@@ -1,17 +1,21 @@
-import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import { Component, OnInit, OnDestroy, ViewEncapsulation } from "@angular/core";
+import {
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
+} from "@angular/forms";
 
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 
-import { CoreConfigService } from '@core/services/config.service';
-import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service';
+import { CoreConfigService } from "@core/services/config.service";
+import { CoreSidebarService } from "@core/components/core-sidebar/core-sidebar.service";
 
 @Component({
-  selector: 'core-theme-customizer',
-  templateUrl: './theme-customizer.component.html',
-  styleUrls: ['./theme-customizer.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  selector: "core-theme-customizer",
+  templateUrl: "./theme-customizer.component.html",
+  styleUrls: ["./theme-customizer.component.scss"],
+  encapsulation: ViewEncapsulation.None,
 })
 export class CoreThemeCustomizerComponent implements OnInit, OnDestroy {
   navbarColorValue: string;
@@ -50,7 +54,7 @@ export class CoreThemeCustomizerComponent implements OnInit, OnDestroy {
         appName: new UntypedFormControl(),
         appTitle: new UntypedFormControl(),
         appLogoImage: new UntypedFormControl(),
-        appLanguage: new UntypedFormControl()
+        appLanguage: new UntypedFormControl(),
       }),
       layout: this._formBuilder.group({
         skin: new UntypedFormControl(),
@@ -58,53 +62,57 @@ export class CoreThemeCustomizerComponent implements OnInit, OnDestroy {
         animation: new UntypedFormControl(),
         menu: this._formBuilder.group({
           hidden: new UntypedFormControl(),
-          collapsed: new UntypedFormControl()
+          collapsed: new UntypedFormControl(),
         }),
         navbar: this._formBuilder.group({
           hidden: new UntypedFormControl(),
           type: new UntypedFormControl(),
           background: new UntypedFormControl(),
           customBackgroundColor: new UntypedFormControl(),
-          backgroundColor: new UntypedFormControl()
+          backgroundColor: new UntypedFormControl(),
         }),
         footer: this._formBuilder.group({
           hidden: new UntypedFormControl(),
           type: new UntypedFormControl(),
           background: new UntypedFormControl(),
           customBackgroundColor: new UntypedFormControl(),
-          backgroundColor: new UntypedFormControl()
+          backgroundColor: new UntypedFormControl(),
         }),
         enableLocalStorage: new UntypedFormControl(),
         customizer: new UntypedFormControl(),
         scrollTop: new UntypedFormControl(),
-        buyNow: new UntypedFormControl()
-      })
+        buyNow: new UntypedFormControl(),
+      }),
     });
 
     // Subscribe to the config changes
-    this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
-      // Update config
-      this.coreConfig = config;
+    this._coreConfigService.config
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((config) => {
+        // Update config
+        this.coreConfig = config;
 
-      // Set the config form values
-      this.form.setValue(config, { emitEvent: false });
-    });
+        // Set the config form values
+        this.form.setValue(config, { emitEvent: false });
+      });
 
     // Subscribe to the form layout.type value changes
     this.form
-      .get('layout.type')
+      .get("layout.type")
       .valueChanges.pipe(takeUntil(this._unsubscribeAll))
-      .subscribe(value => {
+      .subscribe((value) => {
         this._resetFormValues(value);
       });
 
     // Subscribe to the form value changes
-    this.form.valueChanges.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
-      this._coreConfigService.config = config;
-    });
+    this.form.valueChanges
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((config) => {
+        this._coreConfigService.config = config;
+      });
 
     // Set navbar color
-    this.navbarColor(this.form.get('layout.navbar.backgroundColor').value);
+    this.navbarColor(this.form.get("layout.navbar.backgroundColor").value);
   }
 
   /**
@@ -127,62 +135,36 @@ export class CoreThemeCustomizerComponent implements OnInit, OnDestroy {
    */
   private _resetFormValues(value): void {
     switch (value) {
-      case 'vertical': {
+      case "vertical": {
         this.form.patchValue({
           layout: {
             // skin: 'default',
-            animation: 'fadeIn',
+            animation: "fadeIn",
             menu: {
               hidden: false,
-              collapsed: false
+              collapsed: false,
             },
             navbar: {
               hidden: false,
-              type: 'floating-nav',
-              background: 'navbar-light',
+              type: "floating-nav",
+              background: "navbar-light",
               customBackgroundColor: true,
-              backgroundColor: ''
+              backgroundColor: "",
             },
             footer: {
               hidden: false,
-              type: 'footer-static',
-              background: 'footer-light',
+              type: "footer-static",
+              background: "footer-light",
               customBackgroundColor: false,
-              backgroundColor: 'bg-primary'
-            }
-          }
-        });
-      }
-      case 'horizontal': {
-        this.form.patchValue({
-          layout: {
-            // skin: 'default',
-            animation: 'fadeIn',
-            menu: {
-              hidden: false,
-              collapsed: false
+              backgroundColor: "bg-primary",
             },
-            navbar: {
-              hidden: false,
-              type: 'floating-nav',
-              background: 'navbar-light',
-              customBackgroundColor: true,
-              backgroundColor: ''
-            },
-            footer: {
-              hidden: false,
-              type: 'footer-static',
-              background: 'footer-light',
-              customBackgroundColor: false,
-              backgroundColor: 'bg-primary'
-            }
-          }
+          },
         });
       }
     }
 
     // Set navbar color
-    this.navbarColor(this.form.get('layout.navbar.backgroundColor').value);
+    this.navbarColor(this.form.get("layout.navbar.backgroundColor").value);
   }
 
   // Public methods
@@ -196,7 +178,12 @@ export class CoreThemeCustomizerComponent implements OnInit, OnDestroy {
   navbarColor(value): void {
     this.navbarColorValue = value;
     this.form.patchValue({
-      layout: { navbar: { customBackgroundColor: true, backgroundColor: this.navbarColorValue } }
+      layout: {
+        navbar: {
+          customBackgroundColor: true,
+          backgroundColor: this.navbarColorValue,
+        },
+      },
     });
   }
 

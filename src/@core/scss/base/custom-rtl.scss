@@ -44,18 +44,6 @@
   transform: rotate(90deg);
 }
 
-// Horizontal menu
-.horizontal-menu
-  .header-navbar.navbar-horizontal
-  .dropdown-menu
-  .dropdown-toggle::after {
-  background-image: url(str-replace(
-    str-replace($chevron-left, "currentColor", $body-color),
-    "#",
-    "%23"
-  ));
-}
-
 // Dropdown RTL Changes
 .header-navbar .navbar-container ul.nav li.dropdown {
   .dropdown-menu {
