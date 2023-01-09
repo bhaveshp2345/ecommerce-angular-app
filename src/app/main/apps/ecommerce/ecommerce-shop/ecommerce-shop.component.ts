@@ -1,14 +1,14 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 
-import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service';
+import { CoreSidebarService } from "@core/components/core-sidebar/core-sidebar.service";
 
-import { EcommerceService } from 'app/main/apps/ecommerce/ecommerce.service';
+import { EcommerceService } from "app/main/apps/ecommerce/ecommerce.service";
 @Component({
-  selector: 'app-ecommerce-shop',
-  templateUrl: './ecommerce-shop.component.html',
-  styleUrls: ['./ecommerce-shop.component.scss'],
+  selector: "app-ecommerce-shop",
+  templateUrl: "./ecommerce-shop.component.html",
+  styleUrls: ["./ecommerce-shop.component.scss"],
   encapsulation: ViewEncapsulation.None,
-  host: { class: 'ecommerce-application' }
+  host: { class: "ecommerce-application" },
 })
 export class EcommerceShopComponent implements OnInit {
   // public
@@ -21,14 +21,17 @@ export class EcommerceShopComponent implements OnInit {
   public cartList;
   public page = 1;
   public pageSize = 9;
-  public searchText = '';
+  public searchText = "";
 
   /**
    *
    * @param {CoreSidebarService} _coreSidebarService
    * @param {EcommerceService} _ecommerceService
    */
-  constructor(private _coreSidebarService: CoreSidebarService, private _ecommerceService: EcommerceService) {}
+  constructor(
+    private _coreSidebarService: CoreSidebarService,
+    private _ecommerceService: EcommerceService
+  ) {}
 
   // Public Methods
   // -----------------------------------------------------------------------------------------------------
@@ -72,46 +75,52 @@ export class EcommerceShopComponent implements OnInit {
   ngOnInit(): void {
     // Subscribe to ProductList change
 
-    this._ecommerceService.onProductListChange.subscribe(res => {
+    this._ecommerceService.onProductListChange.subscribe((res) => {
       this.products = res;
       this.products.isInWishlist = false;
     });
 
     // Subscribe to Wishlist change
-    this._ecommerceService.onWishlistChange.subscribe(res => (this.wishlist = res));
+    this._ecommerceService.onWishlistChange.subscribe(
+      (res) => (this.wishlist = res)
+    );
 
     // Subscribe to Cartlist change
-    this._ecommerceService.onCartListChange.subscribe(res => (this.cartList = res));
+    this._ecommerceService.onCartListChange.subscribe(
+      (res) => (this.cartList = res)
+    );
 
     // update product is in Wishlist & is in CartList : Boolean
-    this.products.forEach(product => {
-      product.isInWishlist = this.wishlist.findIndex(p => p.productId === product.id) > -1;
-      product.isInCart = this.cartList.findIndex(p => p.productId === product.id) > -1;
+    this.products.forEach((product) => {
+      product.isInWishlist =
+        this.wishlist.findIndex((p) => p.productId === product.id) > -1;
+      product.isInCart =
+        this.cartList.findIndex((p) => p.productId === product.id) > -1;
     });
 
     // content header
     this.contentHeader = {
-      headerTitle: 'Shop',
-      actionButton: true,
+      headerTitle: "Shop",
+      actionButton: false,
       breadcrumb: {
-        type: '',
+        type: "",
         links: [
           {
-            name: 'Home',
-            isLink: true,
-            link: '/'
+            name: "Home",
+            isLink: false,
+            link: "/",
           },
           {
-            name: 'eCommerce',
-            isLink: true,
-            link: '/'
+            name: "eCommerce",
+            isLink: false,
+            link: "/",
           },
           {
-            name: 'Shop',
-            isLink: false
-          }
-        ]
-      }
+            name: "Shop",
+            isLink: false,
+          },
+        ],
+      },
     };
   }
 }

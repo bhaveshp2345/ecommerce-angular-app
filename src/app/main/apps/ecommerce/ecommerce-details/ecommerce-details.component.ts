@@ -1,15 +1,15 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 
-import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
+import { SwiperConfigInterface } from "ngx-swiper-wrapper";
 
-import { EcommerceService } from 'app/main/apps/ecommerce/ecommerce.service';
+import { EcommerceService } from "app/main/apps/ecommerce/ecommerce.service";
 
 @Component({
-  selector: 'app-ecommerce-details',
-  templateUrl: './ecommerce-details.component.html',
-  styleUrls: ['./ecommerce-details.component.scss'],
+  selector: "app-ecommerce-details",
+  templateUrl: "./ecommerce-details.component.html",
+  styleUrls: ["./ecommerce-details.component.scss"],
   encapsulation: ViewEncapsulation.None,
-  host: { class: 'ecommerce-application' }
+  host: { class: "ecommerce-application" },
 })
 export class EcommerceDetailsComponent implements OnInit {
   // public
@@ -24,27 +24,27 @@ export class EcommerceDetailsComponent implements OnInit {
     slidesPerView: 3,
     spaceBetween: 50,
     navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev'
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
     },
     breakpoints: {
       1024: {
         slidesPerView: 3,
-        spaceBetween: 40
+        spaceBetween: 40,
       },
       768: {
         slidesPerView: 3,
-        spaceBetween: 30
+        spaceBetween: 30,
       },
       640: {
         slidesPerView: 2,
-        spaceBetween: 20
+        spaceBetween: 20,
       },
       320: {
         slidesPerView: 1,
-        spaceBetween: 10
-      }
-    }
+        spaceBetween: 10,
+      },
+    },
   };
 
   /**
@@ -64,11 +64,11 @@ export class EcommerceDetailsComponent implements OnInit {
    */
   toggleWishlist(product) {
     if (product.isInWishlist === true) {
-      this._ecommerceService.removeFromWishlist(product.id).then(res => {
+      this._ecommerceService.removeFromWishlist(product.id).then((res) => {
         product.isInWishlist = false;
       });
     } else {
-      this._ecommerceService.addToWishlist(product.id).then(res => {
+      this._ecommerceService.addToWishlist(product.id).then((res) => {
         product.isInWishlist = true;
       });
     }
@@ -80,7 +80,7 @@ export class EcommerceDetailsComponent implements OnInit {
    * @param product
    */
   addToCart(product) {
-    this._ecommerceService.addToCart(product.id).then(res => {
+    this._ecommerceService.addToCart(product.id).then((res) => {
       product.isInCart = true;
     });
   }
@@ -93,52 +93,58 @@ export class EcommerceDetailsComponent implements OnInit {
    */
   ngOnInit(): void {
     // Subscribe to Selected Product change
-    this._ecommerceService.onSelectedProductChange.subscribe(res => {
+    this._ecommerceService.onSelectedProductChange.subscribe((res) => {
       this.product = res[0];
     });
 
     // Subscribe to Wishlist change
-    this._ecommerceService.onWishlistChange.subscribe(res => (this.wishlist = res));
+    this._ecommerceService.onWishlistChange.subscribe(
+      (res) => (this.wishlist = res)
+    );
 
     // Subscribe to Cartlist change
-    this._ecommerceService.onCartListChange.subscribe(res => (this.cartList = res));
+    this._ecommerceService.onCartListChange.subscribe(
+      (res) => (this.cartList = res)
+    );
 
     // Get Related Products
-    this._ecommerceService.getRelatedProducts().then(response => {
+    this._ecommerceService.getRelatedProducts().then((response) => {
       this.relatedProducts = response;
     });
 
-    this.product.isInWishlist = this.wishlist.findIndex(p => p.productId === this.product.id) > -1;
-    this.product.isInCart = this.cartList.findIndex(p => p.productId === this.product.id) > -1;
+    this.product.isInWishlist =
+      this.wishlist.findIndex((p) => p.productId === this.product.id) > -1;
+    this.product.isInCart =
+      this.cartList.findIndex((p) => p.productId === this.product.id) > -1;
 
     // content header
     this.contentHeader = {
-      headerTitle: 'Product Details',
-      actionButton: true,
+      headerTitle: "Product Details",
+      actionButton: false,
       breadcrumb: {
-        type: '',
+        type: "",
         links: [
           {
-            name: 'Home',
-            isLink: true,
-            link: '/'
+            name: "Home",
+            isLink: false,
+            link: "/",
           },
           {
-            name: 'eCommerce',
-            isLink: true,
-            link: '/'
+            name: "eCommerce",
+            isLink: false,
+            link: "/",
           },
           {
-            name: 'Shop',
-            isLink: true,
-            link: '/'
+            name: "Shop",
+            isLink: false,
+            link: "/",
           },
           {
-            name: 'Details',
-            isLink: false
-          }
-        ]
-      }
+            name: "Details",
+            isLink: false,
+          },
+        ],
+      },
     };
   }
 }

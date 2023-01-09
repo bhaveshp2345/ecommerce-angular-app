@@ -9,16 +9,15 @@
 <!-- APP-CONTENT -->
 <div class="app-content content">
   <div class="content-overlay"></div>
-  <div class="header-navbar-shadow" *ngIf="!coreConfig.layout.navbar.hidden"></div>
+  <div
+    class="header-navbar-shadow"
+    *ngIf="!coreConfig.layout.navbar.hidden"
+  ></div>
   <!-- CONTENT -->
   <content></content>
   <!--/ CONTENT -->
 </div>
 <!--/ APP-CONTENT -->
-
-<!-- FOOTER -->
-<ng-container *ngTemplateOutlet="footer"></ng-container>
-<!--/ FOOTER -->
 
 <!-- PARTIALS ---------------------------------------------------------------------------------------- -->
 
@@ -28,7 +27,9 @@
     *ngIf="!coreConfig.layout.navbar.hidden"
     [ngClass]="
       coreConfig.layout.navbar.customBackgroundColor === true
-        ? coreConfig.layout.navbar.background + ' ' + coreConfig.layout.navbar.backgroundColor
+        ? coreConfig.layout.navbar.background +
+          ' ' +
+          coreConfig.layout.navbar.backgroundColor
         : coreConfig.layout.navbar.background
     "
     class="header-navbar horizontal-header-navbar navbar-expand-lg navbar navbar-fixed align-items-center navbar-shadow navbar-brand-center"
@@ -50,7 +51,9 @@
             coreConfig.layout.navbar.type +
             ' ' +
             coreConfig.layout.navbar.backgroundColor
-          : coreConfig.layout.navbar.background + ' ' + coreConfig.layout.navbar.type,
+          : coreConfig.layout.navbar.background +
+            ' ' +
+            coreConfig.layout.navbar.type,
         coreConfig.layout.navbar.type === 'floating-nav' ? 'container-xxl' : ''
       ]"
       class="header-navbar navbar-expand-sm navbar navbar-horizontal navbar-shadow menu-border d-none d-xl-block"
@@ -71,21 +74,3 @@
   </div>
 </ng-template>
 <!--/ MENU -->
-
-<!-- FOOTER -->
-<ng-template #footer>
-  <footer
-    *ngIf="!coreConfig.layout.footer.hidden"
-    class="footer"
-    [ngClass]="
-      coreConfig.layout.footer.customBackgroundColor === true
-        ? coreConfig.layout.footer.background +
-          ' ' +
-          coreConfig.layout.footer.type +
-          ' ' +
-          coreConfig.layout.footer.backgroundColor
-        : coreConfig.layout.footer.background + ' ' + coreConfig.layout.footer.type
-    "
-  ></footer>
-</ng-template>
-<!-- / FOOTER -->

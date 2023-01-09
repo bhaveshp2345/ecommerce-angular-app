@@ -105,17 +105,3 @@
     }
   }
 }
-
-// Buy now
-.buy-now {
-  position: fixed;
-  bottom: 5%;
-  right: 79px;
-  z-index: 1031;
-  .btn {
-    box-shadow: 0 1px 20px 1px $danger !important;
-    &:hover {
-      box-shadow: none !important;
-    }
-  }
-}

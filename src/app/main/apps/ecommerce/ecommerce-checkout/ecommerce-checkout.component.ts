@@ -1,15 +1,15 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 
-import Stepper from 'bs-stepper';
+import Stepper from "bs-stepper";
 
-import { EcommerceService } from 'app/main/apps/ecommerce/ecommerce.service';
+import { EcommerceService } from "app/main/apps/ecommerce/ecommerce.service";
 
 @Component({
-  selector: 'app-ecommerce-checkout',
-  templateUrl: './ecommerce-checkout.component.html',
-  styleUrls: ['./ecommerce-checkout.component.scss'],
+  selector: "app-ecommerce-checkout",
+  templateUrl: "./ecommerce-checkout.component.html",
+  styleUrls: ["./ecommerce-checkout.component.scss"],
   encapsulation: ViewEncapsulation.None,
-  host: { class: 'ecommerce-application' }
+  host: { class: "ecommerce-application" },
 })
 export class EcommerceCheckoutComponent implements OnInit {
   // Public
@@ -19,13 +19,13 @@ export class EcommerceCheckoutComponent implements OnInit {
   public wishlist;
 
   public address = {
-    fullNameVar: '',
-    numberVar: '',
-    flatVar: '',
-    landmarkVar: '',
-    cityVar: '',
-    pincodeVar: '',
-    stateVar: ''
+    fullNameVar: "",
+    numberVar: "",
+    flatVar: "",
+    landmarkVar: "",
+    cityVar: "",
+    pincodeVar: "",
+    stateVar: "",
   };
 
   // Private
@@ -73,52 +73,61 @@ export class EcommerceCheckoutComponent implements OnInit {
    */
   ngOnInit(): void {
     // Subscribe to ProductList change
-    this._ecommerceService.onProductListChange.subscribe(res => {
+    this._ecommerceService.onProductListChange.subscribe((res) => {
       this.products = res;
 
       this.products.isInWishlist = false;
     });
 
     // Subscribe to Cartlist change
-    this._ecommerceService.onCartListChange.subscribe(res => (this.cartLists = res));
+    this._ecommerceService.onCartListChange.subscribe(
+      (res) => (this.cartLists = res)
+    );
 
     // Subscribe to Wishlist change
-    this._ecommerceService.onWishlistChange.subscribe(res => (this.wishlist = res));
+    this._ecommerceService.onWishlistChange.subscribe(
+      (res) => (this.wishlist = res)
+    );
 
     // update product is in Wishlist & is in CartList : Boolean
-    this.products.forEach(product => {
-      product.isInWishlist = this.wishlist.findIndex(p => p.productId === product.id) > -1;
-      product.isInCart = this.cartLists.findIndex(p => p.productId === product.id) > -1;
+    this.products.forEach((product) => {
+      product.isInWishlist =
+        this.wishlist.findIndex((p) => p.productId === product.id) > -1;
+      product.isInCart =
+        this.cartLists.findIndex((p) => p.productId === product.id) > -1;
     });
 
-    this.checkoutStepper = new Stepper(document.querySelector('#checkoutStepper'), {
-      linear: false,
-      animation: true
-    });
+    this.checkoutStepper = new Stepper(
+      document.querySelector("#checkoutStepper"),
+      {
+        linear: false,
+        animation: true,
+      }
+    );
 
     // content header
     this.contentHeader = {
-      headerTitle: 'Checkout',
-      actionButton: true,
+      headerTitle: "Checkout",
+      actionButton: false,
       breadcrumb: {
-        type: '',
+        type: "",
         links: [
           {
-            name: 'Home',
-            isLink: true,
-            link: '/'
+            name: "Home",
+            isLink: false,
+            link: "/",
           },
           {
-            name: 'eCommerce',
-            isLink: true,
-            link: '/'
+            name: "eCommerce",
+            isLink: false,
+            link: "/",
           },
           {
-            name: 'Checkout',
-            isLink: false
-          }
-        ]
-      }
+            name: "Checkout",
+            isLink: false,
+          },
+        ],
+      },
     };
   }
 }

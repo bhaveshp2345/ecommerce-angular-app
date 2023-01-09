@@ -1,22 +1,22 @@
-import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation } from "@angular/core";
 
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { FlatpickrOptions } from 'ng2-flatpickr';
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
+import { FlatpickrOptions } from "ng2-flatpickr";
 
-import { AccountSettingsService } from 'app/main/pages/account-settings/account-settings.service';
+import { AccountSettingsService } from "app/main/pages/account-settings/account-settings.service";
 @Component({
-  selector: 'app-account-settings',
-  templateUrl: './account-settings.component.html',
-  styleUrls: ['./account-settings.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  selector: "app-account-settings",
+  templateUrl: "./account-settings.component.html",
+  styleUrls: ["./account-settings.component.scss"],
+  encapsulation: ViewEncapsulation.None,
 })
 export class AccountSettingsComponent implements OnInit, OnDestroy {
   // public
   public contentHeader: object;
   public data: any;
   public birthDateOptions: FlatpickrOptions = {
-    altInput: true
+    altInput: true,
   };
   public passwordTextTypeOld = false;
   public passwordTextTypeNew = false;
@@ -83,34 +83,21 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
    * On init
    */
   ngOnInit() {
-    this._accountSettingsService.onSettingsChanged.pipe(takeUntil(this._unsubscribeAll)).subscribe(response => {
-      this.data = response;
-      this.avatarImage = this.data.accountSetting.general.avatar;
-    });
+    this._accountSettingsService.onSettingsChanged
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((response) => {
+        this.data = response;
+        this.avatarImage = this.data.accountSetting.general.avatar;
+      });
 
     // content header
     this.contentHeader = {
-      headerTitle: 'Account Settings',
-      actionButton: true,
+      headerTitle: "Account Settings",
+      actionButton: false,
       breadcrumb: {
-        type: '',
-        links: [
-          {
-            name: 'Home',
-            isLink: true,
-            link: '/'
-          },
-          {
-            name: 'Pages',
-            isLink: true,
-            link: '/'
-          },
-          {
-            name: 'Account Settings',
-            isLink: false
-          }
-        ]
-      }
+        type: "",
+        links: [],
+      },
     };
   }
 

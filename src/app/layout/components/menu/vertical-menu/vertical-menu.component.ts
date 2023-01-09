@@ -1,19 +1,26 @@
-import { Component, OnInit, OnDestroy, ViewChild, HostListener, ViewEncapsulation } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+  HostListener,
+  ViewEncapsulation,
+} from "@angular/core";
+import { Router, NavigationEnd } from "@angular/router";
 
-import { Subject } from 'rxjs';
-import { take, takeUntil, filter } from 'rxjs/operators';
-import { PerfectScrollbarDirective } from 'ngx-perfect-scrollbar';
+import { Subject } from "rxjs";
+import { take, takeUntil, filter } from "rxjs/operators";
+import { PerfectScrollbarDirective } from "ngx-perfect-scrollbar";
 
-import { CoreConfigService } from '@core/services/config.service';
-import { CoreMenuService } from '@core/components/core-menu/core-menu.service';
-import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service';
+import { CoreConfigService } from "@core/services/config.service";
+import { CoreMenuService } from "@core/components/core-menu/core-menu.service";
+import { CoreSidebarService } from "@core/components/core-sidebar/core-sidebar.service";
 
 @Component({
-  selector: 'vertical-menu',
-  templateUrl: './vertical-menu.component.html',
-  styleUrls: ['./vertical-menu.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  selector: "vertical-menu",
+  templateUrl: "./vertical-menu.component.html",
+  styleUrls: ["./vertical-menu.component.scss"],
+  encapsulation: ViewEncapsulation.None,
 })
 export class VerticalMenuComponent implements OnInit, OnDestroy {
   coreConfig: any;
@@ -42,7 +49,8 @@ export class VerticalMenuComponent implements OnInit, OnDestroy {
     this._unsubscribeAll = new Subject();
   }
 
-  @ViewChild(PerfectScrollbarDirective, { static: false }) directiveRef?: PerfectScrollbarDirective;
+  @ViewChild(PerfectScrollbarDirective, { static: false })
+  directiveRef?: PerfectScrollbarDirective;
 
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------
@@ -52,40 +60,43 @@ export class VerticalMenuComponent implements OnInit, OnDestroy {
    */
   ngOnInit(): void {
     // Subscribe config change
-    this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
-      this.coreConfig = config;
-    });
+    this._coreConfigService.config
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((config) => {
+        this.coreConfig = config;
+      });
 
-    this.isCollapsed = this._coreSidebarService.getSidebarRegistry('menu').collapsed;
+    this.isCollapsed =
+      this._coreSidebarService.getSidebarRegistry("menu").collapsed;
 
     // Close the menu on router NavigationEnd (Required for small screen to close the menu on select)
     this._router.events
       .pipe(
-        filter(event => event instanceof NavigationEnd),
+        filter((event) => event instanceof NavigationEnd),
         takeUntil(this._unsubscribeAll)
       )
       .subscribe(() => {
-        if (this._coreSidebarService.getSidebarRegistry('menu')) {
-          this._coreSidebarService.getSidebarRegistry('menu').close();
+        if (this._coreSidebarService.getSidebarRegistry("menu")) {
+          this._coreSidebarService.getSidebarRegistry("menu").close();
         }
       });
 
     // scroll to active on navigation end
     this._router.events
       .pipe(
-        filter(event => event instanceof NavigationEnd),
+        filter((event) => event instanceof NavigationEnd),
         take(1)
       )
       .subscribe(() => {
         setTimeout(() => {
-          this.directiveRef.scrollToElement('.navigation .active', -180, 500);
+          this.directiveRef.scrollToElement(".navigation .active", -180, 500);
         });
       });
 
     // Get current menu
     this._coreMenuService.onMenuChanged
       .pipe(
-        filter(value => value !== null),
+        filter((value) => value !== null),
         takeUntil(this._unsubscribeAll)
       )
       .subscribe(() => {
@@ -120,7 +131,7 @@ export class VerticalMenuComponent implements OnInit, OnDestroy {
    * Toggle sidebar expanded status
    */
   toggleSidebar(): void {
-    this._coreSidebarService.getSidebarRegistry('menu').toggleOpen();
+    this._coreSidebarService.getSidebarRegistry("menu").toggleOpen();
   }
 
   /**
@@ -131,14 +142,20 @@ export class VerticalMenuComponent implements OnInit, OnDestroy {
     this._coreConfigService
       .getConfig()
       .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe(config => {
+      .subscribe((config) => {
         this.isCollapsed = config.layout.menu.collapsed;
       });
 
     if (this.isCollapsed) {
-      this._coreConfigService.setConfig({ layout: { menu: { collapsed: false } } }, { emitEvent: true });
+      this._coreConfigService.setConfig(
+        { layout: { menu: { collapsed: false } } },
+        { emitEvent: true }
+      );
     } else {
-      this._coreConfigService.setConfig({ layout: { menu: { collapsed: true } } }, { emitEvent: true });
+      this._coreConfigService.setConfig(
+        { layout: { menu: { collapsed: true } } },
+        { emitEvent: true }
+      );
     }
   }
 }

@@ -1,13 +1,13 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 
-import { EcommerceService } from 'app/main/apps/ecommerce/ecommerce.service';
+import { EcommerceService } from "app/main/apps/ecommerce/ecommerce.service";
 
 @Component({
-  selector: 'app-ecommerce-wishlist',
-  templateUrl: './ecommerce-wishlist.component.html',
-  styleUrls: ['./ecommerce-wishlist.component.scss'],
+  selector: "app-ecommerce-wishlist",
+  templateUrl: "./ecommerce-wishlist.component.html",
+  styleUrls: ["./ecommerce-wishlist.component.scss"],
   encapsulation: ViewEncapsulation.None,
-  host: { class: 'ecommerce-application' }
+  host: { class: "ecommerce-application" },
 })
 export class EcommerceWishlistComponent implements OnInit {
   // Public
@@ -29,41 +29,44 @@ export class EcommerceWishlistComponent implements OnInit {
    */
   ngOnInit(): void {
     // Subscribe to ProductList change
-    this._ecommerceService.onProductListChange.subscribe(res => {
+    this._ecommerceService.onProductListChange.subscribe((res) => {
       this.products = res;
     });
 
     // Subscribe to Wishlist change
-    this._ecommerceService.onWishlistChange.subscribe(res => (this.wishlist = res));
+    this._ecommerceService.onWishlistChange.subscribe(
+      (res) => (this.wishlist = res)
+    );
 
     // update product is in Wishlist : Boolean
-    this.products.forEach(product => {
-      product.isInWishlist = this.wishlist.findIndex(p => p.productId === product.id) > -1;
+    this.products.forEach((product) => {
+      product.isInWishlist =
+        this.wishlist.findIndex((p) => p.productId === product.id) > -1;
     });
 
     // content header
     this.contentHeader = {
-      headerTitle: 'Wish List',
-      actionButton: true,
+      headerTitle: "Wish List",
+      actionButton: false,
       breadcrumb: {
-        type: '',
+        type: "",
         links: [
           {
-            name: 'Home',
-            isLink: true,
-            link: '/'
+            name: "Home",
+            isLink: false,
+            link: "/",
           },
           {
-            name: 'eCommerce',
-            isLink: true,
-            link: '/'
+            name: "eCommerce",
+            isLink: false,
+            link: "/",
           },
           {
-            name: 'Wish List',
-            isLink: false
-          }
-        ]
-      }
+            name: "Wish List",
+            isLink: false,
+          },
+        ],
+      },
     };
   }
 }
