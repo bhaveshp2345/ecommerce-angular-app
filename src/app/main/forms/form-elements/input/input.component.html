@@ -15,27 +15,48 @@
                 <div class="col-xl-4 col-md-6 col-12 mb-1">
                   <div class="form-group">
                     <label for="basicInput">Basic Input</label>
-                    <input type="text" class="form-control" id="basicInput" placeholder="Enter email" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="basicInput"
+                      placeholder="Enter email"
+                    />
                   </div>
                 </div>
                 <div class="col-xl-4 col-md-6 col-12 mb-1">
                   <div class="form-group">
                     <label for="helpInputTop">Input text with help</label>
-                    <small class="text-muted"> eg.<i>someone@example.com</i></small>
+                    <small class="text-muted">
+                      eg.<i>someone@example.com</i></small
+                    >
                     <input type="text" class="form-control" id="helpInputTop" />
                   </div>
                 </div>
                 <div class="col-xl-4 col-md-6 col-12 mb-1">
                   <div class="form-group">
                     <label for="disabledInput">Disabled Input</label>
-                    <input type="text" class="form-control" id="disabledInput" disabled />
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="disabledInput"
+                      disabled
+                    />
                   </div>
                 </div>
                 <div class="col-xl-4 col-md-6 col-12">
                   <div class="form-group">
                     <label for="helperText">With Helper Text</label>
-                    <input type="text" id="helperText" class="form-control" placeholder="Name" />
-                    <p><small class="text-muted">Find helper text here for given textbox.</small></p>
+                    <input
+                      type="text"
+                      id="helperText"
+                      class="form-control"
+                      placeholder="Name"
+                    />
+                    <p>
+                      <small class="text-muted"
+                        >Find helper text here for given textbox.</small
+                      >
+                    </p>
                   </div>
                 </div>
                 <div class="col-xl-4 col-md-6 col-12">
@@ -53,7 +74,9 @@
                 <div class="col-xl-4 col-md-6 col-12">
                   <div class="form-group">
                     <label for="disabledInput">Readonly Static Text</label>
-                    <p class="form-control-static" id="staticInput">email@pixinvent.com</p>
+                    <p class="form-control-static" id="staticInput">
+                      info@tridhyatech.com
+                    </p>
                   </div>
                 </div>
               </div>
@@ -75,20 +98,33 @@
               <div class="row">
                 <div class="col-12">
                   <p class="card-text">
-                    For different sizes of Input, Use classes like <code>.form-control-lg</code> &amp;
+                    For different sizes of Input, Use classes like
+                    <code>.form-control-lg</code> &amp;
                     <code>.form-control-sm</code> for Large, Small input box.
                   </p>
                   <div class="form-group">
                     <label for="largeInput">Large</label>
-                    <input class="form-control form-control-lg" type="text" placeholder="Large Input" />
+                    <input
+                      class="form-control form-control-lg"
+                      type="text"
+                      placeholder="Large Input"
+                    />
                   </div>
                   <div class="form-group">
                     <label for="largeInput">Default</label>
-                    <input class="form-control" type="text" placeholder="Normal Input" />
+                    <input
+                      class="form-control"
+                      type="text"
+                      placeholder="Normal Input"
+                    />
                   </div>
                   <div class="form-group">
                     <label for="largeInput">Small</label>
-                    <input class="form-control form-control-sm" type="text" placeholder="Small Input" />
+                    <input
+                      class="form-control form-control-sm"
+                      type="text"
+                      placeholder="Small Input"
+                    />
                   </div>
                 </div>
               </div>
@@ -96,19 +132,28 @@
           </core-card-snippet>
         </div>
         <div class="col-md-6 col-12">
-          <core-card-snippet [snippetCode]="_snippetCodeHorizontalFormLabelSizing">
+          <core-card-snippet
+            [snippetCode]="_snippetCodeHorizontalFormLabelSizing"
+          >
             <h4 class="card-title">Horizontal form label sizing</h4>
 
             <div class="card-body">
               <div class="row">
                 <div class="col-12">
                   <p class="card-text mb-2">
-                    Be sure to use <code>.col-form-label-sm</code> or <code>.col-form-label-lg</code> to your
-                    <code>&lt;label&gt;</code>s or <code>&lt;legend&gt;</code>s to correctly follow the size of
-                    <code>.form-control-lg</code> and <code>.form-control-sm</code>.
+                    Be sure to use <code>.col-form-label-sm</code> or
+                    <code>.col-form-label-lg</code> to your
+                    <code>&lt;label&gt;</code>s or <code>&lt;legend&gt;</code>s
+                    to correctly follow the size of
+                    <code>.form-control-lg</code> and
+                    <code>.form-control-sm</code>.
                   </p>
                   <div class="form-group row">
-                    <label for="colFormLabelLg" class="col-sm-3 col-form-label col-form-label-lg">Large</label>
+                    <label
+                      for="colFormLabelLg"
+                      class="col-sm-3 col-form-label col-form-label-lg"
+                      >Large</label
+                    >
                     <div class="col-sm-9">
                       <input
                         type="text"
@@ -119,13 +164,24 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="colFormLabel" class="col-sm-3 col-form-label">Default</label>
+                    <label for="colFormLabel" class="col-sm-3 col-form-label"
+                      >Default</label
+                    >
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="colFormLabel" placeholder="Normal Input" />
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="colFormLabel"
+                        placeholder="Normal Input"
+                      />
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">Small</label>
+                    <label
+                      for="colFormLabelSm"
+                      class="col-sm-3 col-form-label col-form-label-sm"
+                      >Small</label
+                    >
                     <div class="col-sm-9">
                       <input
                         type="text"
@@ -155,13 +211,19 @@
               <div class="row">
                 <div class="col-12 mb-1">
                   <p class="card-text mb-1">
-                    For Floating Label Inputs, need to use <code>.form-label-group</code> class & add attribute
+                    For Floating Label Inputs, need to use
+                    <code>.form-label-group</code> class & add attribute
                     <code>disabled</code> for disabled Floating Label Input.
                   </p>
                 </div>
                 <div class="col-sm-6 col-12">
                   <div class="form-label-group">
-                    <input type="text" class="form-control" id="floating-label1" placeholder="Label-placeholder" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="floating-label1"
+                      placeholder="Label-placeholder"
+                    />
                     <label for="floating-label1">Label-placeholder</label>
                   </div>
                 </div>
@@ -174,7 +236,9 @@
                       placeholder="Label-placeholder"
                       disabled
                     />
-                    <label for="floating-label-disable">Disabled-placeholder</label>
+                    <label for="floating-label-disable"
+                      >Disabled-placeholder</label
+                    >
                   </div>
                 </div>
               </div>
@@ -197,15 +261,25 @@
                 <div class="col-lg-6 col-md-12">
                   <div class="form-group">
                     <label for="basicInputFile">Simple File Input</label>
-                    <input type="file" class="form-control-file" id="basicInputFile" />
+                    <input
+                      type="file"
+                      class="form-control-file"
+                      id="basicInputFile"
+                    />
                   </div>
                 </div>
                 <div class="col-lg-6 col-md-12">
                   <div class="form-group">
                     <label for="basicInputFile">With Browse button</label>
                     <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="customFile" />
-                      <label class="custom-file-label" for="customFile">Choose file</label>
+                      <input
+                        type="file"
+                        class="custom-file-input"
+                        id="customFile"
+                      />
+                      <label class="custom-file-label" for="customFile"
+                        >Choose file</label
+                      >
                     </div>
                   </div>
                 </div>
@@ -228,9 +302,10 @@
               <div class="row">
                 <div class="col-12">
                   <p class="card-text mb-1">
-                    You can indicate invalid and valid form fields with <code>.is-invalid</code> and
-                    <code>.is-valid</code>. Note that <code>.invalid-feedback</code> is also supported with these
-                    classes.
+                    You can indicate invalid and valid form fields with
+                    <code>.is-invalid</code> and <code>.is-valid</code>. Note
+                    that <code>.invalid-feedback</code> is also supported with
+                    these classes.
                   </p>
                 </div>
                 <div class="col-sm-6 col-12">

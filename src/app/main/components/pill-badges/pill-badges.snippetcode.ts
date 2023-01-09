@@ -1,4 +1,4 @@
-import { snippetCode } from '@core/components/card-snippet/card-snippet.component';
+import { snippetCode } from "@core/components/card-snippet/card-snippet.component";
 
 export const snippetCodePillBadges: snippetCode = {
   html: `
@@ -9,7 +9,7 @@ export const snippetCodePillBadges: snippetCode = {
   <div class="badge badge-pill badge-warning">Warning</div>
   <div class="badge badge-pill badge-info">Info</div>
   <div class="badge badge-pill badge-dark">Dark</div>
-`
+`,
 };
 
 export const snippetCodeGlowBadges: snippetCode = {
@@ -21,7 +21,7 @@ export const snippetCodeGlowBadges: snippetCode = {
   <div class="badge badge-pill badge-glow badge-warning">Warning</div>
   <div class="badge badge-pill badge-glow badge-info">Info</div>
   <div class="badge badge-pill badge-glow badge-dark">Dark</div>
-`
+`,
 };
 
 export const snippetCodeLightBadges: snippetCode = {
@@ -33,7 +33,7 @@ export const snippetCodeLightBadges: snippetCode = {
   <div class="badge badge-pill badge-light-warning">Warning</div>
   <div class="badge badge-pill badge-light-info">Info</div>
   <div class="badge badge-pill badge-light-dark">Dark</div>
-`
+`,
 };
 
 export const snippetCodePillNotification: snippetCode = {
@@ -50,13 +50,13 @@ export const snippetCodePillNotification: snippetCode = {
   <span [data-feather]="'bell'" [class]="'font-medium-5 text-danger'"></span>
   <span class="badge badge-pill badge-danger badge-glow badge-up">6</span>
 </div>
-`
+`,
 };
 export const snippetCodeBadgePillLink: snippetCode = {
   html: `
-  <a class="badge badge-pill badge-primary" href="https://pixinvent.com" target="_blank"
+  <a class="badge badge-pill badge-primary" href="https://www.tridhya.com/" target="_blank"
   ><i data-feather="link" class="mr-25"></i> Primary</a>
-`
+`,
 };
 
 export const snippetCodeBlockBadgePill: snippetCode = {
@@ -64,5 +64,5 @@ export const snippetCodeBlockBadgePill: snippetCode = {
   <div class="badge badge-pill d-block badge-danger">
     <span>Block Badge Pill</span>
   </div>
-`
+`,
 };

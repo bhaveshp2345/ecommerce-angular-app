@@ -12,11 +12,16 @@
 
             <div class="card-body">
               <p class="card-text">
-                Toasts provide feedback messages as notifications to the user. Toasts are as flexible as you need and
-                have very little required markup. At a minimum, we require a single element to contain your “toasted”
-                content and strongly encourage a dismiss button.
+                Toasts provide feedback messages as notifications to the user.
+                Toasts are as flexible as you need and have very little required
+                markup. At a minimum, we require a single element to contain
+                your “toasted” content and strongly encourage a dismiss button.
               </p>
-              <button class="btn btn-outline-primary" (click)="toastBasic('I am a Basic toast', 2000)" rippleEffect>
+              <button
+                class="btn btn-outline-primary"
+                (click)="toastBasic('I am a Basic toast', 2000)"
+                rippleEffect
+              >
                 Toast
               </button>
             </div>
@@ -26,16 +31,26 @@
           <core-card-snippet [snippetCode]="_snippetCodeTranslucent">
             <h4 class="card-title">Translucent</h4>
             <p class="card-text m-1">
-              Toasts are slightly translucent, too, so they blend over whatever they might appear over. For browsers
-              that support the backdrop-filter CSS property, we’ll also attempt to blur the elements under a toast.
+              Toasts are slightly translucent, too, so they blend over whatever
+              they might appear over. For browsers that support the
+              backdrop-filter CSS property, we’ll also attempt to blur the
+              elements under a toast.
             </p>
 
             <div class="card-body bg-primary p-2">
               <ngb-toast [autohide]="false">
                 <ng-template ngbToastHeader>
-                  <img src="assets/images/logo/logo.png" height="18" width="25" class="mr-2" alt="Toast image" />
-                  <strong class="mr-auto toast-title">Vuexy Admin</strong>
-                  <small class="text-muted toast-time ml-5 mr-1 pl-3">11 mins ago</small>
+                  <img
+                    src="assets/images/logo/tridhya-logo.png"
+                    height="18"
+                    width="25"
+                    class="mr-2"
+                    alt="Toast image"
+                  />
+                  <strong class="mr-auto toast-title">Tridhya Admin</strong>
+                  <small class="text-muted toast-time ml-5 mr-1 pl-3"
+                    >11 mins ago</small
+                  >
                 </ng-template>
                 Hello, world! This is a toast message.
               </ngb-toast>
@@ -55,13 +70,24 @@
 
             <div class="card-body">
               <p class="card-text mb-0">
-                When you have multiple toasts, By default toasts vertically stack them in a readable manner.
+                When you have multiple toasts, By default toasts vertically
+                stack them in a readable manner.
               </p>
               <div class="demo-inline-spacing">
-                <button class="btn btn-outline-primary" (click)="toastAutoHide()" rippleEffect>
+                <button
+                  class="btn btn-outline-primary"
+                  (click)="toastAutoHide()"
+                  rippleEffect
+                >
                   Auto Hide: {{ hideValue }}
                 </button>
-                <button class="btn btn-outline-primary" (click)="toastStacking()" rippleEffect>Toast</button>
+                <button
+                  class="btn btn-outline-primary"
+                  (click)="toastStacking()"
+                  rippleEffect
+                >
+                  Toast
+                </button>
               </div>
             </div>
           </core-card-snippet>
@@ -73,10 +99,16 @@
             <div class="card-body">
               <p class="card-text">
                 You can place toasts with custom CSS as you need them, Ex: use
-                <code>[ngStyle]="&#123; left: 0, right: 'unset' &#125;"</code> to place toasts on left side of the
-                screen.
+                <code>[ngStyle]="&#123; left: 0, right: 'unset' &#125;"</code>
+                to place toasts on left side of the screen.
               </p>
-              <button class="btn btn-outline-primary" (click)="toastPlacement()" rippleEffect>Toast Placement</button>
+              <button
+                class="btn btn-outline-primary"
+                (click)="toastPlacement()"
+                rippleEffect
+              >
+                Toast Placement
+              </button>
             </div>
           </core-card-snippet>
         </div>
@@ -85,6 +117,10 @@
     <!--/ Stacking & Placement Toast -->
 
     <!-- app-toast-container component -->
-    <app-toast-container [ngStyle]="toastStyle" aria-live="polite" aria-atomic="true"></app-toast-container>
+    <app-toast-container
+      [ngStyle]="toastStyle"
+      aria-live="polite"
+      aria-atomic="true"
+    ></app-toast-container>
   </div>
 </div>

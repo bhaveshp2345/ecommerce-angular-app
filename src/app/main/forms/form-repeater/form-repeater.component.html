@@ -22,7 +22,7 @@
                           [(ngModel)]="item.itemName"
                           name="itemName{{ i }}"
                           id="itemName{{ i }}"
-                          placeholder="Vuexy Admin Template"
+                          placeholder="Tridhya Admin Template"
                         />
                       </div>
                     </div>
@@ -59,13 +59,23 @@
                     <div class="col-md-2 col-12">
                       <div class="form-group">
                         <label for="staticPrice">Price</label>
-                        <input type="text" readonly class="form-control-plaintext" id="staticPrice" value="$32" />
+                        <input
+                          type="text"
+                          readonly
+                          class="form-control-plaintext"
+                          id="staticPrice"
+                          value="$32"
+                        />
                       </div>
                     </div>
 
                     <div class="col-md-2 col-12 mb-50">
                       <div class="form-group">
-                        <button class="btn btn-outline-danger text-nowrap px-1" (click)="deleteItem(i)" rippleEffect>
+                        <button
+                          class="btn btn-outline-danger text-nowrap px-1"
+                          (click)="deleteItem(i)"
+                          rippleEffect
+                        >
                           <i data-feather="x" class="mr-25"></i>
                           <span>Delete</span>
                         </button>
@@ -77,7 +87,12 @@
               </form>
               <div class="row">
                 <div class="col-12">
-                  <button class="btn btn-icon btn-primary" type="button" (click)="addItem()" rippleEffect>
+                  <button
+                    class="btn btn-icon btn-primary"
+                    type="button"
+                    (click)="addItem()"
+                    rippleEffect
+                  >
                     <i data-feather="plus" class="mr-25"></i>
                     <span>Add New</span>
                   </button>
@@ -96,6 +111,5 @@
         <!--/ Invoice repeater -->
       </div>
     </section>
-
   </div>
 </div>

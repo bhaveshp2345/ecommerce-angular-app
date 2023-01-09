@@ -1,4 +1,4 @@
-import { snippetCode } from '@core/components/card-snippet/card-snippet.component';
+import { snippetCode } from "@core/components/card-snippet/card-snippet.component";
 
 export const snippetCodeInvoiceRepeater: snippetCode = {
   html: `
@@ -14,7 +14,7 @@ export const snippetCodeInvoiceRepeater: snippetCode = {
             [(ngModel)]="item.itemName"
             name="itemName{{ i }}"
             id="itemName{{ i }}"
-            placeholder="Vuexy Admin Template"
+            placeholder="Tridhya Admin Template"
           />
         </div>
       </div>
@@ -121,5 +121,5 @@ Quantity: {{ item.itemQuantity }}</div>
       }
     }
   }
-`
+`,
 };

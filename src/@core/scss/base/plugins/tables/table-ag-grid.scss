@@ -1,14 +1,5 @@
-// ================================================================================================
-//   File Name: aggrid.scss
-//   Description: SCC file for Aggrid.
-//   ----------------------------------------------------------------------------------------------
-//   Item Name: Vuexy - Vuejs, React, Angular, HTML & Laravel Admin Dashboard Template
-//   Author: PIXINVENT
-//   Author URL: http://www.themeforest.net/user/pixinvent
-// ================================================================================================
-
-@import '../../bootstrap-extended/include'; // Bootstrap includes
-@import '../../components/include'; // Components includes
+@import "../../bootstrap-extended/include"; // Bootstrap includes
+@import "../../components/include"; // Components includes
 
 .aggrid {
   height: 600px;
@@ -47,8 +38,8 @@
       margin-left: 0;
       margin-top: 18px;
 
-      [ref='lbCurrent'],
-      [ref='lbTotal'] {
+      [ref="lbCurrent"],
+      [ref="lbTotal"] {
         color: $white;
         padding: 0.7rem 0.95rem;
         border-radius: 0.5rem;
@@ -88,11 +79,11 @@
       }
     }
 
-    span[ref='lbCurrent'] {
+    span[ref="lbCurrent"] {
       background-color: $primary;
     }
 
-    span[ref='lbTotal'] {
+    span[ref="lbTotal"] {
       background-color: $gray-300;
       color: $body-color !important;
     }
@@ -122,7 +113,11 @@
   font-size: 0.95rem;
 
   &:after {
-    background-image: url(str-replace(str-replace($chevron-down, 'currentColor', $body-color), '#', '%23'));
+    background-image: url(str-replace(
+      str-replace($chevron-down, "currentColor", $body-color),
+      "#",
+      "%23"
+    ));
     left: 5px;
   }
 }

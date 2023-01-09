@@ -1,4 +1,4 @@
-import { snippetCode } from '@core/components/card-snippet/card-snippet.component';
+import { snippetCode } from "@core/components/card-snippet/card-snippet.component";
 
 export const snippetCodeBasic: snippetCode = {
   html: `
@@ -49,7 +49,7 @@ export const snippetCodeBasic: snippetCode = {
     #SweetAlertHTML
     title="<strong>HTML <u>example</u></strong>"
     text="Something went wrong!"
-    html='You can use <b>bold text</b>, <a href="https://pixinvent.com/" target="_blank">links</a> and other HTML tags'
+    html='You can use <b>bold text</b>, <a href="https://www.tridhya.com/" target="_blank">links</a> and other HTML tags'
     icon="info"
     [focusCancel]="true"
     [showCloseButton]="true"
@@ -60,7 +60,7 @@ export const snippetCodeBasic: snippetCode = {
   >
   </swal>
   <!-- Swal of Sweet Alert HTML -->
-  `
+  `,
 };
 
 export const snippetCodePosition: snippetCode = {
@@ -125,7 +125,7 @@ export const snippetCodePosition: snippetCode = {
   </swal>
   <!--/ Swal of Sweet Alert With Position bottom-end -->
 
-`
+`,
 };
 
 export const snippetCodeAnimations: snippetCode = {
@@ -196,7 +196,7 @@ export const snippetCodeAnimations: snippetCode = {
   >
   </swal>
   <!--/ Swal of Sweet Alert With Shake -->
-`
+`,
 };
 
 export const snippetCodeTypes: snippetCode = {
@@ -244,7 +244,7 @@ export const snippetCodeTypes: snippetCode = {
     icon="error"
   >
   </swal>
-`
+`,
 };
 
 export const snippetCodeCustomImage: snippetCode = {
@@ -268,7 +268,7 @@ export const snippetCodeCustomImage: snippetCode = {
   >
   </swal>
   <!-- Swal of Sweet Alert Custom Image -->
-`
+`,
 };
 
 export const snippetCodeAutoClose: snippetCode = {
@@ -301,7 +301,7 @@ autoCloseBeforeOpen(event: BeforeOpenEvent) {
 onAutoClose() {
   clearInterval(this.timerInterval);
 }
-`
+`,
 };
 
 export const snippetCodeQuestion: snippetCode = {
@@ -344,7 +344,7 @@ export const snippetCodeQuestion: snippetCode = {
         }
       });
   }
-`
+`,
 };
 
 export const snippetCodeAjax: snippetCode = {
@@ -394,7 +394,7 @@ export const snippetCodeAjax: snippetCode = {
       }
     });
   }
-`
+`,
 };
 
 export const snippetCodeConfirmText: snippetCode = {
@@ -414,7 +414,7 @@ export const snippetCodeConfirmText: snippetCode = {
       text: "You won't be able to revert this!",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#7367F0',
+      confirmButtonColor: '#ff9f43',
       cancelButtonColor: '#E42728',
       confirmButtonText: 'Yes, delete it!',
       customClass: {
@@ -434,7 +434,7 @@ export const snippetCodeConfirmText: snippetCode = {
       }
     });
   }
-`
+`,
 };
 
 export const snippetCodeConfirmColor: snippetCode = {
@@ -481,5 +481,5 @@ export const snippetCodeConfirmColor: snippetCode = {
       }
     });
   }
-`
+`,
 };

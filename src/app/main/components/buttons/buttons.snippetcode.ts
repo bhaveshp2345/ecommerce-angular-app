@@ -1,4 +1,4 @@
-import { snippetCode } from '@core/components/card-snippet/card-snippet.component';
+import { snippetCode } from "@core/components/card-snippet/card-snippet.component";
 
 export const snippetCodeFilled: snippetCode = {
   html: `
@@ -9,7 +9,7 @@ export const snippetCodeFilled: snippetCode = {
   ><button type="button" class="btn btn-warning" rippleEffect>Warning</button
   ><button type="button" class="btn btn-info" rippleEffect>Info</button
   ><button type="button" class="btn btn-dark" rippleEffect>Dark</button>
-  `
+  `,
 };
 export const snippetCodeBorder: snippetCode = {
   html: `
@@ -20,7 +20,7 @@ export const snippetCodeBorder: snippetCode = {
   ><button type="button" class="btn btn-outline-warning" rippleEffect>Warning</button
   ><button type="button" class="btn btn-outline-info" rippleEffect>Info</button
   ><button type="button" class="btn btn-outline-dark" rippleEffect>Dark</button>
-  `
+  `,
 };
 export const snippetCodeFlat: snippetCode = {
   html: `
@@ -31,7 +31,7 @@ export const snippetCodeFlat: snippetCode = {
   ><button type="button" class="btn btn-flat-warning" rippleEffect>Warning</button
   ><button type="button" class="btn btn-flat-info" rippleEffect>Info</button
   ><button type="button" class="btn btn-flat-dark" rippleEffect>Dark</button>
-  `
+  `,
 };
 export const snippetCodeGradient: snippetCode = {
   html: `
@@ -42,7 +42,7 @@ export const snippetCodeGradient: snippetCode = {
   ><button type="button" class="btn btn-gradient-warning">Warning</button
   ><button type="button" class="btn btn-gradient-info">Info</button
   ><button type="button" class="btn btn-gradient-dark">Dark</button>
-  `
+  `,
 };
 export const snippetCodeRelief: snippetCode = {
   html: `
@@ -53,7 +53,7 @@ export const snippetCodeRelief: snippetCode = {
   ><button type="button" class="btn btn-relief-warning">Warning</button
   ><button type="button" class="btn btn-relief-info">Info</button
   ><button type="button" class="btn btn-relief-dark">Dark</button>
-  `
+  `,
 };
 export const snippetCodeRoundbuttons: snippetCode = {
   html: `
@@ -64,7 +64,7 @@ export const snippetCodeRoundbuttons: snippetCode = {
   ><button type="button" class="btn btn-outline-warning round" rippleEffect>Warning</button
   ><button type="button" class="btn btn-outline-info round" rippleEffect>Info</button
   ><button type="button" class="btn btn-outline-dark round" rippleEffect>Dark</button>
-  `
+  `,
 };
 export const snippetCodeIcon: snippetCode = {
   html: `
@@ -77,7 +77,7 @@ export const snippetCodeIcon: snippetCode = {
 ><button type="button" class="btn btn-outline-primary" rippleEffect disabled>
   <span [data-feather]="'home'" [class]="'mr-25'"></span>Home
 </button>
-  `
+  `,
 };
 export const snippetCodeIconOnly: snippetCode = {
   html: `
@@ -109,7 +109,7 @@ export const snippetCodeIconOnly: snippetCode = {
   disabled>
   <span [data-feather]="'search'"></span>
 </button>
-  `
+  `,
 };
 export const snippetCodeBasicButtongroup: snippetCode = {
   html: `
@@ -133,7 +133,7 @@ export const snippetCodeBasicButtongroup: snippetCode = {
     </div>
   </div>
 </div>
-  `
+  `,
 };
 export const snippetCodeRadioButtonStyle: snippetCode = {
   html: `
@@ -168,7 +168,7 @@ export const snippetCodeRadioButtonStyle: snippetCode = {
     middle: false,
     right: false
   };
-`
+`,
 };
 export const snippetCodeSizes: snippetCode = {
   html: `
@@ -183,7 +183,7 @@ export const snippetCodeSizes: snippetCode = {
   <button type="button" class="btn btn-outline-primary" rippleEffect>Default</button>
   <button type="button" class="btn btn-outline-primary btn-sm" rippleEffect>Small</button>
   <!--/ button outline sizes -->
-  `
+  `,
 };
 export const snippetCodeBlocklevelbuttons: snippetCode = {
   html: `
@@ -199,7 +199,7 @@ export const snippetCodeBlocklevelbuttons: snippetCode = {
     </button>
   </div>
 </div>
-  `
+  `,
 };
 export const snippetCodeButtontags: snippetCode = {
   html: `
@@ -210,7 +210,7 @@ export const snippetCodeButtontags: snippetCode = {
   </div>
   </ngb-alert>
 
-  <a class="btn btn-primary" href="https://pixinvent.com/" role="button" target="_blank" rippleEffect
+  <a class="btn btn-primary" href="https://www.tridhya.com/" role="button" target="_blank" rippleEffect
     >External Link</a
   ><button class="btn btn-primary" [routerLink]="['/pages/login']" type="button" rippleEffect>
     Router Link</button
@@ -222,5 +222,5 @@ export const snippetCodeButtontags: snippetCode = {
     rippleEffect
   />
 
-  `
+  `,
 };

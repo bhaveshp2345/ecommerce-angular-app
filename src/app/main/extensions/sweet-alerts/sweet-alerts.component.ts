@@ -1,15 +1,15 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 
-import { BeforeOpenEvent } from '@sweetalert2/ngx-sweetalert2';
-import Swal from 'sweetalert2';
+import { BeforeOpenEvent } from "@sweetalert2/ngx-sweetalert2";
+import Swal from "sweetalert2";
 
-import * as snippet from 'app/main/extensions/sweet-alerts/sweet-alerts.snippetcode';
+import * as snippet from "app/main/extensions/sweet-alerts/sweet-alerts.snippetcode";
 
 @Component({
-  selector: 'app-sweet-alerts',
-  templateUrl: './sweet-alerts.component.html',
-  styleUrls: ['./sweet-alerts.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  selector: "app-sweet-alerts",
+  templateUrl: "./sweet-alerts.component.html",
+  styleUrls: ["./sweet-alerts.component.scss"],
+  encapsulation: ViewEncapsulation.None,
 })
 export class SweetAlertsComponent implements OnInit {
   // public
@@ -42,7 +42,7 @@ export class SweetAlertsComponent implements OnInit {
     Swal.showLoading();
 
     this.timerInterval = setInterval(function () {
-      let timeLeft: HTMLElement = event.modalElement.querySelector('strong');
+      let timeLeft: HTMLElement = event.modalElement.querySelector("strong");
       timeLeft.textContent = <any>Swal.getTimerLeft();
     }, 100);
   }
@@ -59,31 +59,34 @@ export class SweetAlertsComponent implements OnInit {
    */
   questionBeforeOpen() {
     Swal.mixin({
-      input: 'text',
-      confirmButtonText: 'Next &rarr;',
+      input: "text",
+      confirmButtonText: "Next &rarr;",
       showCancelButton: true,
-      progressSteps: ['1', '2', '3'],
+      progressSteps: ["1", "2", "3"],
       customClass: {
-        confirmButton: 'btn btn-primary',
-        cancelButton: 'btn btn-danger ml-1'
-      }
+        confirmButton: "btn btn-primary",
+        cancelButton: "btn btn-danger ml-1",
+      },
     })
       .queue([
         {
-          title: 'Question 1',
-          text: 'Chaining swal2 modals is easy'
+          title: "Question 1",
+          text: "Chaining swal2 modals is easy",
         },
-        'Question 2',
-        'Question 3'
+        "Question 2",
+        "Question 3",
       ])
       .then(function (result) {
         if ((<HTMLInputElement>result).value) {
           Swal.fire({
-            title: 'All done!',
-            html: 'Your answers: <code>' + JSON.stringify((<HTMLInputElement>result).value) + '</code>',
+            title: "All done!",
+            html:
+              "Your answers: <code>" +
+              JSON.stringify((<HTMLInputElement>result).value) +
+              "</code>",
 
-            confirmButtonText: 'Lovely!',
-            customClass: { confirmButton: 'btn btn-primary' }
+            confirmButtonText: "Lovely!",
+            customClass: { confirmButton: "btn btn-primary" },
           });
         }
       });
@@ -94,18 +97,18 @@ export class SweetAlertsComponent implements OnInit {
    */
   ajaxOpen() {
     Swal.fire({
-      title: 'Search for a user',
-      input: 'text',
+      title: "Search for a user",
+      input: "text",
       showCancelButton: true,
-      confirmButtonText: 'Look up',
+      confirmButtonText: "Look up",
       showLoaderOnConfirm: true,
 
       customClass: {
-        confirmButton: 'btn btn-primary',
-        cancelButton: 'btn btn-danger ml-1'
+        confirmButton: "btn btn-primary",
+        cancelButton: "btn btn-danger ml-1",
       },
       preConfirm: function (login) {
-        return fetch('//api.github.com/users/' + login + '')
+        return fetch("//api.github.com/users/" + login + "")
           .then(function (response) {
             if (!response.ok) {
               console.log(response);
@@ -114,18 +117,18 @@ export class SweetAlertsComponent implements OnInit {
             return response.json();
           })
           .catch(function (error) {
-            Swal.showValidationMessage('Request failed:  ' + error + '');
+            Swal.showValidationMessage("Request failed:  " + error + "");
           });
       },
       allowOutsideClick: function () {
         return !Swal.isLoading();
-      }
+      },
     }).then(function (result) {
       if (result.value) {
         Swal.fire({
-          title: '' + result.value.login + "'s avatar",
+          title: "" + result.value.login + "'s avatar",
           imageUrl: result.value.avatar_url,
-          customClass: { confirmButton: 'btn btn-primary' }
+          customClass: { confirmButton: "btn btn-primary" },
         });
       }
     });
@@ -136,26 +139,26 @@ export class SweetAlertsComponent implements OnInit {
    */
   ConfirmTextOpen() {
     Swal.fire({
-      title: 'Are you sure?',
+      title: "Are you sure?",
       text: "You won't be able to revert this!",
-      icon: 'warning',
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#7367F0',
-      cancelButtonColor: '#E42728',
-      confirmButtonText: 'Yes, delete it!',
+      confirmButtonColor: "#ff9f43",
+      cancelButtonColor: "#E42728",
+      confirmButtonText: "Yes, delete it!",
       customClass: {
-        confirmButton: 'btn btn-primary',
-        cancelButton: 'btn btn-danger ml-1'
-      }
+        confirmButton: "btn btn-primary",
+        cancelButton: "btn btn-danger ml-1",
+      },
     }).then(function (result) {
       if (result.value) {
         Swal.fire({
-          icon: 'success',
-          title: 'Deleted!',
-          text: 'Your file has been deleted.',
+          icon: "success",
+          title: "Deleted!",
+          text: "Your file has been deleted.",
           customClass: {
-            confirmButton: 'btn btn-success'
-          }
+            confirmButton: "btn btn-success",
+          },
         });
       }
     });
@@ -166,33 +169,33 @@ export class SweetAlertsComponent implements OnInit {
    */
   ConfirmColorOpen() {
     Swal.fire({
-      title: 'Are you sure?',
+      title: "Are you sure?",
       text: "You won't be able to revert this!",
-      icon: 'warning',
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
+      confirmButtonText: "Yes, delete it!",
       customClass: {
-        confirmButton: 'btn btn-primary',
-        cancelButton: 'btn btn-danger ml-1'
-      }
+        confirmButton: "btn btn-primary",
+        cancelButton: "btn btn-danger ml-1",
+      },
     }).then(function (result) {
       if (result.value) {
         Swal.fire({
-          title: 'Deleted!',
-          text: 'Your file has been deleted.',
-          icon: 'success',
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success",
           customClass: {
-            confirmButton: 'btn btn-success'
-          }
+            confirmButton: "btn btn-success",
+          },
         });
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire({
-          title: 'Cancelled',
-          text: 'Your imaginary file is safe :)',
-          icon: 'error',
+          title: "Cancelled",
+          text: "Your imaginary file is safe :)",
+          icon: "error",
           customClass: {
-            confirmButton: 'btn btn-success'
-          }
+            confirmButton: "btn btn-success",
+          },
         });
       }
     });
@@ -209,27 +212,27 @@ export class SweetAlertsComponent implements OnInit {
   ngOnInit(): void {
     // content header
     this.contentHeader = {
-      headerTitle: 'Sweet Alerts',
+      headerTitle: "Sweet Alerts",
       actionButton: true,
       breadcrumb: {
-        type: '',
+        type: "",
         links: [
           {
-            name: 'Home',
+            name: "Home",
             isLink: true,
-            link: '/'
+            link: "/",
           },
           {
-            name: 'Extensions',
+            name: "Extensions",
             isLink: true,
-            link: '/'
+            link: "/",
           },
           {
-            name: 'Sweet Alerts',
-            isLink: false
-          }
-        ]
-      }
+            name: "Sweet Alerts",
+            isLink: false,
+          },
+        ],
+      },
     };
   }
 }

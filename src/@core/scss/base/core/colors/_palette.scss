@@ -1,15 +1,6 @@
-// ================================================================================================
-//   File Name: pallette.scss
-//   Description: Custom color system styles, includes background, border and text colors
-//   ----------------------------------------------------------------------------------------------
-//   Item Name: Vuexy - Vuejs, React, Angular, HTML & Laravel Admin Dashboard Template
-//   Author: PIXINVENT
-//   Author URL: http://www.themeforest.net/user/pixinvent
-// ================================================================================================
-
 //  ================================================================================================
 //  WARNING: PLEASE DO NOT CHANGE THIS VARIABLE FILE.
-//  THIS FILE WILL GET OVERWRITTEN WITH EACH Vuexy HTML TEMPLATE RELEASE.
+//  THIS FILE WILL GET OVERWRITTEN WITH EACH Tridhya HTML TEMPLATE RELEASE.
 //  TIP:
 //  We suggest you to use this (assets/scss/colors/palette.scss) file for overriding color variables.
 //  ================================================================================================
@@ -30,7 +21,7 @@
 }
 
 // Color palettes
-@import 'palette-variables';
+@import "palette-variables";
 
 // Color Classes
 //   Text color: .color .lighten-* / .darken-* / .accent-*
@@ -43,7 +34,7 @@
 
 @each $color_name, $color in $colors {
   @each $color_type, $color_value in $color {
-    @if $color_type== 'base' {
+    @if $color_type== "base" {
       // background color
       .bg-#{$color_name} {
         background-color: $color_value !important;
@@ -55,7 +46,14 @@
       }
 
       // Alert
-      @if ($color_name != 'light' and $color_name != 'black' and $color_name != 'white') {
+      @if (
+        $color_name !=
+          "light" and
+          $color_name !=
+          "black" and
+          $color_name !=
+          "white"
+      ) {
         .alert-#{$color_name} {
           background: rgba($color_value, 0.12) !important;
           color: $color_value !important;
@@ -76,7 +74,16 @@
       }
 
       // bg color lighten for rgba - opacity set
-      @if ($color_name != 'light' and $color_name != 'black' and $color_name != 'white' and $color_name != 'dark') {
+      @if (
+        $color_name !=
+          "light" and
+          $color_name !=
+          "black" and
+          $color_name !=
+          "white" and
+          $color_name !=
+          "dark"
+      ) {
         .bg-light-#{$color_name} {
           background: rgba($color_value, 0.12) !important;
           color: $color_value !important;
@@ -105,7 +112,16 @@
       }
 
       // avatar with light bg
-      @if ($color_name != 'light' and $color_name != 'black' and $color_name != 'white' and $color_name != 'dark') {
+      @if (
+        $color_name !=
+          "light" and
+          $color_name !=
+          "black" and
+          $color_name !=
+          "white" and
+          $color_name !=
+          "dark"
+      ) {
         .avatar.bg-light-#{$color_name} {
           color: $color_value !important;
         }
@@ -142,7 +158,14 @@
       }
 
       // Badge Background Color
-      @if ($color_name != 'light' and $color_name != 'black' and $color_name != 'white') {
+      @if (
+        $color_name !=
+          "light" and
+          $color_name !=
+          "black" and
+          $color_name !=
+          "white"
+      ) {
         .badge {
           // Badge Light Background
           &.badge-light-#{$color_name} {
@@ -158,7 +181,14 @@
       }
 
       // Basic buttons
-      @if ($color_name != 'light' and $color_name != 'black' and $color_name != 'white') {
+      @if (
+        $color_name !=
+          "light" and
+          $color_name !=
+          "black" and
+          $color_name !=
+          "white"
+      ) {
         .btn-#{$color_name} {
           border-color: $color_value !important;
           background-color: $color_value !important;
@@ -168,7 +198,10 @@
           &:active,
           &.active {
             color: $white;
-            background-color: color-function($color_name, 'darken-1') !important;
+            background-color: color-function(
+              $color_name,
+              "darken-1"
+            ) !important;
           }
 
           &:hover:not(.disabled):not(:disabled) {
@@ -182,7 +215,14 @@
       }
 
       // For Btn Flat
-      @if ($color_name != 'light' and $color_name != 'black' and $color_name != 'white') {
+      @if (
+        $color_name !=
+          "light" and
+          $color_name !=
+          "black" and
+          $color_name !=
+          "white"
+      ) {
         .btn-flat-#{$color-name} {
           background-color: transparent;
           color: $color-value;
@@ -203,31 +243,42 @@
           }
 
           &.dropdown-toggle::after {
-            background-image: url(str-replace(str-replace($chevron-down, 'currentColor', $color_value), '#', '%23'));
+            background-image: url(str-replace(
+              str-replace($chevron-down, "currentColor", $color_value),
+              "#",
+              "%23"
+            ));
           }
         }
       }
 
       // For Btn Relief
-      @if ($color_name != 'light' and $color_name != 'black' and $color_name != 'white') {
+      @if (
+        $color_name !=
+          "light" and
+          $color_name !=
+          "black" and
+          $color_name !=
+          "white"
+      ) {
         .btn-relief-#{$color-name} {
           background-color: $color-value;
           box-shadow: inset 0 -3px 0 0 rgba($black, 0.2);
           color: $white;
           transition: all 0.2s ease;
-          @if $color_name == 'dark' {
+          @if $color_name == "dark" {
             &:hover:not(.disabled):not(:disabled) {
-              background-color: color-function($color_name, 'darken-3');
+              background-color: color-function($color_name, "darken-3");
             }
           } @else {
             &:hover:not(.disabled):not(:disabled) {
-              background-color: color-function($color_name, 'lighten-1');
+              background-color: color-function($color_name, "lighten-1");
             }
           }
           &:active,
           &.active,
           &:focus {
-            background-color: color-function($color_name, 'darken-1');
+            background-color: color-function($color_name, "darken-1");
           }
 
           &:hover {
@@ -243,7 +294,14 @@
       }
 
       // Outline buttons
-      @if ($color_name != 'light' and $color_name != 'black' and $color_name != 'white') {
+      @if (
+        $color_name !=
+          "light" and
+          $color_name !=
+          "black" and
+          $color_name !=
+          "white"
+      ) {
         .btn-outline-#{$color_name} {
           border: 1px solid $color_value !important;
           background-color: transparent;
@@ -264,7 +322,11 @@
           }
 
           &.dropdown-toggle::after {
-            background-image: url(str-replace(str-replace($chevron-down, 'currentColor', $color_value), '#', '%23'));
+            background-image: url(str-replace(
+              str-replace($chevron-down, "currentColor", $color_value),
+              "#",
+              "%23"
+            ));
           }
           // split toggle have show class
           .show > &.dropdown-toggle {
@@ -275,7 +337,14 @@
       }
 
       // Wave effect
-      @if ($color_name != 'light' and $color_name != 'black' and $color_name != 'white') {
+      @if (
+        $color_name !=
+          "light" and
+          $color_name !=
+          "black" and
+          $color_name !=
+          "white"
+      ) {
         .btn-outline-#{$color_name},
         .btn-flat-#{$color-name} {
           &.waves-effect {
@@ -293,7 +362,14 @@
       }
 
       // Bullet colors for email app
-      @if ($color_name != 'light' and $color_name != 'black' and $color_name != 'white') {
+      @if (
+        $color_name !=
+          "light" and
+          $color_name !=
+          "black" and
+          $color_name !=
+          "white"
+      ) {
         .bullet {
           &.bullet-#{$color_name} {
             background-color: $color_value;
@@ -302,7 +378,14 @@
       }
 
       // Modal
-      @if ($color_name != 'light' and $color_name != 'black' and $color_name != 'white') {
+      @if (
+        $color_name !=
+          "light" and
+          $color_name !=
+          "black" and
+          $color_name !=
+          "white"
+      ) {
         .modal {
           &.modal-#{$color_name} {
             .modal-header {
@@ -318,7 +401,16 @@
       }
 
       // For Pagination
-      @if ($color_name != 'light' and $color_name != 'black' and $color_name != 'white' and $color_name != 'dark') {
+      @if (
+        $color_name !=
+          "light" and
+          $color_name !=
+          "black" and
+          $color_name !=
+          "white" and
+          $color_name !=
+          "dark"
+      ) {
         .pagination-#{$color-name} {
           .page-item {
             &.active {
@@ -352,9 +444,9 @@
                 &:hover {
                   &:after {
                     background-image: url(str-replace(
-                      str-replace($chevron-right, 'currentColor', $color_value),
-                      '#',
-                      '%23'
+                      str-replace($chevron-right, "currentColor", $color_value),
+                      "#",
+                      "%23"
                     )) !important;
                   }
                 }
@@ -367,9 +459,9 @@
                 &:hover {
                   &:before {
                     background-image: url(str-replace(
-                      str-replace($chevron-left, 'currentColor', $color_value),
-                      '#',
-                      '%23'
+                      str-replace($chevron-left, "currentColor", $color_value),
+                      "#",
+                      "%23"
                     )) !important;
                   }
                 }
@@ -380,7 +472,16 @@
       }
 
       // For Nav Pills
-      @if ($color_name != 'light' and $color_name != 'black' and $color_name != 'white' and $color_name != 'dark') {
+      @if (
+        $color_name !=
+          "light" and
+          $color_name !=
+          "black" and
+          $color_name !=
+          "white" and
+          $color_name !=
+          "dark"
+      ) {
         .nav-pill-#{$color-name} {
           .nav-item {
             .nav-link {
@@ -396,7 +497,14 @@
       }
 
       // Progress Bars
-      @if ($color_name != 'light' and $color_name != 'black' and $color_name != 'white') {
+      @if (
+        $color_name !=
+          "light" and
+          $color_name !=
+          "black" and
+          $color_name !=
+          "white"
+      ) {
         .progress-bar-#{$color_name} {
           background-color: rgba($color_value, 0.12);
 
@@ -407,7 +515,14 @@
       }
 
       // Timeline
-      @if ($color_name != 'light' and $color_name != 'black' and $color_name != 'white') {
+      @if (
+        $color_name !=
+          "light" and
+          $color_name !=
+          "black" and
+          $color_name !=
+          "white"
+      ) {
         .timeline {
           .timeline-point-#{$color_name} {
             border-color: $color_value !important;
@@ -428,7 +543,14 @@
       }
 
       // Divider
-      @if ($color_name != 'light' and $color_name != 'black' and $color_name != 'white') {
+      @if (
+        $color_name !=
+          "light" and
+          $color_name !=
+          "black" and
+          $color_name !=
+          "white"
+      ) {
         .divider.divider-#{$color-name} {
           .divider-text {
             &:before,
@@ -448,7 +570,14 @@
       }
 
       // Custom Checkbox & Radio
-      @if ($color_name != 'light' and $color_name != 'black' and $color_name != 'white') {
+      @if (
+        $color_name !=
+          "light" and
+          $color_name !=
+          "black" and
+          $color_name !=
+          "white"
+      ) {
         .custom-control-#{$color_name} {
           .custom-control-input:checked ~ .custom-control-label::before,
           .custom-control-input:active ~ .custom-control-label::before {
@@ -463,7 +592,8 @@
               box-shadow: 0 2px 4px 0 rgba($color_value, 0.4) !important;
             }
           }
-          .custom-control-input:disabled:checked ~ .custom-control-label::before {
+          .custom-control-input:disabled:checked
+            ~ .custom-control-label::before {
             background-color: rgba($color_value, 0.65) !important;
             border: none;
             box-shadow: none !important;
@@ -475,7 +605,14 @@
       }
 
       // Bootstrap Custom Switches
-      @if ($color_name != 'light' and $color_name != 'black' and $color_name != 'white') {
+      @if (
+        $color_name !=
+          "light" and
+          $color_name !=
+          "black" and
+          $color_name !=
+          "white"
+      ) {
         .custom-switch-#{$color-name} {
           .custom-control-input:checked ~ .custom-control-label::before {
             background-color: $color_value !important;
@@ -486,7 +623,14 @@
       }
 
       // Select2
-      @if ($color_name != 'light' and $color_name != 'black' and $color_name != 'white') {
+      @if (
+        $color_name !=
+          "light" and
+          $color_name !=
+          "black" and
+          $color_name !=
+          "white"
+      ) {
         .select2-#{$color-name} {
           .select2-container--default {
             .select2-selection--multiple {

@@ -1,4 +1,4 @@
-import { snippetCode } from '@core/components/card-snippet/card-snippet.component';
+import { snippetCode } from "@core/components/card-snippet/card-snippet.component";
 
 export const snippetCodeBasicInputs: snippetCode = {
   html: `
@@ -44,11 +44,11 @@ export const snippetCodeBasicInputs: snippetCode = {
   <div class="col-xl-4 col-md-6 col-12">
     <div class="form-group">
       <label for="disabledInput">Readonly Static Text</label>
-      <p class="form-control-static" id="staticInput">email@pixinvent.com</p>
+      <p class="form-control-static" id="staticInput">info@tridhyatech.com</p>
     </div>
   </div>
 </div>
-  `
+  `,
 };
 export const snippetCodeSizingOptions: snippetCode = {
   html: `
@@ -64,7 +64,7 @@ export const snippetCodeSizingOptions: snippetCode = {
   <label for="largeInput">Small</label>
   <input class="form-control form-control-sm" type="text" placeholder="Small Input" />
 </div>
-  `
+  `,
 };
 export const snippetCodeHorizontalFormLabelSizing: snippetCode = {
   html: `
@@ -98,7 +98,7 @@ export const snippetCodeHorizontalFormLabelSizing: snippetCode = {
     />
   </div>
 </div>
-  `
+  `,
 };
 export const snippetCodeFloatingLabelInputs: snippetCode = {
   html: `
@@ -117,7 +117,7 @@ export const snippetCodeFloatingLabelInputs: snippetCode = {
   />
   <label for="floating-label-disable">Disabled-placeholder</label>
 </div>
-  `
+  `,
 };
 export const snippetCodeFileInput: snippetCode = {
   html: `
@@ -133,7 +133,7 @@ export const snippetCodeFileInput: snippetCode = {
     <label class="custom-file-label" for="customFile">Choose file</label>
   </div>
 </div>
-  `
+  `,
 };
 export const snippetCodeInputValidationStates: snippetCode = {
   html: `
@@ -170,5 +170,5 @@ export const snippetCodeInputValidationStates: snippetCode = {
     <div class="invalid-feedback">This is invalid state.</div>
   </div>
 </div>
-  `
+  `,
 };

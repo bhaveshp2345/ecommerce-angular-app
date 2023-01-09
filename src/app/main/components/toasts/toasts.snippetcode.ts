@@ -1,4 +1,4 @@
-import { snippetCode } from '@core/components/card-snippet/card-snippet.component';
+import { snippetCode } from "@core/components/card-snippet/card-snippet.component";
 
 export const snippetCodeBasic: snippetCode = {
   html: `
@@ -11,25 +11,25 @@ export const snippetCodeBasic: snippetCode = {
       autohide: true
     });
   }
-  `
+  `,
 };
 export const snippetCodeTranslucent: snippetCode = {
   html: `
 <ngb-toast [autohide]="false">
   <ng-template ngbToastHeader>
     <img
-      src="assets/images/logo/logo.png"
+      src="assets/images/logo/tridhya-logo.png"
       height="18"
       width="25"
       class="mr-2"
       alt="Toast image"
     />
-    <strong class="mr-auto toast-title">Vuexy Admin</strong>
+    <strong class="mr-auto toast-title">Tridhya Admin</strong>
     <small class="text-muted toast-time ml-5 mr-1 pl-3">11 mins ago</small>
   </ng-template>
   Hello, world! This is a toast message.
 </ngb-toast>
-  `
+  `,
 };
 export const snippetCodeStacking: snippetCode = {
   html: `
@@ -48,7 +48,7 @@ export const snippetCodeStacking: snippetCode = {
       autohide: this.hideValue
     });
   }
-  `
+  `,
 };
 export const snippetCodePlacement: snippetCode = {
   html: `
@@ -61,5 +61,5 @@ export const snippetCodePlacement: snippetCode = {
     });
     this.toastStyle = { left: 0, right: 'unset' };
   }
-  `
+  `,
 };

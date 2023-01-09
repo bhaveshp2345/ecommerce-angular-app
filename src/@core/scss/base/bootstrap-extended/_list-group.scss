@@ -1,12 +1,3 @@
-/* ===============================================================================================
-  File Name: list-group.scss
-  Description: Contain list item, list group related extended SCSS.
-  ----------------------------------------------------------------------------------------------
-  Item Name: Vuexy - Vuejs, React, Angular, HTML & Laravel Admin Dashboard Template
-  Author: PIXINVENT
-  Author URL: http://www.themeforest.net/user/pixinvent
-================================================================================================*/
-
 // Inline list style with pipeline separator
 
 ul.list-inline {
@@ -16,7 +7,7 @@ ul.list-inline {
   // used in search page
   &.list-inline-pipe {
     > li + li:before {
-      content: ' | ';
+      content: " | ";
       padding-right: 2px;
     }
   }
@@ -74,8 +65,12 @@ ul.list-inline {
       position: relative;
       padding-left: 1.5rem;
       &:after {
-        content: ' ';
-        background-image: url(str-replace(str-replace($circle, 'currentColor', $body-color), '#', '%23'));
+        content: " ";
+        background-image: url(str-replace(
+          str-replace($circle, "currentColor", $body-color),
+          "#",
+          "%23"
+        ));
         background-repeat: no-repeat;
         background-position: center;
         color: $body-color;

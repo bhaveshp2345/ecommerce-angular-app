@@ -1,4 +1,4 @@
-import { snippetCode } from '@core/components/card-snippet/card-snippet.component';
+import { snippetCode } from "@core/components/card-snippet/card-snippet.component";
 
 export const snippetCodeBadge: snippetCode = {
   html: `
@@ -9,7 +9,7 @@ export const snippetCodeBadge: snippetCode = {
   <div class="badge badge-warning">Warning</div>
   <div class="badge badge-info">Info</div>
   <div class="badge badge-dark">Dark</div>
-  `
+  `,
 };
 
 export const snippetCodeGlowBadge: snippetCode = {
@@ -21,7 +21,7 @@ export const snippetCodeGlowBadge: snippetCode = {
   <div class="badge badge-glow badge-warning">Warning</div>
   <div class="badge badge-glow badge-info">Info</div>
   <div class="badge badge-glow badge-dark">Dark</div>
-  `
+  `,
 };
 
 export const snippetCodeLightBadge: snippetCode = {
@@ -33,7 +33,7 @@ export const snippetCodeLightBadge: snippetCode = {
   <div class="badge badge-light-warning">Warning</div>
   <div class="badge badge-light-info">Info</div>
   <div class="badge badge-light-dark">Dark</div>
-  `
+  `,
 };
 
 export const snippetCodeWithIcons: snippetCode = {
@@ -66,18 +66,18 @@ export const snippetCodeWithIcons: snippetCode = {
   <i data-feather="star" class="mr-25"></i>
   <span>Info</span>
 </div>
-  `
+  `,
 };
 
 export const snippetCodeLink: snippetCode = {
   html: `
 <div class="badge badge-primary">
-  <a href="https://pixinvent.com/" target="_blank">
+  <a href="https://www.tridhya.com/" target="_blank">
     <span [data-feather]="'link'" [class]="'mr-25'"></span>
     <span>Link Badge</span>
   </a>
 </div>
-  `
+  `,
 };
 
 export const snippetCodeBlockWithLink: snippetCode = {
@@ -85,5 +85,5 @@ export const snippetCodeBlockWithLink: snippetCode = {
 <div class="badge d-block badge-primary">
   <span>Badge</span>
 </div>
-  `
+  `,
 };

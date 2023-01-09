@@ -1,15 +1,6 @@
 //  ================================================================================================
-//  File Name: variables.scss
-//  Description: Custom component variable
-//  ----------------------------------------------------------------------------------------------
-//  Item Name: Vuexy - Vuejs, React, Angular, HTML & Laravel Admin Dashboard Template
-//  Author: PIXINVENT
-//  Author URL: http://www.themeforest.net/user/pixinvent
-//  ================================================================================================
-
-//  ================================================================================================
 //  WARNING: PLEASE DO NOT CHANGE THIS VARIABLE FILE.
-//  THIS FILE WILL GET OVERWRITTEN WITH EACH VUEXY HTML TEMPLATE RELEASE.
+//  THIS FILE WILL GET OVERWRITTEN WITH EACH TRIDHYA HTML TEMPLATE RELEASE.
 //  TIP:
 //  We suggest you to use this (assets/scss/variables/_variables-components.scss) file for overriding components variables.
 //  ================================================================================================
@@ -98,9 +89,15 @@ $border-radius-xs: 0.12rem !default;
 $input-border-radius-xl: $border-radius-xl !default;
 $input-border-radius-xs: $border-radius-xs !default;
 
-$input-height-xl: (($font-size-xl * $line-height-xl) + ($input-padding-y-xl * 2)) !default;
-$input-height-xs: (($font-size-xs * $line-height-xs) + ($input-padding-y-xs * 2)) !default;
-$input-height-sm: (($font-size-sm * $line-height-sm) + ($input-padding-y-sm * 2)) !default;
+$input-height-xl: (
+  ($font-size-xl * $line-height-xl) + ($input-padding-y-xl * 2)
+) !default;
+$input-height-xs: (
+  ($font-size-xs * $line-height-xs) + ($input-padding-y-xs * 2)
+) !default;
+$input-height-sm: (
+  ($font-size-sm * $line-height-sm) + ($input-padding-y-sm * 2)
+) !default;
 
 //  -------------------------------
 //  Blank Page Bg Color

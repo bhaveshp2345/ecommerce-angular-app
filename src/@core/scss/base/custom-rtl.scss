@@ -1,17 +1,8 @@
-// ================================================================================================
-//  File Name: custom-rtl.scss
-//  Description: RTL support SCSS file.
-//  ----------------------------------------------------------------------------------------------
-//  Item Name: Vuexy - Vuejs, React, Angular, HTML & Laravel Admin Dashboard Template
-//  Author: PIXINVENT
-//  Author URL: http://www.themeforest.net/user/pixinvent
-// ================================================================================================
-
 // Variables
 // ------------------------------
 
-@import 'bootstrap-extended/include'; // Bootstrap includes
-@import 'components/include'; // Components includes
+@import "bootstrap-extended/include"; // Bootstrap includes
+@import "components/include"; // Components includes
 
 // Align icons position
 .main-menu {
@@ -33,8 +24,16 @@
 }
 
 // Transformed menu icons
-.vertical-layout.vertical-menu-modern.menu-expanded .main-menu .navigation li.has-sub > a:after,
-.vertical-layout.vertical-overlay-menu.menu-open .main-menu .navigation li.has-sub > a:after {
+.vertical-layout.vertical-menu-modern.menu-expanded
+  .main-menu
+  .navigation
+  li.has-sub
+  > a:after,
+.vertical-layout.vertical-overlay-menu.menu-open
+  .main-menu
+  .navigation
+  li.has-sub
+  > a:after {
   transform: rotate(180deg);
 }
 .vertical-layout.vertical-menu-modern.menu-expanded
@@ -46,8 +45,15 @@
 }
 
 // Horizontal menu
-.horizontal-menu .header-navbar.navbar-horizontal .dropdown-menu .dropdown-toggle::after {
-  background-image: url(str-replace(str-replace($chevron-left, 'currentColor', $body-color), '#', '%23'));
+.horizontal-menu
+  .header-navbar.navbar-horizontal
+  .dropdown-menu
+  .dropdown-toggle::after {
+  background-image: url(str-replace(
+    str-replace($chevron-left, "currentColor", $body-color),
+    "#",
+    "%23"
+  ));
 }
 
 // Dropdown RTL Changes
@@ -93,7 +99,11 @@
 .dropleft {
   .dropdown-toggle {
     &::before {
-      background-image: url(str-replace(str-replace($chevron-right, 'currentColor', $white), '#', '%23')) !important;
+      background-image: url(str-replace(
+        str-replace($chevron-right, "currentColor", $white),
+        "#",
+        "%23"
+      )) !important;
     }
   }
   .dropdown-menu {
@@ -106,7 +116,11 @@
 .dropright {
   .dropdown-toggle {
     &::after {
-      background-image: url(str-replace(str-replace($chevron-left, 'currentColor', $white), '#', '%23')) !important;
+      background-image: url(str-replace(
+        str-replace($chevron-left, "currentColor", $white),
+        "#",
+        "%23"
+      )) !important;
     }
   }
   .dropdown-menu {
@@ -131,18 +145,21 @@
 }
 
 // Select2
-.select2-container--default .select2-selection--single .select2-selection__arrow {
+.select2-container--default
+  .select2-selection--single
+  .select2-selection__arrow {
   left: 1px;
 }
-.select2-container--default .select2-selection--multiple .select2-selection__choice {
+.select2-container--default
+  .select2-selection--multiple
+  .select2-selection__choice {
   float: right;
 }
 .select2-search__field {
   direction: rtl;
 }
 
-
-.apexcharts-canvas .apexcharts-text.apexcharts-yaxis-label{
+.apexcharts-canvas .apexcharts-text.apexcharts-yaxis-label {
   transform: translate(14px, 0);
 }
 
@@ -180,7 +197,7 @@ table.dataTable thead .sorting_desc:before {
 }
 
 // Breadcrumb
-.breadcrumb:not([class*='breadcrumb-']),
+.breadcrumb:not([class*="breadcrumb-"]),
 .breadcrumb.breadcrumb-chevron {
   .breadcrumb-item + .breadcrumb-item {
     &:before {
@@ -237,14 +254,14 @@ table.dataTable thead .sorting_desc:before {
   }
 }
 
-code[class*='language-'],
-pre[class*='language-'] {
+code[class*="language-"],
+pre[class*="language-"] {
   direction: ltr;
 }
 
 @media print {
-  code[class*='language-'],
-  pre[class*='language-'] {
+  code[class*="language-"],
+  pre[class*="language-"] {
     text-shadow: none;
   }
 }
@@ -271,25 +288,25 @@ pre[class*='language-'] {
 
 // Tooltip
 .bs-tooltip-left .arrow::before,
-.bs-tooltip-auto[x-placement^='left'] .arrow::before {
+.bs-tooltip-auto[x-placement^="left"] .arrow::before {
   border-width: 0.4rem 0 0.4rem 0.4rem;
   border-left-color: $tooltip-bg;
 }
 
 .bs-tooltip-left .arrow,
-.bs-tooltip-auto[x-placement^='left'] .arrow {
+.bs-tooltip-auto[x-placement^="left"] .arrow {
   right: 0;
   left: auto;
 }
 
 .bs-tooltip-right .arrow::before,
-.bs-tooltip-auto[x-placement^='right'] .arrow::before {
+.bs-tooltip-auto[x-placement^="right"] .arrow::before {
   border-width: 0.4rem 0.4rem 0.4rem 0;
   border-right-color: $tooltip-bg;
 }
 
 .bs-tooltip-right .arrow,
-.bs-tooltip-auto[x-placement^='right'] .arrow {
+.bs-tooltip-auto[x-placement^="right"] .arrow {
   left: 0;
   right: auto;
 }

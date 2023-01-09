@@ -1,12 +1,25 @@
-import { Component, OnInit, OnDestroy, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+  ViewEncapsulation,
+} from "@angular/core";
 
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { ApexAxisChartSeries, ApexChart, ApexDataLabels, ApexFill, ApexStroke, ApexTooltip } from 'ng-apexcharts';
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
+import {
+  ApexAxisChartSeries,
+  ApexChart,
+  ApexDataLabels,
+  ApexFill,
+  ApexStroke,
+  ApexTooltip,
+} from "ng-apexcharts";
 
-import { colors } from 'app/colors.const';
-import { CardStatisticsService } from 'app/main/ui/card/card-statistics/card-statistics.service';
-import { CoreConfigService } from '@core/services/config.service';
+import { colors } from "app/colors.const";
+import { CardStatisticsService } from "app/main/ui/card/card-statistics/card-statistics.service";
+import { CoreConfigService } from "@core/services/config.service";
 
 // interface ChartOptions
 export interface ChartOptions {
@@ -19,28 +32,28 @@ export interface ChartOptions {
   colors: string[];
 }
 @Component({
-  selector: 'app-card-statistics',
-  templateUrl: './card-statistics.component.html',
-  styleUrls: ['./card-statistics.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  selector: "app-card-statistics",
+  templateUrl: "./card-statistics.component.html",
+  styleUrls: ["./card-statistics.component.scss"],
+  encapsulation: ViewEncapsulation.None,
 })
 export class CardStatisticsComponent implements OnInit, OnDestroy {
   // Decorator
-  @ViewChild('statisticsBarRef') statisticsBarRef: any;
-  @ViewChild('statisticsLineRef') statisticsLineRef: any;
-  @ViewChild('gainedChartoptionsRef') gainedChartoptionsRef: any;
-  @ViewChild('revenueChartoptionsRef') revenueChartoptionsRef: any;
-  @ViewChild('salesChartoptionsRef') salesChartoptionsRef: any;
-  @ViewChild('orderChartoptionsRef') orderChartoptionsRef: any;
-  @ViewChild('trafficChartoptionsRef') trafficChartoptionsRef: any;
-  @ViewChild('userChartoptionsRef') userChartoptionsRef: any;
-  @ViewChild('newsletterChartoptionsRef') newsletterChartoptionsRef: any;
+  @ViewChild("statisticsBarRef") statisticsBarRef: any;
+  @ViewChild("statisticsLineRef") statisticsLineRef: any;
+  @ViewChild("gainedChartoptionsRef") gainedChartoptionsRef: any;
+  @ViewChild("revenueChartoptionsRef") revenueChartoptionsRef: any;
+  @ViewChild("salesChartoptionsRef") salesChartoptionsRef: any;
+  @ViewChild("orderChartoptionsRef") orderChartoptionsRef: any;
+  @ViewChild("trafficChartoptionsRef") trafficChartoptionsRef: any;
+  @ViewChild("userChartoptionsRef") userChartoptionsRef: any;
+  @ViewChild("newsletterChartoptionsRef") newsletterChartoptionsRef: any;
 
-  private $barColor = '#f3f3f3';
-  private $trackBgColor = '#EBEBEB';
-  private $primary_light = '#A9A2F6';
-  private $success_light = '#55DD92';
-  private $warning_light = '#ffc085';
+  private $barColor = "#f3f3f3";
+  private $trackBgColor = "#EBEBEB";
+  private $primary_light = "#A9A2F6";
+  private $success_light = "#55DD92";
+  private $warning_light = "#ffc085";
 
   public data: any;
 
@@ -48,10 +61,10 @@ export class CardStatisticsComponent implements OnInit, OnDestroy {
   private _unsubscribeAll: Subject<any>;
 
   // private
-  private $primary = '#7367F0';
-  private $success = '#28c76f';
-  private $danger = '#EA5455';
-  private $warning = '#FF9F43';
+  private $primary = "#ff9f43";
+  private $success = "#28c76f";
+  private $danger = "#EA5455";
+  private $warning = "#FF9F43";
   // public content-header
   public contentHeader: object;
   // public apexcharts variable
@@ -72,16 +85,19 @@ export class CardStatisticsComponent implements OnInit, OnDestroy {
    * @param {CoreConfigService} _coreConfigService
    * @param {CardStatisticsService} _cardStatisticsService
    */
-  constructor(private _cardStatisticsService: CardStatisticsService, private _coreConfigService: CoreConfigService) {
+  constructor(
+    private _cardStatisticsService: CardStatisticsService,
+    private _coreConfigService: CoreConfigService
+  ) {
     this._unsubscribeAll = new Subject();
     this.statisticsBar = {
       chart: {
         height: 70,
-        type: 'bar',
+        type: "bar",
         stacked: true,
         toolbar: {
-          show: false
-        }
+          show: false,
+        },
       },
       grid: {
         show: false,
@@ -89,63 +105,69 @@ export class CardStatisticsComponent implements OnInit, OnDestroy {
           left: 0,
           right: 0,
           top: -15,
-          bottom: -15
-        }
+          bottom: -15,
+        },
       },
       plotOptions: {
         bar: {
           horizontal: false,
-          columnWidth: '20%',
-          startingShape: 'rounded',
+          columnWidth: "20%",
+          startingShape: "rounded",
           colors: {
-            backgroundBarColors: [this.$barColor, this.$barColor, this.$barColor, this.$barColor, this.$barColor],
-            backgroundBarRadius: 5
-          }
-        }
+            backgroundBarColors: [
+              this.$barColor,
+              this.$barColor,
+              this.$barColor,
+              this.$barColor,
+              this.$barColor,
+            ],
+            backgroundBarRadius: 5,
+          },
+        },
       },
       legend: {
-        show: false
+        show: false,
       },
       dataLabels: {
-        enabled: false
+        enabled: false,
       },
       colors: [colors.solid.warning],
       series: [
         {
-          name: '2020',
-          data: [45, 85, 65, 45, 65]
-        }
+          name: "2020",
+          data: [45, 85, 65, 45, 65],
+        },
       ],
       xaxis: {
         labels: {
-          show: false
+          show: false,
         },
         axisBorder: {
-          show: false
+          show: false,
         },
         axisTicks: {
-          show: false
-        }
+          show: false,
+        },
       },
       yaxis: {
-        show: false
+        show: false,
       },
       tooltip: {
         x: {
-          show: false
-        }
-      }
+          show: false,
+        },
+      },
     };
     this.statisticsLine = {
       chart: {
         height: 70,
-        type: 'line',
+        type: "line",
         toolbar: {
-          show: false
+          show: false,
         },
         zoom: {
-          enabled: false
-        }
+          enabled: false,
+        },
       },
       grid: {
         // show: true,
@@ -153,29 +175,29 @@ export class CardStatisticsComponent implements OnInit, OnDestroy {
         strokeDashArray: 5,
         xaxis: {
           lines: {
-            show: true
-          }
+            show: true,
+          },
         },
         yaxis: {
           lines: {
-            show: false
-          }
+            show: false,
+          },
         },
         padding: {
           // left: 0,
           // right: 0,
           top: -30,
-          bottom: -10
-        }
+          bottom: -10,
+        },
       },
       stroke: {
-        width: 3
+        width: 3,
       },
       colors: [colors.solid.info],
       series: [
         {
-          data: [0, 20, 5, 30, 15, 45]
-        }
+          data: [0, 20, 5, 30, 15, 45],
+        },
       ],
       markers: {
         size: 2,
@@ -189,331 +211,331 @@ export class CardStatisticsComponent implements OnInit, OnDestroy {
           {
             seriesIndex: 0,
             dataPointIndex: 5,
-            fillColor: '#ffffff',
+            fillColor: "#ffffff",
             strokeColor: colors.solid.info,
-            size: 5
-          }
+            size: 5,
+          },
         ],
-        shape: 'circle',
+        shape: "circle",
         radius: 2,
         hover: {
-          size: 3
-        }
+          size: 3,
+        },
       },
       xaxis: {
         labels: {
           show: true,
           style: {
-            fontSize: '0px'
-          }
+            fontSize: "0px",
+          },
         },
         axisBorder: {
-          show: false
+          show: false,
         },
         axisTicks: {
-          show: false
-        }
+          show: false,
+        },
       },
       yaxis: {
-        show: false
+        show: false,
       },
       tooltip: {
         x: {
-          show: false
-        }
-      }
+          show: false,
+        },
+      },
     };
     // Subscribers Gained chart
     this.gainedChartoptions = {
       chart: {
         height: 100,
-        type: 'area',
+        type: "area",
         toolbar: {
-          show: false
+          show: false,
         },
         sparkline: {
-          enabled: true
-        }
+          enabled: true,
+        },
       },
       colors: [this.$primary],
       dataLabels: {
-        enabled: false
+        enabled: false,
       },
       stroke: {
-        curve: 'smooth',
-        width: 2.5
+        curve: "smooth",
+        width: 2.5,
       },
       fill: {
-        type: 'gradient',
+        type: "gradient",
         gradient: {
           shadeIntensity: 0.9,
           opacityFrom: 0.7,
           opacityTo: 0.5,
-          stops: [0, 80, 100]
-        }
+          stops: [0, 80, 100],
+        },
       },
       // series: this.data?.subscribers_gained?.series,
       tooltip: {
-        x: { show: false }
-      }
+        x: { show: false },
+      },
     };
     // Revenue Generated Chart
     this.revenueChartoptions = {
       chart: {
         height: 100,
-        type: 'area',
+        type: "area",
         toolbar: {
-          show: false
+          show: false,
         },
         sparkline: {
-          enabled: true
-        }
+          enabled: true,
+        },
       },
       colors: [this.$success],
       dataLabels: {
-        enabled: false
+        enabled: false,
       },
       stroke: {
-        curve: 'smooth',
-        width: 2.5
+        curve: "smooth",
+        width: 2.5,
       },
       fill: {
-        type: 'gradient',
+        type: "gradient",
         gradient: {
           shadeIntensity: 0.9,
           opacityFrom: 0.7,
           opacityTo: 0.5,
-          stops: [0, 80, 100]
-        }
+          stops: [0, 80, 100],
+        },
       },
       series: [
         {
-          name: 'Revenue',
-          data: [350, 275, 400, 300, 350, 300, 450]
-        }
+          name: "Revenue",
+          data: [350, 275, 400, 300, 350, 300, 450],
+        },
       ],
       tooltip: {
-        x: { show: false }
-      }
+        x: { show: false },
+      },
     };
     // Quaterly Sales Chart
     this.salesChartoptions = {
       chart: {
         height: 100,
-        type: 'area',
+        type: "area",
         toolbar: {
-          show: false
+          show: false,
         },
         sparkline: {
-          enabled: true
-        }
+          enabled: true,
+        },
       },
       colors: [this.$danger],
       dataLabels: {
-        enabled: false
+        enabled: false,
       },
       stroke: {
-        curve: 'smooth',
-        width: 2.5
+        curve: "smooth",
+        width: 2.5,
       },
       fill: {
-        type: 'gradient',
+        type: "gradient",
         gradient: {
           shadeIntensity: 0.9,
           opacityFrom: 0.7,
           opacityTo: 0.5,
-          stops: [0, 80, 100]
-        }
+          stops: [0, 80, 100],
+        },
       },
       series: [
         {
-          name: 'Sales',
-          data: [10, 15, 7, 12, 3, 16]
-        }
+          name: "Sales",
+          data: [10, 15, 7, 12, 3, 16],
+        },
       ],
       tooltip: {
-        x: { show: false }
-      }
+        x: { show: false },
+      },
     };
     // Order Received Chart
     this.orderChartoptions = {
       chart: {
         height: 100,
-        type: 'area',
+        type: "area",
         toolbar: {
-          show: false
+          show: false,
         },
         sparkline: {
-          enabled: true
-        }
+          enabled: true,
+        },
       },
       colors: [this.$warning],
       dataLabels: {
-        enabled: false
+        enabled: false,
       },
       stroke: {
-        curve: 'smooth',
-        width: 2.5
+        curve: "smooth",
+        width: 2.5,
       },
       fill: {
-        type: 'gradient',
+        type: "gradient",
         gradient: {
           shadeIntensity: 0.9,
           opacityFrom: 0.7,
           opacityTo: 0.5,
-          stops: [0, 80, 100]
-        }
+          stops: [0, 80, 100],
+        },
       },
       series: [
         {
-          name: 'Orders',
-          data: [10, 15, 8, 15, 7, 12, 8]
-        }
+          name: "Orders",
+          data: [10, 15, 8, 15, 7, 12, 8],
+        },
       ],
       tooltip: {
-        x: { show: false }
-      }
+        x: { show: false },
+      },
     };
     // Site Traffic Chart
     this.trafficChartoptions = {
       chart: {
         height: 100,
-        type: 'line',
+        type: "line",
         dropShadow: {
           enabled: true,
           top: 5,
           left: 0,
           blur: 4,
-          opacity: 0.1
+          opacity: 0.1,
         },
         toolbar: {
-          show: false
+          show: false,
         },
         sparkline: {
-          enabled: true
-        }
+          enabled: true,
+        },
       },
       colors: [this.$primary],
       dataLabels: {
-        enabled: false
+        enabled: false,
       },
       stroke: {
-        curve: 'smooth',
-        width: 5
+        curve: "smooth",
+        width: 5,
       },
       fill: {
-        type: 'gradient',
+        type: "gradient",
         gradient: {
           shadeIntensity: 1,
           gradientToColors: [this.$primary_light],
           opacityFrom: 1,
           opacityTo: 1,
-          stops: [0, 100, 100, 100]
-        }
+          stops: [0, 100, 100, 100],
+        },
       },
       series: [
         {
-          name: 'Traffic Rate',
-          data: [150, 200, 125, 225, 200, 250]
-        }
+          name: "Traffic Rate",
+          data: [150, 200, 125, 225, 200, 250],
+        },
       ],
       tooltip: {
-        x: { show: false }
-      }
+        x: { show: false },
+      },
     };
     // Active Users Chart
     this.userChartoptions = {
       chart: {
         height: 100,
-        type: 'line',
+        type: "line",
         dropShadow: {
           enabled: true,
           top: 5,
           left: 0,
           blur: 4,
-          opacity: 0.1
+          opacity: 0.1,
         },
         toolbar: {
-          show: false
+          show: false,
         },
         sparkline: {
-          enabled: true
-        }
+          enabled: true,
+        },
       },
       colors: [this.$success],
       dataLabels: {
-        enabled: false
+        enabled: false,
       },
       stroke: {
-        curve: 'smooth',
-        width: 5
+        curve: "smooth",
+        width: 5,
       },
       fill: {
-        type: 'gradient',
+        type: "gradient",
         gradient: {
           shadeIntensity: 1,
           gradientToColors: [this.$success_light],
           opacityFrom: 1,
           opacityTo: 1,
-          stops: [0, 100, 100, 100]
-        }
+          stops: [0, 100, 100, 100],
+        },
       },
       series: [
         {
-          name: 'Active Users',
-          data: [750, 1000, 900, 1250, 1000, 1200, 1100]
-        }
+          name: "Active Users",
+          data: [750, 1000, 900, 1250, 1000, 1200, 1100],
+        },
       ],
       tooltip: {
-        x: { show: false }
-      }
+        x: { show: false },
+      },
     };
     // News Letter Chart
     this.newsletterChartoptions = {
       chart: {
         height: 100,
-        type: 'line',
+        type: "line",
         dropShadow: {
           enabled: true,
           top: 5,
           left: 0,
           blur: 4,
-          opacity: 0.1
+          opacity: 0.1,
         },
         toolbar: {
-          show: false
+          show: false,
         },
         sparkline: {
-          enabled: true
-        }
+          enabled: true,
+        },
       },
       colors: [this.$warning],
       dataLabels: {
-        enabled: false
+        enabled: false,
       },
       stroke: {
-        curve: 'smooth',
-        width: 5
+        curve: "smooth",
+        width: 5,
       },
       fill: {
-        type: 'gradient',
+        type: "gradient",
         gradient: {
           shadeIntensity: 1,
           gradientToColors: [this.$warning_light],
           opacityFrom: 1,
           opacityTo: 1,
-          stops: [0, 100, 100, 100]
-        }
+          stops: [0, 100, 100, 100],
+        },
       },
       series: [
         {
-          name: 'Newsletter',
-          data: [365, 390, 365, 400, 375, 400]
-        }
+          name: "Newsletter",
+          data: [365, 390, 365, 400, 375, 400],
+        },
       ],
       tooltip: {
-        x: { show: false }
-      }
+        x: { show: false },
+      },
     };
   }
   // Lifecycle Hooks
@@ -522,32 +544,34 @@ export class CardStatisticsComponent implements OnInit, OnDestroy {
    * On init
    */
   ngOnInit() {
-    this._cardStatisticsService.onCardSatatsChanged.pipe(takeUntil(this._unsubscribeAll)).subscribe(response => {
-      this.data = response;
-    });
+    this._cardStatisticsService.onCardSatatsChanged
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((response) => {
+        this.data = response;
+      });
 
     this.contentHeader = {
-      headerTitle: 'Statistics Cards',
+      headerTitle: "Statistics Cards",
       actionButton: true,
       breadcrumb: {
-        type: '',
+        type: "",
         links: [
           {
-            name: 'Home',
+            name: "Home",
             isLink: true,
-            link: '/'
+            link: "/",
           },
           {
-            name: 'Cards',
+            name: "Cards",
             isLink: true,
-            link: '/'
+            link: "/",
           },
           {
-            name: 'Statistics Cards',
-            isLink: false
-          }
-        ]
-      }
+            name: "Statistics Cards",
+            isLink: false,
+          },
+        ],
+      },
     };
   }
 
@@ -556,24 +580,34 @@ export class CardStatisticsComponent implements OnInit, OnDestroy {
    */
   ngAfterViewInit() {
     // Subscribe to core config changes
-    this._coreConfigService.getConfig().subscribe(config => {
+    this._coreConfigService.getConfig().subscribe((config) => {
       // If Menu Collapsed Changes
       if (
-        (config.layout.menu.collapsed === true || config.layout.menu.collapsed === false) &&
-        localStorage.getItem('currentUser')
+        (config.layout.menu.collapsed === true ||
+          config.layout.menu.collapsed === false) &&
+        localStorage.getItem("currentUser")
       ) {
         setTimeout(() => {
           // Get Dynamic Width for Charts
           this.isMenuToggled = true;
-          this.statisticsBar.chart.width = this.statisticsBarRef?.nativeElement.offsetWidth;
-          this.statisticsLine.chart.width = this.statisticsLineRef?.nativeElement.offsetWidth;
-          this.gainedChartoptions.chart.width = this.gainedChartoptionsRef?.nativeElement.offsetWidth;
-          this.revenueChartoptions.chart.width = this.revenueChartoptionsRef?.nativeElement.offsetWidth;
-          this.salesChartoptions.chart.width = this.salesChartoptionsRef?.nativeElement.offsetWidth;
-          this.orderChartoptions.chart.width = this.orderChartoptionsRef?.nativeElement.offsetWidth;
-          this.trafficChartoptions.chart.width = this.trafficChartoptionsRef?.nativeElement.offsetWidth;
-          this.userChartoptions.chart.width = this.userChartoptionsRef?.nativeElement.offsetWidth;
-          this.newsletterChartoptions.chart.width = this.newsletterChartoptionsRef?.nativeElement.offsetWidth;
+          this.statisticsBar.chart.width =
+            this.statisticsBarRef?.nativeElement.offsetWidth;
+          this.statisticsLine.chart.width =
+            this.statisticsLineRef?.nativeElement.offsetWidth;
+          this.gainedChartoptions.chart.width =
+            this.gainedChartoptionsRef?.nativeElement.offsetWidth;
+          this.revenueChartoptions.chart.width =
+            this.revenueChartoptionsRef?.nativeElement.offsetWidth;
+          this.salesChartoptions.chart.width =
+            this.salesChartoptionsRef?.nativeElement.offsetWidth;
+          this.orderChartoptions.chart.width =
+            this.orderChartoptionsRef?.nativeElement.offsetWidth;
+          this.trafficChartoptions.chart.width =
+            this.trafficChartoptionsRef?.nativeElement.offsetWidth;
+          this.userChartoptions.chart.width =
+            this.userChartoptionsRef?.nativeElement.offsetWidth;
+          this.newsletterChartoptions.chart.width =
+            this.newsletterChartoptionsRef?.nativeElement.offsetWidth;
         }, 500);
       }
     });

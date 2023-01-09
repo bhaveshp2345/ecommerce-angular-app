@@ -1,14 +1,5 @@
-/*=========================================================================================
-    File Name: ext-component-swiper.scss
-    Description: swiper plugin scss.
-    ----------------------------------------------------------------------------------------
-    Item Name: Vuexy - Vuejs, React, Angular, HTML & Laravel Admin Dashboard Template
-    Author: PIXINVENT
-    Author URL: http://www.themeforest.net/user/pixinvent
-==========================================================================================*/
-
-@import '../../bootstrap-extended/include'; // Bootstrap includes
-@import '../../components/include'; // Components includes
+@import "../../bootstrap-extended/include"; // Bootstrap includes
+@import "../../components/include"; // Components includes
 
 /* Swiper css */
 /* ---------- */
@@ -63,12 +54,20 @@
   }
   .swiper-button-next {
     &:after {
-      background-image: url(str-replace(str-replace($chevron-right, 'currentColor', $white), '#', '%23'));
+      background-image: url(str-replace(
+        str-replace($chevron-right, "currentColor", $white),
+        "#",
+        "%23"
+      ));
     }
   }
   .swiper-button-prev {
     &:after {
-      background-image: url(str-replace(str-replace($chevron-left, 'currentColor', $white), '#', '%23'));
+      background-image: url(str-replace(
+        str-replace($chevron-left, "currentColor", $white),
+        "#",
+        "%23"
+      ));
     }
   }
 
@@ -91,12 +90,20 @@
   &.swiper-container-rtl {
     .swiper-button-next {
       &:after {
-        background-image: url(str-replace(str-replace($chevron-left, 'currentColor', $white), '#', '%23'));
+        background-image: url(str-replace(
+          str-replace($chevron-left, "currentColor", $white),
+          "#",
+          "%23"
+        ));
       }
     }
     .swiper-button-prev {
       &:after {
-        background-image: url(str-replace(str-replace($chevron-right, 'currentColor', $white), '#', '%23'));
+        background-image: url(str-replace(
+          str-replace($chevron-right, "currentColor", $white),
+          "#",
+          "%23"
+        ));
       }
     }
   }
@@ -206,28 +213,36 @@
 
 .swiper-button-prev {
   &:after {
-    background-image: url(str-replace(str-replace($chevron-left, 'currentColor', $primary), '#', '%23'));
+    background-image: url(str-replace(
+      str-replace($chevron-left, "currentColor", $primary),
+      "#",
+      "%23"
+    ));
     background-repeat: no-repeat;
     background-position: center;
     background-size: 44px;
     color: $body-color;
     width: 44px;
     height: 44px;
-    content: '';
+    content: "";
     padding-right: 1px;
   }
 }
 
 .swiper-button-next {
   &:after {
-    background-image: url(str-replace(str-replace($chevron-right, 'currentColor', $primary), '#', '%23'));
+    background-image: url(str-replace(
+      str-replace($chevron-right, "currentColor", $primary),
+      "#",
+      "%23"
+    ));
     background-repeat: no-repeat;
     background-position: center;
     background-size: 44px;
     color: $body-color;
     width: 44px;
     height: 44px;
-    content: '';
+    content: "";
     padding-right: 2px;
   }
 }
@@ -235,27 +250,35 @@
 .swiper-container-rtl {
   .swiper-button-prev {
     &:after {
-      background-image: url(str-replace(str-replace($chevron-right, 'currentColor', $primary), '#', '%23'));
+      background-image: url(str-replace(
+        str-replace($chevron-right, "currentColor", $primary),
+        "#",
+        "%23"
+      ));
       background-repeat: no-repeat;
       background-position: center;
       background-size: 44px;
       color: $body-color;
       width: 44px;
       height: 44px;
-      content: '';
+      content: "";
     }
   }
 
   .swiper-button-next {
     &:after {
-      background-image: url(str-replace(str-replace($chevron-left, 'currentColor', $primary), '#', '%23'));
+      background-image: url(str-replace(
+        str-replace($chevron-left, "currentColor", $primary),
+        "#",
+        "%23"
+      ));
       background-repeat: no-repeat;
       background-position: center;
       background-size: 44px;
       color: $body-color;
       width: 44px;
       height: 44px;
-      content: '';
+      content: "";
     }
   }
 }

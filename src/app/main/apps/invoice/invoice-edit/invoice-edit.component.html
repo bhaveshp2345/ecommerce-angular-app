@@ -7,7 +7,9 @@
           <div class="card invoice-preview-card">
             <!-- Header starts -->
             <div class="card-body invoice-padding pb-0">
-              <div class="d-flex justify-content-between flex-md-row flex-column invoice-spacing mt-0">
+              <div
+                class="d-flex justify-content-between flex-md-row flex-column invoice-spacing mt-0"
+              >
                 <div>
                   <div class="logo-wrapper">
                     <svg
@@ -35,11 +37,20 @@
                           x2="37.373316%"
                           y2="100%"
                         >
-                          <stop stop-color="#EEEEEE" stop-opacity="0" offset="0%"></stop>
+                          <stop
+                            stop-color="#EEEEEE"
+                            stop-opacity="0"
+                            offset="0%"
+                          ></stop>
                           <stop stop-color="#FFFFFF" offset="100%"></stop>
                         </linearGradient>
                       </defs>
-                      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                      <g
+                        stroke="none"
+                        stroke-width="1"
+                        fill="none"
+                        fill-rule="evenodd"
+                      >
                         <g transform="translate(-400.000000, -178.000000)">
                           <g transform="translate(400.000000, 178.000000)">
                             <path
@@ -71,16 +82,24 @@
                         </g>
                       </g>
                     </svg>
-                    <h3 class="text-primary invoice-logo">Vuexy</h3>
+                    <h3 class="text-primary invoice-logo">Tridhya</h3>
                   </div>
-                  <p class="card-text mb-25">Office 149, 450 South Brand Brooklyn</p>
+                  <p class="card-text mb-25">
+                    Office 149, 450 South Brand Brooklyn
+                  </p>
                   <p class="card-text mb-25">San Diego County, CA 91905, USA</p>
-                  <p class="card-text mb-0">+1 (123) 456 7891, +44 (876) 543 2198</p>
+                  <p class="card-text mb-0">
+                    +1 (123) 456 7891, +44 (876) 543 2198
+                  </p>
                 </div>
                 <div class="invoice-number-date mt-md-0 mt-2">
-                  <div class="d-flex align-items-center justify-content-md-end mb-1">
+                  <div
+                    class="d-flex align-items-center justify-content-md-end mb-1"
+                  >
                     <h4 class="invoice-title">Invoice</h4>
-                    <div class="input-group input-group-merge invoice-edit-input-group disabled">
+                    <div
+                      class="input-group input-group-merge invoice-edit-input-group disabled"
+                    >
                       <div class="input-group-prepend">
                         <div class="input-group-text">
                           <i data-feather="hash"></i>
@@ -97,11 +116,17 @@
                   </div>
                   <div class="d-flex align-items-center mb-1">
                     <span class="title">Date:</span>
-                    <ng2-flatpickr [config]="DateRangeOptions" name="DateRange"></ng2-flatpickr>
+                    <ng2-flatpickr
+                      [config]="DateRangeOptions"
+                      name="DateRange"
+                    ></ng2-flatpickr>
                   </div>
                   <div class="d-flex align-items-center">
                     <span class="title">Due Date:</span>
-                    <ng2-flatpickr [config]="DateRangeOptions" name="DateRange"></ng2-flatpickr>
+                    <ng2-flatpickr
+                      [config]="DateRangeOptions"
+                      name="DateRange"
+                    ></ng2-flatpickr>
                   </div>
                 </div>
               </div>
@@ -117,9 +142,13 @@
                   <h6 class="mb-2">Invoice To:</h6>
                   <h6 class="mb-25">{{ apiData.client.name }}</h6>
                   <p class="card-text mb-25">{{ apiData.client.company }}</p>
-                  <p class="card-text mb-25">{{ apiData.client.address + ' ' + apiData.client.country }}</p>
+                  <p class="card-text mb-25">
+                    {{ apiData.client.address + " " + apiData.client.country }}
+                  </p>
                   <p class="card-text mb-25">{{ apiData.client.contact }}</p>
-                  <p class="card-text mb-0">{{ apiData.client.companyEmail }}</p>
+                  <p class="card-text mb-0">
+                    {{ apiData.client.companyEmail }}
+                  </p>
                 </div>
                 <div class="col-xl-4 p-0 mt-xl-0 mt-2">
                   <h6 class="mb-2">Payment Details:</h6>
@@ -128,7 +157,9 @@
                       <tr>
                         <td class="pr-1">Total Due:</td>
                         <td>
-                          <span class="font-weight-bold">{{ paymentDetails.totalDue }}</span>
+                          <span class="font-weight-bold">{{
+                            paymentDetails.totalDue
+                          }}</span>
                         </td>
                       </tr>
                       <tr>
@@ -158,19 +189,36 @@
             <div class="card-body invoice-padding invoice-product-details">
               <form class="source-item">
                 <div data-repeater-list="group-a">
-                  <div class="repeater-wrapper" data-repeater-item *ngFor="let item of items; let i = index" @heightIn>
+                  <div
+                    class="repeater-wrapper"
+                    data-repeater-item
+                    *ngFor="let item of items; let i = index"
+                    @heightIn
+                  >
                     <div class="row">
-                      <div class="col-12 d-flex product-details-border position-relative pr-0">
+                      <div
+                        class="col-12 d-flex product-details-border position-relative pr-0"
+                      >
                         <div class="row w-100 pr-lg-0 pr-1 py-2">
-                          <div class="col-lg-5 col-12 mb-lg-0 mb-2 mt-lg-0 mt-2">
-                            <p class="card-text col-title mb-md-50 mb-0">Item</p>
+                          <div
+                            class="col-lg-5 col-12 mb-lg-0 mb-2 mt-lg-0 mt-2"
+                          >
+                            <p class="card-text col-title mb-md-50 mb-0">
+                              Item
+                            </p>
                             <select class="form-control item-details">
                               <option value="App Design">App Design</option>
-                              <option value="App Customization" selected>App Customization</option>
+                              <option value="App Customization" selected>
+                                App Customization
+                              </option>
                               <option value="ABC Template">ABC Template</option>
-                              <option value="App Development">App Development</option>
+                              <option value="App Development">
+                                App Development
+                              </option>
                             </select>
-                            <textarea class="form-control mt-2" rows="1">Customization & Bug Fixes</textarea>
+                            <textarea class="form-control mt-2" rows="1">
+Customization & Bug Fixes</textarea
+                            >
                           </div>
                           <div class="col-lg-3 col-12 my-lg-0 my-2">
                             <p class="card-text col-title mb-md-2 mb-0">Cost</p>
@@ -185,10 +233,18 @@
                             <div class="mt-2">
                               <span>Discount: </span>
                               <span class="discount">0%</span>
-                              <span class="tax-1 ml-50" data-toggle="tooltip" data-placement="top" title="Tax 1"
+                              <span
+                                class="tax-1 ml-50"
+                                data-toggle="tooltip"
+                                data-placement="top"
+                                title="Tax 1"
                                 >0%</span
                               >
-                              <span class="tax-2 ml-50" data-toggle="tooltip" data-placement="top" title="Tax 2"
+                              <span
+                                class="tax-2 ml-50"
+                                data-toggle="tooltip"
+                                data-placement="top"
+                                title="Tax 2"
                                 >0%</span
                               >
                             </div>
@@ -205,7 +261,9 @@
                             />
                           </div>
                           <div class="col-lg-2 col-12 mt-lg-0 mt-2">
-                            <p class="card-text col-title mb-md-50 mb-0">Price</p>
+                            <p class="card-text col-title mb-md-50 mb-0">
+                              Price
+                            </p>
                             <p class="card-text mb-0">$24.00</p>
                           </div>
                         </div>
@@ -213,9 +271,17 @@
                           class="d-flex flex-column align-items-center justify-content-between border-left invoice-product-actions py-50 px-25"
                         >
                           <button (click)="deleteItem(i)" class="btn p-0">
-                            <i data-feather="x" [size]="18" class="cursor-pointer"></i>
+                            <i
+                              data-feather="x"
+                              [size]="18"
+                              class="cursor-pointer"
+                            ></i>
                           </button>
-                          <div ngbDropdown class="dropdown" #discountDropdown="ngbDropdown">
+                          <div
+                            ngbDropdown
+                            class="dropdown"
+                            #discountDropdown="ngbDropdown"
+                          >
                             <button
                               class="cursor-pointer more-options-dropdown mr-0 btn p-0 hide-arrow"
                               id="dropdownMenuButton"
@@ -234,13 +300,25 @@
                               aria-labelledby="dropdownMenuButton"
                             >
                               <div class="form-group">
-                                <label for="discount-input" class="form-label">Discount(%)</label>
-                                <input type="number" class="form-control" id="discount-input" />
+                                <label for="discount-input" class="form-label"
+                                  >Discount(%)</label
+                                >
+                                <input
+                                  type="number"
+                                  class="form-control"
+                                  id="discount-input"
+                                />
                               </div>
                               <div class="form-row mt-50">
                                 <div class="form-group col-md-6">
-                                  <label for="tax-1-input" class="form-label">Tax 1</label>
-                                  <select name="tax-1-input" id="tax-1-input" class="form-control tax-select">
+                                  <label for="tax-1-input" class="form-label"
+                                    >Tax 1</label
+                                  >
+                                  <select
+                                    name="tax-1-input"
+                                    id="tax-1-input"
+                                    class="form-control tax-select"
+                                  >
                                     <option value="0%" selected>0%</option>
                                     <option value="1%">1%</option>
                                     <option value="10%">10%</option>
@@ -249,8 +327,14 @@
                                   </select>
                                 </div>
                                 <div class="form-group col-md-6">
-                                  <label for="tax-2-input" class="form-label">Tax 2</label>
-                                  <select name="tax-2-input" id="tax-2-input" class="form-control tax-select">
+                                  <label for="tax-2-input" class="form-label"
+                                    >Tax 2</label
+                                  >
+                                  <select
+                                    name="tax-2-input"
+                                    id="tax-2-input"
+                                    class="form-control tax-select"
+                                  >
                                     <option value="0%" selected>0%</option>
                                     <option value="1%">1%</option>
                                     <option value="10%">10%</option>
@@ -287,7 +371,12 @@
                 </div>
                 <div class="row mt-1">
                   <div class="col-12 px-0">
-                    <button type="button" class="btn btn-primary btn-sm btn-add-new" (click)="addItem()" rippleEffect>
+                    <button
+                      type="button"
+                      class="btn btn-primary btn-sm btn-add-new"
+                      (click)="addItem()"
+                      rippleEffect
+                    >
                       <i data-feather="plus" class="mr-25"></i>
                       <span class="align-middle">Add Item</span>
                     </button>
@@ -302,11 +391,20 @@
               <div class="row invoice-sales-total-wrapper">
                 <div class="col-md-6 order-md-1 order-2 mt-md-0 mt-3">
                   <div class="d-flex align-items-center mb-1">
-                    <label for="salesperson" class="form-label">Salesperson:</label>
-                    <input type="text" class="form-control ml-50" id="salesperson" placeholder="Edward Crowley" />
+                    <label for="salesperson" class="form-label"
+                      >Salesperson:</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control ml-50"
+                      id="salesperson"
+                      placeholder="Edward Crowley"
+                    />
                   </div>
                 </div>
-                <div class="col-md-6 d-flex justify-content-end order-md-2 order-1">
+                <div
+                  class="col-md-6 d-flex justify-content-end order-md-2 order-1"
+                >
                   <div class="invoice-total-wrapper">
                     <div class="invoice-total-item">
                       <p class="invoice-total-title">Subtotal:</p>
@@ -338,7 +436,9 @@
               <div class="row">
                 <div class="col-12">
                   <div class="form-group mb-2">
-                    <label for="note" class="form-label font-weight-bold">Note:</label>
+                    <label for="note" class="form-label font-weight-bold"
+                      >Note:</label
+                    >
                     <textarea class="form-control" rows="2" id="note">
 It was a pleasure working with you and your team. We hope you will keep us in mind for future freelance projects. Thank You!</textarea
                     >
@@ -364,10 +464,18 @@ It was a pleasure working with you and your team. We hope you will keep us in mi
               >
                 Send Invoice
               </button>
-              <a routerLink="/apps/invoice/preview/{{ urlLastValue }}" class="btn btn-outline-primary btn-block mb-75"
+              <a
+                routerLink="/apps/invoice/preview/{{ urlLastValue }}"
+                class="btn btn-outline-primary btn-block mb-75"
                 >Preview</a
               >
-              <button type="button" class="btn btn-outline-primary btn-block mb-75" rippleEffect>Save</button>
+              <button
+                type="button"
+                class="btn btn-outline-primary btn-block mb-75"
+                rippleEffect
+              >
+                Save
+              </button>
               <button
                 class="btn btn-success btn-block mb-75"
                 data-toggle="modal"
@@ -388,23 +496,46 @@ It was a pleasure working with you and your team. We hope you will keep us in mi
             </select>
             <div class="invoice-terms mt-1">
               <div class="d-flex justify-content-between">
-                <label class="invoice-terms-title mb-0" for="paymentTerms">Payment Terms</label>
+                <label class="invoice-terms-title mb-0" for="paymentTerms"
+                  >Payment Terms</label
+                >
                 <div class="custom-control custom-switch">
-                  <input type="checkbox" class="custom-control-input" checked id="paymentTerms" />
-                  <label class="custom-control-label" for="paymentTerms"></label>
+                  <input
+                    type="checkbox"
+                    class="custom-control-input"
+                    checked
+                    id="paymentTerms"
+                  />
+                  <label
+                    class="custom-control-label"
+                    for="paymentTerms"
+                  ></label>
                 </div>
               </div>
               <div class="d-flex justify-content-between py-1">
-                <label class="invoice-terms-title mb-0" for="clientNotes">Client Notes</label>
+                <label class="invoice-terms-title mb-0" for="clientNotes"
+                  >Client Notes</label
+                >
                 <div class="custom-control custom-switch">
-                  <input type="checkbox" class="custom-control-input" checked id="clientNotes" />
+                  <input
+                    type="checkbox"
+                    class="custom-control-input"
+                    checked
+                    id="clientNotes"
+                  />
                   <label class="custom-control-label" for="clientNotes"></label>
                 </div>
               </div>
               <div class="d-flex justify-content-between">
-                <label class="invoice-terms-title mb-0" for="paymentStub">Payment Stub</label>
+                <label class="invoice-terms-title mb-0" for="paymentStub"
+                  >Payment Stub</label
+                >
                 <div class="custom-control custom-switch">
-                  <input type="checkbox" class="custom-control-input" id="paymentStub" />
+                  <input
+                    type="checkbox"
+                    class="custom-control-input"
+                    id="paymentStub"
+                  />
                   <label class="custom-control-label" for="paymentStub"></label>
                 </div>
               </div>
