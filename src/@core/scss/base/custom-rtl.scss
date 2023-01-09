@@ -327,17 +327,6 @@ body .ps__rail-y {
   left: 1px !important;
 }
 
-// FAQ and Pricing page
-.faq-navigation img,
-.pricing-free-trial .pricing-trial-img {
-  transform: scaleX(-1);
-}
-
-.feather-chevron-left,
-.feather-chevron-right {
-  transform: rotate(-180deg) !important;
-}
-
 // Kanban
 .kanban-application {
   .kanban-container {

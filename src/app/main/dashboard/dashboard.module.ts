@@ -13,13 +13,9 @@ import { Role } from "app/auth/models";
 
 import { CoreCommonModule } from "@core/common.module";
 
-import { InvoiceModule } from "app/main/apps/invoice/invoice.module";
-import { InvoiceListService } from "app/main/apps/invoice/invoice-list/invoice-list.service";
-
 import { DashboardService } from "app/main/dashboard/dashboard.service";
 
 import { AnalyticsComponent } from "app/main/dashboard/analytics/analytics.component";
-import { EcommerceComponent } from "app/main/dashboard/ecommerce/ecommerce.component";
 
 const routes = [
   {
@@ -29,22 +25,12 @@ const routes = [
     data: { roles: [Role.Admin], animation: "danalytics" },
     resolve: {
       css: DashboardService,
-      inv: InvoiceListService,
     },
-  },
-  {
-    path: "ecommerce",
-    component: EcommerceComponent,
-    canActivate: [AuthGuard],
-    resolve: {
-      css: DashboardService,
-    },
-    data: { animation: "decommerce" },
   },
 ];
 
 @NgModule({
-  declarations: [AnalyticsComponent, EcommerceComponent],
+  declarations: [AnalyticsComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -53,9 +39,8 @@ const routes = [
     PerfectScrollbarModule,
     CoreCommonModule,
     NgApexchartsModule,
-    InvoiceModule,
   ],
-  providers: [DashboardService, InvoiceListService],
-  exports: [EcommerceComponent],
+  providers: [DashboardService],
+  exports: [AnalyticsComponent],
 })
 export class DashboardModule {}

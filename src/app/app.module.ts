@@ -26,11 +26,6 @@ import { AppComponent } from "app/app.component";
 import { LayoutModule } from "app/layout/layout.module";
 import { ContentHeaderModule } from "app/layout/components/content-header/content-header.module";
 
-import { ContextMenuComponent } from "app/main/extensions/context-menu/context-menu.component";
-import { AnimatedCustomContextMenuComponent } from "./main/extensions/context-menu/custom-context-menu/animated-custom-context-menu/animated-custom-context-menu.component";
-import { BasicCustomContextMenuComponent } from "./main/extensions/context-menu/custom-context-menu/basic-custom-context-menu/basic-custom-context-menu.component";
-import { SubMenuCustomContextMenuComponent } from "./main/extensions/context-menu/custom-context-menu/sub-menu-custom-context-menu/sub-menu-custom-context-menu.component";
-
 const appRoutes: Routes = [
   {
     path: "dashboard",
@@ -51,47 +46,6 @@ const appRoutes: Routes = [
       import("./main/pages/pages.module").then((m) => m.PagesModule),
   },
   {
-    path: "ui",
-    loadChildren: () => import("./main/ui/ui.module").then((m) => m.UIModule),
-    canActivate: [AuthGuard],
-  },
-  {
-    path: "components",
-    loadChildren: () =>
-      import("./main/components/components.module").then(
-        (m) => m.ComponentsModule
-      ),
-    canActivate: [AuthGuard],
-  },
-  {
-    path: "extensions",
-    loadChildren: () =>
-      import("./main/extensions/extensions.module").then(
-        (m) => m.ExtensionsModule
-      ),
-    canActivate: [AuthGuard],
-  },
-  {
-    path: "forms",
-    loadChildren: () =>
-      import("./main/forms/forms.module").then((m) => m.FormsModule),
-    canActivate: [AuthGuard],
-  },
-  {
-    path: "tables",
-    loadChildren: () =>
-      import("./main/tables/tables.module").then((m) => m.TablesModule),
-    canActivate: [AuthGuard],
-  },
-  {
-    path: "charts-and-maps",
-    loadChildren: () =>
-      import("./main/charts-and-maps/charts-and-maps.module").then(
-        (m) => m.ChartsAndMapsModule
-      ),
-    canActivate: [AuthGuard],
-  },
-  {
     path: "",
     redirectTo: "/dashboard/analytics",
     pathMatch: "full",
@@ -103,13 +57,7 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ContextMenuComponent,
-    BasicCustomContextMenuComponent,
-    AnimatedCustomContextMenuComponent,
-    SubMenuCustomContextMenuComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
