@@ -1,0 +1,200 @@
+<div class="slideout-content">
+  <!-- Modal to add new user starts-->
+  <div
+    class="modalsd modal-slide-in sdfade new-user-modal"
+    id="modals-slide-in"
+  >
+    <div class="modal-dialog">
+      <form
+        class="add-new-user modal-content pt-0"
+        (ngSubmit)="(newUserForm.form.valid)"
+        #newUserForm="ngForm"
+      >
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="toggleSidebar('new-user-sidebar')"
+        >
+          ×
+        </button>
+        <div class="modal-header mb-1">
+          <h5 class="modal-title" id="exampleModalLabel">New User</h5>
+        </div>
+        <ngb-alert [type]="'danger'" [dismissible]="false" *ngIf="error">
+          <div class="alert-body">
+            <p>{{ error }}</p>
+          </div>
+        </ngb-alert>
+        <div class="modal-body flex-grow-1">
+          <div class="form-group">
+            <label class="form-label" for="basic-icon-default-firstname"
+              >First Name</label
+            >
+            <input
+              type="text"
+              class="form-control dt-full-name"
+              id="basic-icon-default-firstname"
+              placeholder="John"
+              [(ngModel)]="firstname"
+              name="user-firstname"
+              [class.error]="newUserForm.submitted && FNameRef.invalid"
+              #FNameRef="ngModel"
+              required
+              aria-label="John"
+              aria-describedby="basic-icon-default-fullname2"
+            />
+            <span
+              *ngIf="newUserForm.submitted && FNameRef.invalid"
+              class="invalid-form"
+            >
+              <small
+                class="form-text text-danger"
+                *ngIf="FNameRef.errors.required"
+                >This field is required!</small
+              >
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="basic-icon-default-lastname"
+              >Last Name</label
+            >
+            <input
+              type="text"
+              class="form-control dt-full-name"
+              id="basic-icon-default-lastname"
+              placeholder="Doe"
+              [(ngModel)]="lastname"
+              name="user-lastname"
+              [class.error]="newUserForm.submitted && LNameRef.invalid"
+              #LNameRef="ngModel"
+              required
+              aria-label="Doe"
+              aria-describedby="basic-icon-default-lastname2"
+            />
+            <span
+              *ngIf="newUserForm.submitted && LNameRef.invalid"
+              class="invalid-form"
+            >
+              <small
+                class="form-text text-danger"
+                *ngIf="LNameRef.errors.required"
+                >This field is required!</small
+              >
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="basic-icon-default-email"
+              >Email</label
+            >
+            <input
+              type="text"
+              id="basic-icon-default-email"
+              class="form-control dt-email"
+              placeholder="john.doe@example.com"
+              aria-label="john.doe@example.com"
+              aria-describedby="basic-icon-default-email2"
+              name="user-email"
+              [(ngModel)]="email"
+              [class.error]="newUserForm.submitted && FEmailRef.invalid"
+              #FEmailRef="ngModel"
+              required
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+            />
+            <span
+              *ngIf="newUserForm.submitted && FEmailRef.invalid"
+              class="invalid-form"
+            >
+              <small
+                class="form-text text-danger"
+                *ngIf="FEmailRef.errors.required"
+                >This field is required!</small
+              >
+              <small
+                class="form-text text-danger"
+                *ngIf="FEmailRef.errors.pattern"
+                >Please enter valid email!</small
+              >
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="basic-icon-default-password"
+              >Password</label
+            >
+            <div class="input-group input-group-merge form-password-toggle">
+              <input
+                [type]="passwordTextType ? 'text' : 'password'"
+                class="form-control form-control-merge"
+                id="basic-icon-default-password"
+                placeholder="············"
+                [(ngModel)]="password"
+                name="user-password"
+                [class.error]="newUserForm.submitted && passwordRef.invalid"
+                #passwordRef="ngModel"
+                required
+                aria-label="············"
+                aria-describedby="basic-icon-default-lastname2"
+                pattern="^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$"
+              />
+              <div class="input-group-append">
+                <span class="input-group-text cursor-pointer"
+                  ><i
+                    class="feather font-small-4"
+                    [ngClass]="{
+                      'icon-eye-off': passwordTextType,
+                      'icon-eye': !passwordTextType
+                    }"
+                    (click)="togglePasswordTextType()"
+                  ></i
+                ></span>
+              </div>
+            </div>
+            <span
+              *ngIf="newUserForm.submitted && passwordRef.invalid"
+              class="invalid-form"
+            >
+              <small
+                class="form-text text-danger"
+                *ngIf="passwordRef.errors.required"
+                >This field is required!</small
+              >
+              <small
+                class="form-text text-danger"
+                *ngIf="passwordRef.errors.pattern"
+                >A password must have minimum 6 charater, a special character &
+                a number!</small
+              >
+            </span>
+          </div>
+
+          <button
+            [disabled]="loading"
+            type="submit"
+            class="btn btn-primary mr-1"
+            (click)="submit(newUserForm)"
+            rippleEffect
+          >
+            <span
+              *ngIf="loading"
+              class="spinner-border spinner-border-sm mr-1"
+            ></span
+            >Submit
+          </button>
+          <button
+            type="reset"
+            class="btn btn-outline-secondary"
+            (click)="toggleSidebar('new-user-sidebar')"
+            rippleEffect
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- Modal to add new user Ends-->
+</div>

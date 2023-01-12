@@ -1,16 +1,21 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from "@angular/forms";
 
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { take, takeUntil } from "rxjs/operators";
+import { Subject } from "rxjs";
 
-import { CoreConfigService } from '@core/services/config.service';
+import { CoreConfigService } from "@core/services/config.service";
+import { AuthenticationService } from "app/auth/service";
 
 @Component({
-  selector: 'app-auth-forgot-password-v2',
-  templateUrl: './auth-forgot-password-v2.component.html',
-  styleUrls: ['./auth-forgot-password-v2.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  selector: "app-auth-forgot-password-v2",
+  templateUrl: "./auth-forgot-password-v2.component.html",
+  styleUrls: ["./auth-forgot-password-v2.component.scss"],
+  encapsulation: ViewEncapsulation.None,
 })
 export class AuthForgotPasswordV2Component implements OnInit {
   // Public
@@ -18,6 +23,8 @@ export class AuthForgotPasswordV2Component implements OnInit {
   public coreConfig: any;
   public forgotPasswordForm: UntypedFormGroup;
   public submitted = false;
+  public loading = false;
+  public error = "";
 
   // Private
   private _unsubscribeAll: Subject<any>;
@@ -29,24 +36,28 @@ export class AuthForgotPasswordV2Component implements OnInit {
    * @param {FormBuilder} _formBuilder
    *
    */
-  constructor(private _coreConfigService: CoreConfigService, private _formBuilder: UntypedFormBuilder) {
+  constructor(
+    private _coreConfigService: CoreConfigService,
+    private _formBuilder: UntypedFormBuilder,
+    private _authenticationService: AuthenticationService
+  ) {
     this._unsubscribeAll = new Subject();
 
     // Configure the layout
     this._coreConfigService.config = {
       layout: {
         navbar: {
-          hidden: true
+          hidden: true,
         },
         menu: {
-          hidden: true
+          hidden: true,
         },
         footer: {
-          hidden: true
+          hidden: true,
         },
         customizer: false,
-        enableLocalStorage: false
-      }
+        enableLocalStorage: false,
+      },
     };
   }
 
@@ -65,6 +76,21 @@ export class AuthForgotPasswordV2Component implements OnInit {
     if (this.forgotPasswordForm.invalid) {
       return;
     }
+
+    // Login
+    this.loading = true;
+    this._authenticationService
+      .forotPassword(this.f.email.value)
+      .pipe(take(1))
+      .subscribe(
+        (data) => {
+          this.loading = false;
+        },
+        (error) => {
+          this.error = error?.error?.message || "Something went wrong!";
+          this.loading = false;
+        }
+      );
   }
 
   // Lifecycle Hooks
@@ -75,13 +101,15 @@ export class AuthForgotPasswordV2Component implements OnInit {
    */
   ngOnInit(): void {
     this.forgotPasswordForm = this._formBuilder.group({
-      email: ['', [Validators.required, Validators.email]]
+      email: ["", [Validators.required, Validators.email]],
     });
 
     // Subscribe to config changes
-    this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
-      this.coreConfig = config;
-    });
+    this._coreConfigService.config
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((config) => {
+        this.coreConfig = config;
+      });
   }
 
   /**

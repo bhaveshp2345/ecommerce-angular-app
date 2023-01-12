@@ -108,14 +108,16 @@ export class EcommerceDetailsComponent implements OnInit {
     );
 
     // Get Related Products
-    this._ecommerceService.getRelatedProducts().then((response) => {
-      this.relatedProducts = response;
-    });
+    // this._ecommerceService.getRelatedProducts().then((response) => {
+    //   this.relatedProducts = response;
+    // });
 
-    this.product.isInWishlist =
-      this.wishlist.findIndex((p) => p.productId === this.product.id) > -1;
-    this.product.isInCart =
-      this.cartList.findIndex((p) => p.productId === this.product.id) > -1;
+    if (this.product?.length > 0) {
+      this.product.isInWishlist =
+        this.wishlist.findIndex((p) => p.productId === this.product.id) > -1;
+      this.product.isInCart =
+        this.cartList.findIndex((p) => p.productId === this.product.id) > -1;
+    }
 
     // content header
     this.contentHeader = {

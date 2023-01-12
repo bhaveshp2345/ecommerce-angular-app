@@ -1,4 +1,4 @@
-﻿import { Role } from './role';
+﻿import { Role } from "./role";
 
 export class User {
   id: number;
@@ -8,5 +8,12 @@ export class User {
   lastName: string;
   avatar: string;
   role: Role;
-  token?: string;
+  auth_toekn?: string;
+}
+
+export class Page {
+  limit: number = 0;
+  page: number = 0;
+  totalElements: number = 0;
+  totalPages: number = 0;
 }

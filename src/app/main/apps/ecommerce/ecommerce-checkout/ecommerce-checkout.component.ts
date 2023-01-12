@@ -90,12 +90,14 @@ export class EcommerceCheckoutComponent implements OnInit {
     );
 
     // update product is in Wishlist & is in CartList : Boolean
-    this.products.forEach((product) => {
-      product.isInWishlist =
-        this.wishlist.findIndex((p) => p.productId === product.id) > -1;
-      product.isInCart =
-        this.cartLists.findIndex((p) => p.productId === product.id) > -1;
-    });
+    if (this.products.length > 0) {
+      this.products.forEach((product) => {
+        product.isInWishlist =
+          this.wishlist.findIndex((p) => p.productId === product.id) > -1;
+        product.isInCart =
+          this.cartLists.findIndex((p) => p.productId === product.id) > -1;
+      });
+    }
 
     this.checkoutStepper = new Stepper(
       document.querySelector("#checkoutStepper"),

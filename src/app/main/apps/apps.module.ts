@@ -15,6 +15,10 @@ const routes: Routes = [
     loadChildren: () =>
       import("./ecommerce/ecommerce.module").then((m) => m.EcommerceModule),
   },
+  {
+    path: "user",
+    loadChildren: () => import("./user/user.module").then((m) => m.UserModule),
+  },
 ];
 
 FullCalendarModule.registerPlugins([

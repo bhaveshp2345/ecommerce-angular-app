@@ -11,7 +11,7 @@
               </div>
             </div>
             <h2 class="font-weight-bolder mt-1">
-              {{ data.subscribers_gained.analyticsData.subscribers }}
+              {{ data?.subscribers_gained?.analyticsData?.subscribers }}
             </h2>
             <p class="mb-0">Subscribers Gained</p>
           </div>
@@ -19,7 +19,7 @@
           <!-- Apexchart component-->
           <div id="gainedChartoptions" #gainedChartRef>
             <apx-chart
-              [series]="data.subscribers_gained.series"
+              [series]="data?.subscribers_gained?.series"
               [chart]="{
                 height: 100,
                 width:
@@ -52,7 +52,7 @@
               </div>
             </div>
             <h2 class="font-weight-bolder mt-1">
-              {{ data.ordersRecevied.analyticsData.orders }}
+              {{ data?.ordersRecevied?.analyticsData?.orders }}
             </h2>
             <p class="mb-0">Orders Received</p>
           </div>
@@ -60,7 +60,7 @@
           <!-- Apexchart component-->
           <div id="orderChartoptions" #orderChartRef>
             <apx-chart
-              [series]="data.ordersRecevied.series"
+              [series]="data.ordersRecevied?.series"
               [chart]="{
                 height: 100,
                 width:
@@ -97,12 +97,12 @@
               >
                 <div class="mb-1 mb-lg-0">
                   <h2 class="font-weight-bolder mb-25">
-                    {{ data.avgSessions.analyticsData.avgSessions }}
+                    {{ data?.avgSessions?.analyticsData?.avgSessions }}
                   </h2>
                   <p class="card-text font-weight-bold mb-2">Avg Sessions</p>
                   <div class="font-medium-2">
                     <span class="text-success mr-25">{{
-                      data.avgSessions.analyticsData.vsLastSevenDays
+                      data?.avgSessions?.analyticsData?.vsLastSevenDays
                     }}</span>
                     <span>vs last 7 days</span>
                   </div>
@@ -150,7 +150,7 @@
                     }"
                     [states]="avgsessionChartoptions.states"
                     [colors]="avgsessionChartoptions.colors"
-                    [series]="data.avgSessions.series"
+                    [series]="data.avgSessions?.series"
                     [plotOptions]="avgsessionChartoptions.plotOptions"
                     [tooltip]="avgsessionChartoptions.tooltip"
                   ></apx-chart>
@@ -162,46 +162,50 @@
             <div class="row avg-sessions pt-50">
               <div class="col-6 mb-2">
                 <p class="mb-50">
-                  Goal: {{ data.avgSessions.analyticsData.goal }}
+                  Goal: {{ data?.avgSessions?.analyticsData?.goal }}
                 </p>
 
                 <ngb-progressbar
                   type="primary"
                   [height]="'6px'"
-                  [value]="data.avgSessions.analyticsData.goalProgressbar"
+                  [value]="data?.avgSessions?.analyticsData?.goalProgressbar"
                 ></ngb-progressbar>
               </div>
               <div class="col-6 mb-2">
                 <p class="mb-50">
-                  Users: {{ data.avgSessions.analyticsData.users }}
+                  Users: {{ data?.avgSessions?.analyticsData?.users }}
                 </p>
 
                 <ngb-progressbar
                   type="warning"
                   [height]="'6px'"
-                  [value]="data.avgSessions.analyticsData.retentionProgressbar"
+                  [value]="
+                    data?.avgSessions?.analyticsData?.retentionProgressbar
+                  "
                 ></ngb-progressbar>
               </div>
               <div class="col-6">
                 <p class="mb-50">
-                  Retention: {{ data.avgSessions.analyticsData.retention }}
+                  Retention: {{ data?.avgSessions?.analyticsData?.retention }}
                 </p>
 
                 <ngb-progressbar
                   type="danger"
                   [height]="'6px'"
-                  [value]="data.avgSessions.analyticsData.usersProgressbar"
+                  [value]="data?.avgSessions?.analyticsData?.usersProgressbar"
                 ></ngb-progressbar>
               </div>
               <div class="col-6">
                 <p class="mb-50">
-                  Duration: {{ data.avgSessions.analyticsData.duration }}
+                  Duration: {{ data?.avgSessions?.analyticsData?.duration }}
                 </p>
 
                 <ngb-progressbar
                   type="success"
                   [height]="'6px'"
-                  [value]="data.avgSessions.analyticsData.durationProgressbar"
+                  [value]="
+                    data?.avgSessions?.analyticsData?.durationProgressbar
+                  "
                 ></ngb-progressbar>
               </div>
             </div>
@@ -245,7 +249,7 @@
                 class="col-sm-2 col-12 d-flex flex-column flex-wrap text-center"
               >
                 <h1 class="font-large-2 font-weight-bolder mt-2 mb-0">
-                  {{ data.supportTracker.analyticsData.tickets }}
+                  {{ data?.supportTracker?.analyticsData?.tickets }}
                 </h1>
                 <p class="card-text">Tickets</p>
               </div>
@@ -256,7 +260,7 @@
                 <div id="supportChartoptions">
                   <!-- Apexchart component-->
                   <apx-chart
-                    [series]="data.supportTracker.series"
+                    [series]="data.supportTracker?.series"
                     [chart]="{
                       height: 290,
                       width:
@@ -282,19 +286,19 @@
               <div class="text-center">
                 <p class="card-text mb-50">New Tickets</p>
                 <span class="font-large-1 font-weight-bold">{{
-                  data.supportTracker.analyticsData.newTickets
+                  data?.supportTracker?.analyticsData?.newTickets
                 }}</span>
               </div>
               <div class="text-center">
                 <p class="card-text mb-50">Open Tickets</p>
                 <span class="font-large-1 font-weight-bold">{{
-                  data.supportTracker.analyticsData.openTickets
+                  data?.supportTracker?.analyticsData?.openTickets
                 }}</span>
               </div>
               <div class="text-center">
                 <p class="card-text mb-50">Response Time</p>
                 <span class="font-large-1 font-weight-bold">{{
-                  data.supportTracker.analyticsData.responseTime
+                  data?.supportTracker?.analyticsData?.responseTime
                 }}</span>
               </div>
             </div>
@@ -382,7 +386,7 @@
                     show: false
                   }
                 }"
-                [series]="data.salesLastSixMonths.series"
+                [series]="data.salesLastSixMonths?.series"
                 [stroke]="salesChartoptions.stroke"
                 [colors]="salesChartoptions.colors"
                 [plotOptions]="salesChartoptions.plotOptions"

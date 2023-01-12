@@ -76,7 +76,9 @@
                             <label for="account-username">Username</label>
                             <input
                               type="text"
-                              [(ngModel)]="data.accountSetting.general.username"
+                              [(ngModel)]="
+                                data?.accountSetting?.general.username
+                              "
                               class="form-control"
                               id="account-username"
                               name="username"
@@ -89,7 +91,9 @@
                             <label for="account-name">Name</label>
                             <input
                               type="text"
-                              [(ngModel)]="data.accountSetting.general.fullName"
+                              [(ngModel)]="
+                                data?.accountSetting?.general.fullName
+                              "
                               class="form-control"
                               id="account-name"
                               name="name"
@@ -102,7 +106,7 @@
                             <label for="account-e-mail">E-mail</label>
                             <input
                               type="email"
-                              [(ngModel)]="data.accountSetting.general.email"
+                              [(ngModel)]="data?.accountSetting?.general.email"
                               class="form-control"
                               id="account-e-mail"
                               name="email"
@@ -115,7 +119,9 @@
                             <label for="account-company">Company</label>
                             <input
                               type="text"
-                              [(ngModel)]="data.accountSetting.general.company"
+                              [(ngModel)]="
+                                data?.accountSetting?.general.company
+                              "
                               class="form-control"
                               id="account-company"
                               name="company"
@@ -320,7 +326,7 @@
                           <div class="form-group">
                             <label for="accountTextarea">Bio</label>
                             <textarea
-                              [(ngModel)]="data.accountSetting.info.bio"
+                              [(ngModel)]="data?.accountSetting?.info.bio"
                               class="form-control"
                               id="accountTextarea"
                               name="accountTextarea"
@@ -334,7 +340,6 @@
                             <label for="account-birth-date">Birth date</label>
                             <ng2-flatpickr
                               [config]="birthDateOptions"
-                              [(ngModel)]="data.accountSetting.info.dob"
                               id="account-birth-date"
                               name="account-birth-date"
                               placeholder="June 18, 2021"
@@ -346,7 +351,7 @@
                             <label for="accountSelect">Country</label>
                             <select
                               class="form-control"
-                              [(ngModel)]="data.accountSetting.info.country"
+                              [(ngModel)]="data?.accountSetting?.info.country"
                               id="accountSelect"
                               name="accountSelect"
                             >
@@ -361,7 +366,7 @@
                             <label for="account-website">Website</label>
                             <input
                               type="text"
-                              [(ngModel)]="data.accountSetting.info.website"
+                              [(ngModel)]="data?.accountSetting?.info.website"
                               class="form-control"
                               name="website"
                               id="account-website"
@@ -374,7 +379,7 @@
                             <label for="account-phone">Phone</label>
                             <input
                               type="text"
-                              [(ngModel)]="data.accountSetting.info.phone"
+                              [(ngModel)]="data?.accountSetting?.info.phone"
                               class="form-control"
                               id="account-phone"
                               placeholder="Phone number"
@@ -437,7 +442,8 @@
                             <input
                               type="text"
                               [(ngModel)]="
-                                data.accountSetting.social.socialLinks.twitter
+                                data?.accountSetting?.social?.socialLinks
+                                  .twitter
                               "
                               id="account-twitter"
                               name="account-twitter"
@@ -453,7 +459,8 @@
                             <input
                               type="text"
                               [(ngModel)]="
-                                data.accountSetting.social.socialLinks.facebook
+                                data?.accountSetting?.social?.socialLinks
+                                  .facebook
                               "
                               id="account-facebook"
                               name="account-facebook"
@@ -469,7 +476,7 @@
                             <input
                               type="text"
                               [(ngModel)]="
-                                data.accountSetting.social.socialLinks.google
+                                data?.accountSetting?.social?.socialLinks.google
                               "
                               id="account-google"
                               name="account-google"
@@ -485,7 +492,8 @@
                             <input
                               type="text"
                               [(ngModel)]="
-                                data.accountSetting.social.socialLinks.linkedIn
+                                data?.accountSetting?.social?.socialLinks
+                                  .linkedIn
                               "
                               id="account-linkedin"
                               name="account-linkedin"
@@ -501,7 +509,8 @@
                             <input
                               type="text"
                               [(ngModel)]="
-                                data.accountSetting.social.socialLinks.instagram
+                                data?.accountSetting?.social?.socialLinks
+                                  .instagram
                               "
                               id="account-instagram"
                               name="account-instagram"
@@ -517,7 +526,7 @@
                             <input
                               type="text"
                               [(ngModel)]="
-                                data.accountSetting.social.socialLinks.quora
+                                data?.accountSetting?.social?.socialLinks.quora
                               "
                               id="account-quora"
                               name="account-quora"
@@ -642,7 +651,8 @@
                             type="checkbox"
                             class="custom-control-input"
                             [checked]="
-                              data.accountSetting.notification.commentOnArticle
+                              data?.accountSetting?.notification
+                                ?.commentOnArticle
                             "
                             id="accountSwitch1"
                           />
@@ -660,7 +670,7 @@
                             type="checkbox"
                             class="custom-control-input"
                             [checked]="
-                              data.accountSetting.notification.AnswerOnForm
+                              data?.accountSetting?.notification?.AnswerOnForm
                             "
                             id="accountSwitch2"
                           />
@@ -678,7 +688,7 @@
                             type="checkbox"
                             class="custom-control-input"
                             [checked]="
-                              data.accountSetting.notification.followMe
+                              data?.accountSetting?.notification?.followMe
                             "
                             id="accountSwitch3"
                           />
@@ -696,7 +706,8 @@
                             type="checkbox"
                             class="custom-control-input"
                             [checked]="
-                              data.accountSetting.notification.newAnnouncements
+                              data?.accountSetting?.notification
+                                ?.newAnnouncements
                             "
                             id="accountSwitch4"
                           />
@@ -713,7 +724,7 @@
                             type="checkbox"
                             class="custom-control-input"
                             [checked]="
-                              data.accountSetting.notification.productUpdates
+                              data?.accountSetting?.notification?.productUpdates
                             "
                             id="accountSwitch6"
                           />
@@ -730,7 +741,7 @@
                             type="checkbox"
                             class="custom-control-input"
                             [checked]="
-                              data.accountSetting.notification.blogDigest
+                              data?.accountSetting?.notification?.blogDigest
                             "
                             id="accountSwitch5"
                           />

@@ -3,13 +3,12 @@
   <app-content-header [contentHeader]="contentHeader"></app-content-header>
   <div class="content-body">
     <section id="wishlist" class="grid-view wishlist-items">
-      <ng-container *ngFor="let product of products">
-        <app-ecommerce-item
-          class="card ecommerce-card"
-          [product]="product"
-          [isWishlistOpen]="true"
-          *ngIf="product.isInWishlist === true"
-        ></app-ecommerce-item>
+      <!-- *ngFor="let product of products" -->
+      <!-- *ngIf="product.isInWishlist === true" -->
+      <!-- [product]="product"
+      [isWishlistOpen]="true" -->
+      <ng-container>
+        <app-ecommerce-item class="card ecommerce-card"></app-ecommerce-item>
       </ng-container>
     </section>
   </div>

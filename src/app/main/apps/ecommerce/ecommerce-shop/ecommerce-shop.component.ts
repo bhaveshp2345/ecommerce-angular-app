@@ -91,12 +91,14 @@ export class EcommerceShopComponent implements OnInit {
     );
 
     // update product is in Wishlist & is in CartList : Boolean
-    this.products.forEach((product) => {
-      product.isInWishlist =
-        this.wishlist.findIndex((p) => p.productId === product.id) > -1;
-      product.isInCart =
-        this.cartList.findIndex((p) => p.productId === product.id) > -1;
-    });
+    if (this.products.length > 0) {
+      for (const product of this.products) {
+        product.isInWishlist =
+          this.wishlist.findIndex((p) => p.productId === product.id) > -1;
+        product.isInCart =
+          this.cartList.findIndex((p) => p.productId === product.id) > -1;
+      }
+    }
 
     // content header
     this.contentHeader = {

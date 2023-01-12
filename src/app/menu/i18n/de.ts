@@ -16,6 +16,12 @@ export const locale = {
           WISHLIST: "Wunschzettel",
           CHECKOUT: "Überprüfen",
         },
+        USER: {
+          COLLAPSIBLE: "Nutzer",
+          LIST: "Liste",
+          VIEW: "Aussicht",
+          EDIT: "Bearbeiten",
+        },
       },
       PAGES: {
         SECTION: "Seiten",

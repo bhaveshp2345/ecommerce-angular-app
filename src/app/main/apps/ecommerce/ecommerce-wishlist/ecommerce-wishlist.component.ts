@@ -39,10 +39,12 @@ export class EcommerceWishlistComponent implements OnInit {
     );
 
     // update product is in Wishlist : Boolean
-    this.products.forEach((product) => {
-      product.isInWishlist =
-        this.wishlist.findIndex((p) => p.productId === product.id) > -1;
-    });
+    if (this.products.length > 0) {
+      this.products.forEach((product) => {
+        product.isInWishlist =
+          this.wishlist.findIndex((p) => p.productId === product.id) > -1;
+      });
+    }
 
     // content header
     this.contentHeader = {

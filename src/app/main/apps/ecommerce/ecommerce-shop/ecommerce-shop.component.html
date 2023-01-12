@@ -118,15 +118,13 @@
         id="ecommerce-products"
         [ngClass]="gridViewRef === true ? 'grid-view' : 'list-view'"
       >
-        <app-ecommerce-item
-          class="card ecommerce-card"
-          [product]="product"
-          *ngFor="
+        <!-- [product]="product"
+           *ngFor="
             let product of products
               | filter : searchText : 'name'
-              | slice : (page - 1) * pageSize : (page - 1) * pageSize + pageSize
-          "
-        ></app-ecommerce-item>
+              | slice : (page - 1) * pageSize : (page - 1) * pageSize + pageSize    
+          " -->
+        <app-ecommerce-item class="card ecommerce-card"></app-ecommerce-item>
       </section>
       <!-- E-commerce Products Ends -->
 

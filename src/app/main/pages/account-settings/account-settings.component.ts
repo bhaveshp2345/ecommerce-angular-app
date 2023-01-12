@@ -87,7 +87,7 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((response) => {
         this.data = response;
-        this.avatarImage = this.data.accountSetting.general.avatar;
+        this.avatarImage = this.data?.accountSetting?.general?.avatar;
       });
 
     // content header

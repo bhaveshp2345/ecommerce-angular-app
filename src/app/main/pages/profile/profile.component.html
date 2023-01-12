@@ -11,7 +11,7 @@
             <!-- profile cover photo -->
             <img
               class="card-img-top"
-              [src]="data.profileData.header.coverImg"
+              src="assets/images/profile/user-uploads/timeline.jpg"
               alt="User Profile Image"
             />
             <!--/ profile cover photo -->
@@ -111,30 +111,35 @@
               <div class="card-body">
                 <h5 class="mb-75">About</h5>
                 <p class="card-text">
-                  {{ data.profileData.userAbout.about }}
+                  <!-- {{ data.profileData.userAbout.about }} -->
+                  {{ data?.data?.company }}
                 </p>
                 <div class="mt-2">
                   <h5 class="mb-75">Joined:</h5>
                   <p class="card-text">
-                    {{ data.profileData.userAbout.joined }}
+                    <!-- {{ data.profileData.userAbout.joined }} -->
+                    {{ data?.data?.created_at | date : "dd/MM/yyyy" }}
                   </p>
                 </div>
                 <div class="mt-2">
                   <h5 class="mb-75">Lives:</h5>
                   <p class="card-text">
-                    {{ data.profileData.userAbout.lives }}
+                    {{ data?.data?.company }}
+                    <!-- {{ data.profileData.userAbout.lives }} -->
                   </p>
                 </div>
                 <div class="mt-2">
                   <h5 class="mb-75">Email:</h5>
                   <p class="card-text">
-                    {{ data.profileData.userAbout.email }}
+                    {{ data?.data?.email }}
+                    <!-- {{ data.profileData.userAbout.email }} -->
                   </p>
                 </div>
                 <div class="mt-2">
                   <h5 class="mb-50">Website:</h5>
                   <p class="card-text mb-0">
-                    {{ data.profileData.userAbout.website }}
+                    {{ data?.data?.email }}
+                    <!-- {{ data.profileData.userAbout.website }} -->
                   </p>
                 </div>
               </div>
@@ -150,7 +155,9 @@
                 <!-- twitter feed -->
                 <div
                   class="profile-twitter-feed mt-2"
-                  *ngFor="let twitterFeedsRef of data.profileData.twitterFeeds"
+                  *ngFor="
+                    let twitterFeedsRef of data?.profileData?.twitterFeeds || []
+                  "
                 >
                   <div
                     class="d-flex justify-content-start align-items-center mb-1"

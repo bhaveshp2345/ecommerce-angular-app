@@ -59,6 +59,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this._pricingService.onPricingChanged
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((response) => {
+        response.data.created_at = new Date(response.data.created_at * 1000);
         this.data = response;
       });
 

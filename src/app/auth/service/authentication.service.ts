@@ -62,25 +62,33 @@ export class AuthenticationService {
    */
   login(email: string, password: string) {
     return this._http
-      .post<any>(`${environment.apiUrl}/users/authenticate`, {
+      .post<any>(`${environment.apiUrl}/users/login`, {
         email,
         password,
+        user_type: "2",
+        platform_os: 1,
       })
       .pipe(
         map((user) => {
+          user = user.data;
           // login successful if there's a jwt token in the response
-          if (user && user.token) {
+          if (user && user.auth_toekn) {
+            user.role = user.user_type == 1 ? Role.Client : Role.Admin;
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             localStorage.setItem("currentUser", JSON.stringify(user));
 
             // Display welcome toast!
+
             setTimeout(() => {
               this._toastrService.success(
                 "You have successfully logged in as an " +
                   user.role +
                   " user to Tridhya. Now you can start to explore. Enjoy! 🎉",
-                "👋 Welcome, " + user.firstName + "!",
-                { toastClass: "toast ngx-toastr", closeButton: true }
+                "👋 Welcome, " + user.first_name + "!",
+                {
+                  toastClass: "toast ngx-toastr",
+                  closeButton: true,
+                }
               );
             }, 2500);
 
@@ -88,6 +96,57 @@ export class AuthenticationService {
             this.currentUserSubject.next(user);
           }
 
+          return user;
+        })
+      );
+  }
+
+  register(userObject: any) {
+    return this._http
+      .post<any>(`${environment.apiUrl}/users/signUp`, userObject)
+      .pipe(
+        map((user) => {
+          user = user.data;
+          if (user) {
+            user.role = user.user_type == 1 ? Role.Client : Role.Admin;
+            // Display welcome toast!
+            setTimeout(() => {
+              this._toastrService.success(
+                "You have successfully registerd in as an " +
+                  user.role +
+                  " user to Tridhya. Now you can start to explore. Enjoy! 🎉",
+                "👋 Welcome, " + user.first_name + "!",
+                {
+                  toastClass: "toast ngx-toastr",
+                  closeButton: true,
+                }
+              );
+            }, 4000);
+          }
+
+          return user;
+        })
+      );
+  }
+
+  forotPassword(email: string) {
+    return this._http
+      .post<any>(`${environment.apiUrl}/users/forgot-password`, {
+        email,
+        user_type: "2",
+      })
+      .pipe(
+        map((user) => {
+          if (user.status == 1) {
+            this._toastrService.success(
+              "The forgot password email has been sent successfully!",
+              "Send Email!",
+              {
+                toastClass: "toast ngx-toastr",
+                closeButton: true,
+              }
+            );
+          }
           return user;
         })
       );

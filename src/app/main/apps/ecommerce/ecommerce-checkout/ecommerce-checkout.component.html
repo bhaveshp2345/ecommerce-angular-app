@@ -52,11 +52,11 @@
           <div id="place-order" class="list-view product-checkout">
             <!-- Checkout Place Order Left starts -->
             <div class="checkout-items">
-              <ng-container *ngFor="let product of products">
-                <app-ecommerce-checkout-item
-                  [product]="product"
-                  *ngIf="product.isInCart === true"
-                ></app-ecommerce-checkout-item>
+              <!-- *ngFor="let product of products"
+              [product]="product"
+              *ngIf="product.isInCart === true" -->
+              <ng-container>
+                <app-ecommerce-checkout-item></app-ecommerce-checkout-item>
               </ng-container>
             </div>
             <!-- Checkout Place Order Left ends -->
@@ -75,7 +75,11 @@
                       aria-describedby="input-coupons"
                     />
                     <div class="input-group-append">
-                      <span class="input-group-text text-primary" id="input-coupons">Apply</span>
+                      <span
+                        class="input-group-text text-primary"
+                        id="input-coupons"
+                        >Apply</span
+                      >
                     </div>
                   </div>
                   <hr />
@@ -88,7 +92,9 @@
                       </li>
                       <li class="price-detail">
                         <div class="detail-title">Bag Discount</div>
-                        <div class="detail-amt discount-amt text-success">-25$</div>
+                        <div class="detail-amt discount-amt text-success">
+                          -25$
+                        </div>
                       </li>
                       <li class="price-detail">
                         <div class="detail-title">Estimated Tax</div>
@@ -96,11 +102,17 @@
                       </li>
                       <li class="price-detail">
                         <div class="detail-title">EMI Eligibility</div>
-                        <a href="javascript:void(0)" class="detail-amt text-primary">Details</a>
+                        <a
+                          href="javascript:void(0)"
+                          class="detail-amt text-primary"
+                          >Details</a
+                        >
                       </li>
                       <li class="price-detail">
                         <div class="detail-title">Delivery Charges</div>
-                        <div class="detail-amt discount-amt text-success">Free</div>
+                        <div class="detail-amt discount-amt text-success">
+                          Free
+                        </div>
                       </li>
                     </ul>
                     <hr />
@@ -139,7 +151,8 @@
               <div class="card-header flex-column align-items-start">
                 <h4 class="card-title">Add New Address</h4>
                 <p class="card-text text-muted mt-25">
-                  Be sure to check "Deliver to this address" when you have finished
+                  Be sure to check "Deliver to this address" when you have
+                  finished
                 </p>
               </div>
               <div class="card-body">
@@ -151,15 +164,22 @@
                         type="text"
                         id="checkout-name"
                         class="form-control"
-                        [class.error]="addressForm.submitted && fullNameRef.invalid"
+                        [class.error]="
+                          addressForm.submitted && fullNameRef.invalid
+                        "
                         name="fullname"
                         placeholder="John Doe"
                         [(ngModel)]="address.fullNameVar"
                         #fullNameRef="ngModel"
                         required
                       />
-                      <span *ngIf="addressForm.submitted && fullNameRef.invalid" class="invalid-form">
-                        <small class="form-text text-danger" *ngIf="fullNameRef.errors.required"
+                      <span
+                        *ngIf="addressForm.submitted && fullNameRef.invalid"
+                        class="invalid-form"
+                      >
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="fullNameRef.errors.required"
                           >This field is required!</small
                         >
                       </span>
@@ -172,15 +192,22 @@
                         type="number"
                         id="checkout-number"
                         class="form-control"
-                        [class.error]="addressForm.submitted && numberRef.invalid"
+                        [class.error]="
+                          addressForm.submitted && numberRef.invalid
+                        "
                         name="mnumber"
                         placeholder="0123456789"
                         [(ngModel)]="address.numberVar"
                         #numberRef="ngModel"
                         required
                       />
-                      <span *ngIf="addressForm.submitted && numberRef.invalid" class="invalid-form">
-                        <small class="form-text text-danger" *ngIf="numberRef.errors.required"
+                      <span
+                        *ngIf="addressForm.submitted && numberRef.invalid"
+                        class="invalid-form"
+                      >
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="numberRef.errors.required"
                           >This field is required!</small
                         >
                       </span>
@@ -200,8 +227,13 @@
                         #flatRef="ngModel"
                         required
                       />
-                      <span *ngIf="addressForm.submitted && flatRef.invalid" class="invalid-form">
-                        <small class="form-text text-danger" *ngIf="flatRef.errors.required"
+                      <span
+                        *ngIf="addressForm.submitted && flatRef.invalid"
+                        class="invalid-form"
+                      >
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="flatRef.errors.required"
                           >This field is required!</small
                         >
                       </span>
@@ -209,20 +241,29 @@
                   </div>
                   <div class="col-md-6 col-sm-12">
                     <div class="form-group mb-2">
-                      <label for="checkout-landmark">Landmark e.g. near apollo hospital:</label>
+                      <label for="checkout-landmark"
+                        >Landmark e.g. near apollo hospital:</label
+                      >
                       <input
                         type="text"
                         id="checkout-landmark"
                         class="form-control"
-                        [class.error]="addressForm.submitted && landmarkRef.invalid"
+                        [class.error]="
+                          addressForm.submitted && landmarkRef.invalid
+                        "
                         name="landmark"
                         placeholder="Near Apollo Hospital"
                         [(ngModel)]="address.landmarkVar"
                         #landmarkRef="ngModel"
                         required
                       />
-                      <span *ngIf="addressForm.submitted && landmarkRef.invalid" class="invalid-form">
-                        <small class="form-text text-danger" *ngIf="landmarkRef.errors.required"
+                      <span
+                        *ngIf="addressForm.submitted && landmarkRef.invalid"
+                        class="invalid-form"
+                      >
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="landmarkRef.errors.required"
                           >This field is required!</small
                         >
                       </span>
@@ -242,8 +283,13 @@
                         #cityRef="ngModel"
                         required
                       />
-                      <span *ngIf="addressForm.submitted && cityRef.invalid" class="invalid-form">
-                        <small class="form-text text-danger" *ngIf="cityRef.errors.required"
+                      <span
+                        *ngIf="addressForm.submitted && cityRef.invalid"
+                        class="invalid-form"
+                      >
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="cityRef.errors.required"
                           >This field is required!</small
                         >
                       </span>
@@ -256,15 +302,22 @@
                         type="number"
                         id="checkout-pincode"
                         class="form-control"
-                        [class.error]="addressForm.submitted && pincodeRef.invalid"
+                        [class.error]="
+                          addressForm.submitted && pincodeRef.invalid
+                        "
                         name="pincode"
                         placeholder="201301"
                         [(ngModel)]="address.pincodeVar"
                         #pincodeRef="ngModel"
                         required
                       />
-                      <span *ngIf="addressForm.submitted && pincodeRef.invalid" class="invalid-form">
-                        <small class="form-text text-danger" *ngIf="pincodeRef.errors.required"
+                      <span
+                        *ngIf="addressForm.submitted && pincodeRef.invalid"
+                        class="invalid-form"
+                      >
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="pincodeRef.errors.required"
                           >This field is required!</small
                         >
                       </span>
@@ -277,15 +330,22 @@
                         type="text"
                         id="checkout-state"
                         class="form-control"
-                        [class.error]="addressForm.submitted && stateRef.invalid"
+                        [class.error]="
+                          addressForm.submitted && stateRef.invalid
+                        "
                         name="state"
                         placeholder="California"
                         [(ngModel)]="address.stateVar"
                         #stateRef="ngModel"
                         required
                       />
-                      <span *ngIf="addressForm.submitted && stateRef.invalid" class="invalid-form">
-                        <small class="form-text text-danger" *ngIf="stateRef.errors.required"
+                      <span
+                        *ngIf="addressForm.submitted && stateRef.invalid"
+                        class="invalid-form"
+                      >
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="stateRef.errors.required"
                           >This field is required!</small
                         >
                       </span>
@@ -344,12 +404,18 @@
 
         <!-- Checkout Payment Starts -->
         <div id="step-payment" class="content">
-          <form id="checkout-payment" class="list-view product-checkout" onsubmit="return false;">
+          <form
+            id="checkout-payment"
+            class="list-view product-checkout"
+            onsubmit="return false;"
+          >
             <div class="payment-type">
               <div class="card">
                 <div class="card-header flex-column align-items-start">
                   <h4 class="card-title">Payment options</h4>
-                  <p class="card-text text-muted mt-25">Be sure to click on correct payment option</p>
+                  <p class="card-text text-muted mt-25">
+                    Be sure to click on correct payment option
+                  </p>
                 </div>
                 <div class="card-body">
                   <h6 class="card-holder-name my-75">John Doe</h6>
@@ -367,14 +433,20 @@
                   </div>
                   <div class="customer-cvv mt-1">
                     <div class="form-inline">
-                      <label class="mb-50" for="card-holder-cvv">Enter CVV:</label>
+                      <label class="mb-50" for="card-holder-cvv"
+                        >Enter CVV:</label
+                      >
                       <input
                         type="password"
                         class="form-control ml-sm-75 ml-0 mb-50 input-cvv"
                         name="input-cvv"
                         id="card-holder-cvv"
                       />
-                      <button type="button" class="btn btn-primary btn-cvv ml-0 ml-sm-1 mb-50" rippleEffect>
+                      <button
+                        type="button"
+                        class="btn btn-primary btn-cvv ml-0 ml-sm-1 mb-50"
+                        rippleEffect
+                      >
                         Continue
                       </button>
                     </div>
@@ -383,33 +455,76 @@
                   <ul class="other-payment-options list-unstyled">
                     <li class="py-50">
                       <div class="custom-control custom-radio">
-                        <input type="radio" id="customColorRadio2" name="paymentOptions" class="custom-control-input" />
-                        <label class="custom-control-label" for="customColorRadio2"> Credit / Debit / ATM Card </label>
+                        <input
+                          type="radio"
+                          id="customColorRadio2"
+                          name="paymentOptions"
+                          class="custom-control-input"
+                        />
+                        <label
+                          class="custom-control-label"
+                          for="customColorRadio2"
+                        >
+                          Credit / Debit / ATM Card
+                        </label>
                       </div>
                     </li>
                     <li class="py-50">
                       <div class="custom-control custom-radio">
-                        <input type="radio" id="customColorRadio3" name="paymentOptions" class="custom-control-input" />
-                        <label class="custom-control-label" for="customColorRadio3"> Net Banking </label>
+                        <input
+                          type="radio"
+                          id="customColorRadio3"
+                          name="paymentOptions"
+                          class="custom-control-input"
+                        />
+                        <label
+                          class="custom-control-label"
+                          for="customColorRadio3"
+                        >
+                          Net Banking
+                        </label>
                       </div>
                     </li>
                     <li class="py-50">
                       <div class="custom-control custom-radio">
-                        <input type="radio" id="customColorRadio4" name="paymentOptions" class="custom-control-input" />
-                        <label class="custom-control-label" for="customColorRadio4"> EMI (Easy Installment) </label>
+                        <input
+                          type="radio"
+                          id="customColorRadio4"
+                          name="paymentOptions"
+                          class="custom-control-input"
+                        />
+                        <label
+                          class="custom-control-label"
+                          for="customColorRadio4"
+                        >
+                          EMI (Easy Installment)
+                        </label>
                       </div>
                     </li>
                     <li class="py-50">
                       <div class="custom-control custom-radio">
-                        <input type="radio" id="customColorRadio5" name="paymentOptions" class="custom-control-input" />
-                        <label class="custom-control-label" for="customColorRadio5"> Cash On Delivery </label>
+                        <input
+                          type="radio"
+                          id="customColorRadio5"
+                          name="paymentOptions"
+                          class="custom-control-input"
+                        />
+                        <label
+                          class="custom-control-label"
+                          for="customColorRadio5"
+                        >
+                          Cash On Delivery
+                        </label>
                       </div>
                     </li>
                   </ul>
                   <hr class="my-2" />
                   <div class="gift-card mb-25">
                     <p class="card-text">
-                      <i data-feather="plus-circle" class="mr-50 font-medium-5"></i>
+                      <i
+                        data-feather="plus-circle"
+                        class="mr-50 font-medium-5"
+                      ></i>
                       <span class="align-middle">Add Gift Card</span>
                     </p>
                   </div>
@@ -431,7 +546,9 @@
                     </li>
                     <li class="price-detail">
                       <div class="details-title">Delivery Charges</div>
-                      <div class="detail-amt discount-amt text-success">Free</div>
+                      <div class="detail-amt discount-amt text-success">
+                        Free
+                      </div>
                     </li>
                   </ul>
                   <hr />

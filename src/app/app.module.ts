@@ -62,10 +62,10 @@ const appRoutes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(FakeDbService, {
-      delay: 0,
-      passThruUnknownUrl: true,
-    }),
+    // HttpClientInMemoryWebApiModule.forRoot(FakeDbService, {
+    //   delay: 0,
+    //   passThruUnknownUrl: true,
+    // }),
     RouterModule.forRoot(appRoutes, {
       scrollPositionRestoration: "enabled",
       relativeLinkResolution: "legacy",
@@ -84,7 +84,7 @@ const appRoutes: Routes = [
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     // ! IMPORTANT: Provider used to create fake backend, comment while using real API
     fakeBackendProvider,
   ],

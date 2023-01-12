@@ -12,6 +12,7 @@ import { Ng2FlatpickrModule } from "ng2-flatpickr";
 import { ProfileModule } from "./profile/profile.module";
 import { AccountSettingsModule } from "./account-settings/account-settings.module";
 import { AuthenticationModule } from "./authentication/authentication.module";
+import { MiscellaneousModule } from "./miscellaneous/miscellaneous.module";
 
 @NgModule({
   declarations: [],
@@ -26,6 +27,7 @@ import { AuthenticationModule } from "./authentication/authentication.module";
     Ng2FlatpickrModule,
     ProfileModule,
     AccountSettingsModule,
+    MiscellaneousModule,
   ],
 
   providers: [],

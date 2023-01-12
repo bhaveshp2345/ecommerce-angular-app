@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild } from "@angular/core";
 
-import { first } from "rxjs/operators";
+import { take } from "rxjs/operators";
 
 import { CoreConfigService } from "@core/services/config.service";
 
@@ -302,7 +302,7 @@ export class AnalyticsComponent implements OnInit {
     this.loading = true;
     this._userService
       .getAll()
-      .pipe(first())
+      .pipe(take(1))
       .subscribe((users) => {
         this.loading = false;
         this.users = users;
