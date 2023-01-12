@@ -4,10 +4,6 @@ import { RouterModule, Routes } from "@angular/router";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
-import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
-import { FakeDbService } from "@fake-db/fake-db.service";
-
-import "hammerjs";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { ToastrModule } from "ngx-toastr";
 import { TranslateModule } from "@ngx-translate/core";
@@ -16,7 +12,6 @@ import { ContextMenuModule } from "@ctrl/ngx-rightclick";
 import { CoreModule } from "@core/core.module";
 import { CoreCommonModule } from "@core/common.module";
 import { CoreSidebarModule, CoreThemeCustomizerModule } from "@core/components";
-import { CardSnippetModule } from "@core/components/card-snippet/card-snippet.module";
 
 import { coreConfig } from "app/app-config";
 import { AuthGuard } from "app/auth/helpers/auth.guards";
@@ -78,7 +73,7 @@ const appRoutes: Routes = [
     CoreCommonModule,
     CoreSidebarModule,
     CoreThemeCustomizerModule,
-    CardSnippetModule,
+    // CardSnippetModule,
     LayoutModule,
     ContentHeaderModule,
   ],

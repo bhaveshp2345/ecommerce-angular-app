@@ -18,25 +18,18 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "allowedCommonJsDependencies": [
-              "hammerjs",
               "node-waves",
               "app/main/ui/icons/feather/feather.component",
               "@angularclass/hmr",
-              "quill",
               "lodash",
               "uuid",
               "nouislider",
-              "dragula",
               "apexcharts",
-              "chart.js",
               "contra/emitter",
               "crossvent",
-              "highlight.js",
               "ng2-flatpickr",
               "mobx",
               "fast-deep-equal",
-              "plyr",
-              "sweetalert2",
               "bs-stepper",
               "feather-icons"
             ],
@@ -48,7 +41,6 @@
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "src/styles.scss",
-              "node_modules/highlight.js/scss/atom-one-dark.scss",
               "src/assets/fonts/feather/iconfont.css",
               "src/assets/fonts/font-awesome/css/font-awesome.min.css",
               "src/assets/fonts/flag-icon-css/css/flag-icon.min.css",
@@ -60,10 +52,7 @@
             "stylePreprocessorOptions": {
               "includePaths": ["node_modules", "src/assets/"]
             },
-            "scripts": [
-              "./node_modules/katex/dist/katex.min.js",
-              "./node_modules/quill/dist/quill.min.js"
-            ],
+            "scripts": [],
             "vendorChunk": true,
             "extractLicenses": false,
             "buildOptimizer": false,

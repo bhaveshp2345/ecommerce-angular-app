@@ -1,11 +1,9 @@
-import { InMemoryDbService } from "angular-in-memory-web-api";
-
 import { accountSettingsFakeData } from "@fake-db/account-settings.data";
 import { DashboardFakeData } from "@fake-db/dashboard.data";
 import { EcommerceFakeData } from "@fake-db/ecommerce.data";
 import { ProfileFakeData } from "@fake-db/profile.data";
 
-export class FakeDbService implements InMemoryDbService {
+export class FakeDbService {
   createDb(): any {
     return {
       // Data-table
