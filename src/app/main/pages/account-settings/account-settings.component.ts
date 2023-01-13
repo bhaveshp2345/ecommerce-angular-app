@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewEncapsulation } from "@angular/core";
 
 import { Subject, of } from "rxjs";
-import { catchError, tap, takeUntil } from "rxjs/operators";
+import { catchError, tap } from "rxjs/operators";
 import { FlatpickrOptions } from "ng2-flatpickr";
 
 import { AccountSettingsService } from "app/main/pages/account-settings/account-settings.service";
@@ -16,6 +16,7 @@ import {
   passValidators,
   phoneValidators,
 } from "app/main/main-constants";
+
 @Component({
   selector: "app-account-settings",
   templateUrl: "./account-settings.component.html",

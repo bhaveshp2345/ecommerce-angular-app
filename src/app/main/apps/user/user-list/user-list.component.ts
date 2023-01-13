@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from "@angular/core";
 import { ColumnMode, DatatableComponent } from "@swimlane/ngx-datatable";
 
-import { EMPTY, from, of, Subject } from "rxjs";
+import { of, Subject } from "rxjs";
 import {
   catchError,
   debounceTime,
-  map,
   switchMap,
   takeUntil,
   tap,
