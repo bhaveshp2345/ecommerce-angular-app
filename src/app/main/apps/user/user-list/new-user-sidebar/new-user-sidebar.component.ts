@@ -61,8 +61,6 @@ export class NewUserSidebarComponent implements OnInit {
   registerNewUser(userBody: any) {
     return this._userListService.registerNewUser(userBody).pipe(
       catchError((err) => {
-        console.log(err);
-
         this.error = err?.error?.message || "Something went wrong!";
         this.loading = false;
         return of();

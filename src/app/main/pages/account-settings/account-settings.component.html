@@ -69,36 +69,60 @@
                     <!--/ header media -->
 
                     <!-- form -->
-                    <form class="validate-form mt-2">
+                    <form
+                      class="validate-form mt-2"
+                      [formGroup]="generalSettingsForm"
+                      (ngSubmit)="onGeneralSettingSubmit()"
+                    >
                       <div class="row">
                         <div class="col-12 col-sm-6">
                           <div class="form-group">
-                            <label for="account-username">Username</label>
+                            <label for="account-firstname">First Name</label>
                             <input
-                              type="text"
-                              [(ngModel)]="
-                                data?.accountSetting?.general.username
-                              "
                               class="form-control"
-                              id="account-username"
-                              name="username"
-                              placeholder="Username"
+                              id="account-firstname"
+                              name="firstname"
+                              placeholder="first name"
+                              formControlName="firstName"
+                              aria-describedby="account-firstname"
+                              [ngClass]="{
+                                'is-invalid':
+                                  submitted && generalF.firstName.errors
+                              }"
                             />
+                            <div
+                              class="invalid-feedback"
+                              *ngIf="submitted && generalF.firstName.errors"
+                            >
+                              <div *ngIf="generalF.firstName.errors?.required">
+                                First Name is required
+                              </div>
+                            </div>
                           </div>
                         </div>
                         <div class="col-12 col-sm-6">
                           <div class="form-group">
-                            <label for="account-name">Name</label>
+                            <label for="account-lastname">Last Name</label>
                             <input
                               type="text"
-                              [(ngModel)]="
-                                data?.accountSetting?.general.fullName
-                              "
                               class="form-control"
-                              id="account-name"
-                              name="name"
-                              placeholder="Name"
+                              id="account-lastname"
+                              name="lastname"
+                              placeholder="lastname"
+                              formControlName="lastName"
+                              [ngClass]="{
+                                'is-invalid':
+                                  submitted && generalF.lastName.errors
+                              }"
                             />
+                            <div
+                              *ngIf="submitted && generalF.lastName.errors"
+                              class="invalid-feedback"
+                            >
+                              <div *ngIf="generalF.lastName.errors?.required">
+                                Lastname is required
+                              </div>
+                            </div>
                           </div>
                         </div>
                         <div class="col-12 col-sm-6">
@@ -106,12 +130,26 @@
                             <label for="account-e-mail">E-mail</label>
                             <input
                               type="email"
-                              [(ngModel)]="data?.accountSetting?.general.email"
                               class="form-control"
                               id="account-e-mail"
                               name="email"
                               placeholder="Email"
+                              formControlName="email"
+                              [ngClass]="{
+                                'is-invalid': submitted && generalF.email.errors
+                              }"
                             />
+                            <div
+                              *ngIf="submitted && generalF.email.errors"
+                              class="invalid-feedback"
+                            >
+                              <div *ngIf="generalF.email.errors?.required">
+                                Email is required
+                              </div>
+                              <div *ngIf="generalF.email.errors?.email">
+                                Email must be a valid email address
+                              </div>
+                            </div>
                           </div>
                         </div>
                         <div class="col-12 col-sm-6">
@@ -119,35 +157,44 @@
                             <label for="account-company">Company</label>
                             <input
                               type="text"
-                              [(ngModel)]="
-                                data?.accountSetting?.general.company
-                              "
                               class="form-control"
                               id="account-company"
                               name="company"
                               placeholder="Company name"
+                              formControlName="company"
+                              [ngClass]="{
+                                'is-invalid':
+                                  submitted && generalF.company.errors
+                              }"
                             />
+                            <div
+                              *ngIf="submitted && generalF.company.errors"
+                              class="invalid-feedback"
+                            >
+                              <div *ngIf="generalF.company.errors?.required">
+                                Company is required
+                              </div>
+                            </div>
                           </div>
                         </div>
-                        <div class="col-12 mt-75">
+                        <div class="col-12 mt-75" *ngIf="error">
                           <div class="alert alert-warning mb-50" role="alert">
                             <h4 class="alert-heading">
-                              Your email is not confirmed. Please check your
-                              inbox.
+                              {{ error }}
                             </h4>
-                            <div class="alert-body">
-                              <a href="javascript: void(0);" class="alert-link"
-                                >Resend confirmation</a
-                              >
-                            </div>
                           </div>
                         </div>
                         <div class="col-12">
                           <button
+                            [disabled]="loading"
                             type="submit"
                             class="btn btn-primary mt-2 mr-1"
                             rippleEffect
                           >
+                            <span
+                              *ngIf="loading"
+                              class="spinner-border spinner-border-sm mr-1"
+                            ></span>
                             Save changes
                           </button>
                           <button
@@ -181,7 +228,11 @@
                 <div class="card">
                   <div class="card-body">
                     <!-- form -->
-                    <form class="validate-form">
+                    <form
+                      class="validate-form"
+                      [formGroup]="changePassForm"
+                      (ngSubmit)="onChangePassSubmit()"
+                    >
                       <div class="row">
                         <div class="col-12 col-sm-6">
                           <div class="form-group">
@@ -195,10 +246,15 @@
                                 [type]="
                                   passwordTextTypeOld ? 'text' : 'password'
                                 "
-                                class="form-control"
+                                class="form-control form-control-merge"
                                 id="account-old-password"
                                 name="password"
                                 placeholder="Old Password"
+                                formControlName="old_password"
+                                [ngClass]="{
+                                  'is-invalid error':
+                                    submitted && changePassF.old_password.errors
+                                }"
                               />
                               <div class="input-group-append">
                                 <span class="input-group-text cursor-pointer"
@@ -211,6 +267,24 @@
                                     (click)="togglePasswordTextTypeOld()"
                                   ></i
                                 ></span>
+                              </div>
+                            </div>
+                            <div
+                              *ngIf="
+                                submitted && changePassF.old_password.errors
+                              "
+                              class="invalid-feedback"
+                              [ngClass]="{
+                                'd-block':
+                                  submitted && changePassF.old_password.errors
+                              }"
+                            >
+                              <div
+                                *ngIf="
+                                  changePassF.old_password.errors?.required
+                                "
+                              >
+                                Old Password is required!
                               </div>
                             </div>
                           </div>
@@ -231,8 +305,13 @@
                                 "
                                 id="account-new-password"
                                 name="new-password"
-                                class="form-control"
+                                class="form-control form-control-merge"
                                 placeholder="New Password"
+                                formControlName="new_password"
+                                [ngClass]="{
+                                  'is-invalid error':
+                                    submitted && changePassF.new_password.errors
+                                }"
                               />
                               <div class="input-group-append">
                                 <span class="input-group-text cursor-pointer"
@@ -245,6 +324,30 @@
                                     (click)="togglePasswordTextTypeNew()"
                                   ></i
                                 ></span>
+                              </div>
+                            </div>
+                            <div
+                              *ngIf="
+                                submitted && changePassF.new_password.errors
+                              "
+                              class="invalid-feedback"
+                              [ngClass]="{
+                                'd-block':
+                                  submitted && changePassF.new_password.errors
+                              }"
+                            >
+                              <div
+                                *ngIf="
+                                  changePassF.new_password.errors?.required
+                                "
+                              >
+                                New Password is required!
+                              </div>
+                              <div
+                                *ngIf="changePassF.new_password.errors?.pattern"
+                              >
+                                A password should be 6 characters long, a number
+                                & a special character.
                               </div>
                             </div>
                           </div>
@@ -261,10 +364,16 @@
                                 [type]="
                                   passwordTextTypeRetype ? 'text' : 'password'
                                 "
-                                class="form-control"
+                                class="form-control form-control-merge"
                                 id="account-retype-new-password"
                                 name="confirm-new-password"
                                 placeholder="New Password"
+                                formControlName="confirm_password"
+                                [ngClass]="{
+                                  'is-invalid error':
+                                    submitted &&
+                                    changePassF.confirm_password.errors
+                                }"
                               />
                               <div class="input-group-append">
                                 <span class="input-group-text cursor-pointer"
@@ -279,14 +388,51 @@
                                 ></span>
                               </div>
                             </div>
+                            <div
+                              *ngIf="
+                                submitted &&
+                                (changePassF.confirm_password.errors ||
+                                  changePassForm.errors?.matching)
+                              "
+                              class="invalid-feedback"
+                              [ngClass]="{
+                                'd-block':
+                                  submitted &&
+                                  (changePassF.confirm_password.errors ||
+                                    changePassForm.errors?.matching)
+                              }"
+                            >
+                              <div
+                                *ngIf="
+                                  changePassF.confirm_password.errors?.required
+                                "
+                              >
+                                Confirm Password is required!
+                              </div>
+                              <div *ngIf="changePassForm.errors?.matching">
+                                Confirm password not matching!
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 mt-75" *ngIf="error">
+                          <div class="alert alert-warning mb-50" role="alert">
+                            <h4 class="alert-heading">
+                              {{ error }}
+                            </h4>
                           </div>
                         </div>
                         <div class="col-12">
                           <button
+                            [disabled]="loading"
                             type="submit"
                             class="btn btn-primary mr-1 mt-1"
                             rippleEffect
                           >
+                            <span
+                              *ngIf="loading"
+                              class="spinner-border spinner-border-sm mr-1"
+                            ></span>
                             Save changes
                           </button>
                           <button
@@ -320,30 +466,38 @@
                 <div class="card">
                   <div class="card-body">
                     <!-- form -->
-                    <form class="validate-form">
+                    <form
+                      class="validate-form"
+                      [formGroup]="informationForm"
+                      (ngSubmit)="onInfoSettingSubmit()"
+                    >
                       <div class="row">
                         <div class="col-12">
                           <div class="form-group">
-                            <label for="accountTextarea">Bio</label>
+                            <label for="accountTextarea">Address</label>
                             <textarea
-                              [(ngModel)]="data?.accountSetting?.info.bio"
                               class="form-control"
                               id="accountTextarea"
                               name="accountTextarea"
-                              rows="4"
-                              placeholder="Your Bio data here..."
+                              rows="2"
+                              placeholder="Your address here..."
+                              formControlName="address"
+                              [ngClass]="{
+                                'is-invalid error':
+                                  submitted && infoF.address.errors
+                              }"
                             ></textarea>
-                          </div>
-                        </div>
-                        <div class="col-12 col-sm-6">
-                          <div class="form-group">
-                            <label for="account-birth-date">Birth date</label>
-                            <ng2-flatpickr
-                              [config]="birthDateOptions"
-                              id="account-birth-date"
-                              name="account-birth-date"
-                              placeholder="June 18, 2021"
-                            ></ng2-flatpickr>
+                            <div
+                              *ngIf="submitted && infoF.address.errors"
+                              class="invalid-feedback"
+                              [ngClass]="{
+                                'd-block': submitted && infoF.address.errors
+                              }"
+                            >
+                              <div *ngIf="infoF.address.errors?.required">
+                                Address is required!
+                              </div>
+                            </div>
                           </div>
                         </div>
                         <div class="col-12 col-sm-6">
@@ -351,27 +505,33 @@
                             <label for="accountSelect">Country</label>
                             <select
                               class="form-control"
-                              [(ngModel)]="data?.accountSetting?.info.country"
                               id="accountSelect"
                               name="accountSelect"
+                              formControlName="country_code"
+                              [ngClass]="{
+                                'is-invalid error':
+                                  submitted && infoF.country_code.errors
+                              }"
                             >
-                              <option>USA</option>
-                              <option>India</option>
-                              <option>Canada</option>
+                              <option
+                                [value]="item.value"
+                                *ngFor="let item of selectCountry"
+                              >
+                                {{ item.name }}
+                              </option>
                             </select>
-                          </div>
-                        </div>
-                        <div class="col-12 col-sm-6">
-                          <div class="form-group">
-                            <label for="account-website">Website</label>
-                            <input
-                              type="text"
-                              [(ngModel)]="data?.accountSetting?.info.website"
-                              class="form-control"
-                              name="website"
-                              id="account-website"
-                              placeholder="Website address"
-                            />
+                            <div
+                              *ngIf="submitted && infoF.country_code.errors"
+                              class="invalid-feedback"
+                              [ngClass]="{
+                                'd-block':
+                                  submitted && infoF.country_code.errors
+                              }"
+                            >
+                              <div *ngIf="infoF.country_code.errors?.required">
+                                Country code is required!
+                              </div>
+                            </div>
                           </div>
                         </div>
                         <div class="col-12 col-sm-6">
@@ -379,20 +539,51 @@
                             <label for="account-phone">Phone</label>
                             <input
                               type="text"
-                              [(ngModel)]="data?.accountSetting?.info.phone"
                               class="form-control"
                               id="account-phone"
                               placeholder="Phone number"
                               name="phone"
+                              formControlName="mobile_number"
+                              [ngClass]="{
+                                'is-invalid error':
+                                  submitted && infoF.mobile_number.errors
+                              }"
                             />
+                            <div
+                              *ngIf="submitted && infoF.mobile_number.errors"
+                              class="invalid-feedback"
+                              [ngClass]="{
+                                'd-block':
+                                  submitted && infoF.mobile_number.errors
+                              }"
+                            >
+                              <div *ngIf="infoF.mobile_number.errors?.required">
+                                Mobile number is required!
+                              </div>
+                              <div *ngIf="infoF.mobile_number.errors?.pattern">
+                                Please enter a valid mobile number!
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 mt-75" *ngIf="error">
+                          <div class="alert alert-warning mb-50" role="alert">
+                            <h4 class="alert-heading">
+                              {{ error }}
+                            </h4>
                           </div>
                         </div>
                         <div class="col-12">
                           <button
+                            [disabled]="loading"
                             type="submit"
                             class="btn btn-primary mt-1 mr-1"
                             rippleEffect
                           >
+                            <span
+                              *ngIf="loading"
+                              class="spinner-border spinner-border-sm mr-1"
+                            ></span>
                             Save changes
                           </button>
                           <button
