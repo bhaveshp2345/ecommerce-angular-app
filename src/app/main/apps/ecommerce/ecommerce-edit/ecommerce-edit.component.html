@@ -94,7 +94,7 @@
                             type="text"
                             class="form-control"
                             placeholder="iPhone"
-                            name="phone"
+                            name="title"
                             [(ngModel)]="productTitle"
                             [class.error]="
                               productInfoEditForm.submitted && titleRef.invalid
@@ -124,7 +124,7 @@
                             type="text"
                             class="form-control"
                             placeholder="Apple"
-                            name="phone"
+                            name="brand"
                             [(ngModel)]="productBrand"
                             [class.error]="
                               productInfoEditForm.submitted && brandRef.invalid
@@ -305,6 +305,28 @@
                               </button>
                             </li>
                           </ul>
+                        </div>
+                      </div>
+                      <div class="col-lg-4 col-md-6 mb-1">
+                        <div class="product-color-options">
+                          <h6>Rating</h6>
+                          <div class="rating rating-sm mb-1">
+                            <ngb-rating
+                              [(rate)]="productRating"
+                              [readonly]="false"
+                              [max]="5"
+                              class="outline-none"
+                              name="rating"
+                              [(ngModel)]="productRating"
+                            >
+                              <ng-template let-fill="fill" let-index="index"
+                                ><span
+                                  class="fa fa-star-o mr-25"
+                                  [class.fa-star]="fill === 100"
+                                ></span
+                              ></ng-template>
+                            </ngb-rating>
+                          </div>
                         </div>
                       </div>
                       <div class="col-sm-12">

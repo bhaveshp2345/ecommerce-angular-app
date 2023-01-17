@@ -28,6 +28,21 @@
               >
               <div class="ecommerce-details-price d-flex flex-wrap mt-1">
                 <h4 class="item-price mr-1">${{ product?.price }}</h4>
+                <div class="rating rating-sm pl-1 border-left mb-1">
+                  <ngb-rating
+                    [rate]="4"
+                    [readonly]="true"
+                    [max]="5"
+                    class="outline-none"
+                  >
+                    <ng-template let-fill="fill" let-index="index"
+                      ><span
+                        class="fa fa-star-o mr-25"
+                        [class.fa-star]="fill === 100"
+                      ></span
+                    ></ng-template>
+                  </ngb-rating>
+                </div>
               </div>
               <p class="card-text">
                 Available - <span class="text-success">In stock</span>
@@ -49,30 +64,20 @@
               <div class="product-color-options">
                 <h6>Colors</h6>
                 <ul class="list-unstyled mb-0">
-                  <li class="d-inline-block selected">
-                    <div class="color-option b-primary">
-                      <div class="filloption bg-primary"></div>
-                    </div>
-                  </li>
-                  <li class="d-inline-block">
-                    <div class="color-option b-success">
-                      <div class="filloption bg-success"></div>
-                    </div>
-                  </li>
-                  <li class="d-inline-block">
-                    <div class="color-option b-danger">
-                      <div class="filloption bg-danger"></div>
-                    </div>
-                  </li>
-                  <li class="d-inline-block">
-                    <div class="color-option b-warning">
-                      <div class="filloption bg-warning"></div>
-                    </div>
-                  </li>
-                  <li class="d-inline-block">
-                    <div class="color-option b-info">
-                      <div class="filloption bg-info"></div>
-                    </div>
+                  <li
+                    class="d-inline-block"
+                    *ngFor="let item of productColors"
+                    [ngClass]="{
+                      selected: item.color == selectedColor
+                    }"
+                  >
+                    <button
+                      class="btn color-option {{ item.parent }}"
+                      (click)="changeColor(item.color)"
+                      rippleEffect
+                    >
+                      <div class="filloption {{ item.child }}"></div>
+                    </button>
                   </li>
                 </ul>
               </div>

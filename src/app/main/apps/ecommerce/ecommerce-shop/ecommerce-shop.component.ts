@@ -59,13 +59,6 @@ export class EcommerceShopComponent implements OnInit {
     this.gridViewRef = true;
   }
 
-  /**
-   * Sort Product
-   */
-  sortProduct(sortParam) {
-    // this._ecommerceService.sortProduct(sortParam);
-  }
-
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------
 

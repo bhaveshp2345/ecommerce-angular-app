@@ -25,6 +25,7 @@ export class EcommerceEditComponent implements OnInit {
     { color: "blue", child: "bg-info", parent: "b-info" },
   ];
   selectedColor = "green";
+  productRating = 4;
   loading = false;
   error = "";
 
@@ -65,30 +66,41 @@ export class EcommerceEditComponent implements OnInit {
     this.avatarImage = "";
   }
 
-  changeColor(color) {
+  changeColor(color: string) {
     this.selectedColor = color;
   }
+
   /**
    * Submit
    *
    * @param form
    */
   submitProductEdit(form) {
-    if (form.valid && this.avatarImage) {
-      this.loading = true;
-      const formVal = form.value;
-      const productBody = {
-        avatarImage: this.avatarImage,
-        title: formVal["title"],
-        brand: formVal["brand"],
-        inStock: formVal["inStock"],
-        price: formVal["price"],
-        delivery_charge: formVal["delivery_charge"],
-        status: formVal["status"],
-        description: formVal["description"],
-      };
-      console.log("productBody", productBody);
-      this.error = "No API found";
+    if (form.valid) {
+      if (
+        this.avatarImage &&
+        this.productRating != null &&
+        this.selectedColor
+      ) {
+        this.loading = true;
+        const formVal = form.value;
+        const productBody = {
+          rating: this.productRating,
+          avatarImage: this.avatarImage,
+          title: formVal["title"],
+          brand: formVal["brand"],
+          inStock: formVal["availability"],
+          price: formVal["price"],
+          delivery_charge: formVal["delivery_charge"],
+          status: formVal["status"],
+          description: formVal["description"],
+          color: this.selectedColor,
+        };
+
+        this.error = "No API found";
+      } else {
+        this.error = "All fields are required";
+      }
     }
   }
 

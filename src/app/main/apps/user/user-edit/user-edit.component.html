@@ -20,9 +20,7 @@
                 >
                   <!-- users edit media object start -->
                   <div class="media mb-2">
-                    <div
-                      *ngIf="currentRow?.avatar.length > 0; else customAvatar"
-                    >
+                    <div *ngIf="true; else customAvatar">
                       <img
                         class="user-avatar users-avatar-shadow rounded mr-2 my-25 cursor-pointer"
                         [src]="avatarImage"
@@ -68,6 +66,7 @@
                         </label>
                         <button
                           class="btn btn-outline-secondary d-none d-sm-block"
+                          (click)="removeAvatar()"
                           rippleEffect
                         >
                           Remove
@@ -606,140 +605,6 @@
                       </div>
                       <div class="col-lg-4 col-md-6">
                         <div class="form-group">
-                          <label for="languages">Languages</label>
-                          <select id="languages" class="form-control">
-                            <option value="English">English</option>
-                            <option value="Spanish">Spanish</option>
-                            <option value="French" selected>French</option>
-                            <option value="Russian">Russian</option>
-                            <option value="German">German</option>
-                            <option value="Arabic">Arabic</option>
-                            <option value="Sanskrit">Sanskrit</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                          <label class="d-block mb-1">Gender</label>
-                          <div
-                            class="custom-control custom-radio custom-control-inline"
-                          >
-                            <input
-                              type="radio"
-                              id="male"
-                              name="gender"
-                              class="custom-control-input"
-                            />
-                            <label class="custom-control-label" for="male"
-                              >Male</label
-                            >
-                          </div>
-                          <div
-                            class="custom-control custom-radio custom-control-inline"
-                          >
-                            <input
-                              type="radio"
-                              id="female"
-                              name="gender"
-                              class="custom-control-input"
-                              checked
-                            />
-                            <label class="custom-control-label" for="female"
-                              >Female</label
-                            >
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                          <label class="d-block mb-1">Contact Options</label>
-                          <div
-                            class="custom-control custom-checkbox custom-control-inline"
-                          >
-                            <input
-                              type="checkbox"
-                              class="custom-control-input"
-                              id="email-cb"
-                              checked
-                            />
-                            <label class="custom-control-label" for="email-cb"
-                              >Email</label
-                            >
-                          </div>
-                          <div
-                            class="custom-control custom-checkbox custom-control-inline"
-                          >
-                            <input
-                              type="checkbox"
-                              class="custom-control-input"
-                              id="message"
-                              checked
-                            />
-                            <label class="custom-control-label" for="message"
-                              >Message</label
-                            >
-                          </div>
-                          <div
-                            class="custom-control custom-checkbox custom-control-inline"
-                          >
-                            <input
-                              type="checkbox"
-                              class="custom-control-input"
-                              id="phone"
-                            />
-                            <label class="custom-control-label" for="phone"
-                              >Phone</label
-                            >
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-12">
-                        <h4 class="mb-1 mt-2">
-                          <i
-                            data-feather="map-pin"
-                            [size]="16"
-                            class="mr-75 font-medium-4"
-                          ></i>
-                          <span class="align-middle">Address</span>
-                        </h4>
-                      </div>
-                      <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                          <label for="address-1">Address Line 1</label>
-                          <input
-                            id="address-1"
-                            type="text"
-                            class="form-control"
-                            value="A-65, Belvedere Streets"
-                            name="address"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                          <label for="address-2">Address Line 2</label>
-                          <input
-                            id="address-2"
-                            type="text"
-                            class="form-control"
-                            placeholder="T-78, Groove Street"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                          <label for="postcode">Postcode</label>
-                          <input
-                            id="postcode"
-                            type="text"
-                            class="form-control"
-                            placeholder="597626"
-                            name="zip"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
                           <label for="city">City</label>
                           <input
                             id="city"
@@ -747,18 +612,6 @@
                             class="form-control"
                             value="New York"
                             name="city"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                          <label for="state">State</label>
-                          <input
-                            id="state"
-                            type="text"
-                            class="form-control"
-                            name="state"
-                            placeholder="Manhattan"
                           />
                         </div>
                       </div>
@@ -795,169 +648,6 @@
                   <!-- users edit Info form ends -->
                 </div>
                 <!-- Information Tab ends -->
-              </ng-template>
-            </li>
-            <li ngbNavItem>
-              <a ngbNavLink class="d-flex align-items-center"
-                ><i data-feather="share-2" class="mr-sm-50"></i
-                ><span class="d-none d-sm-block">Social</span></a
-              >
-              <ng-template ngbNavContent>
-                <!-- Social Tab starts -->
-                <div
-                  class="tab-pane"
-                  id="social"
-                  aria-labelledby="social-tab"
-                  role="tabpanel"
-                >
-                  <!-- users edit social form start -->
-                  <form class="form-validate">
-                    <div class="row">
-                      <div class="col-lg-4 col-md-6 form-group">
-                        <label for="twitter-input">Twitter</label>
-                        <div class="input-group input-group-merge">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon3">
-                              <i
-                                class="font-medium-2"
-                                data-feather="twitter"
-                              ></i>
-                            </span>
-                          </div>
-                          <input
-                            id="twitter-input"
-                            type="text"
-                            class="form-control"
-                            value="https://www.twitter.com/adoptionism744"
-                            placeholder="https://www.twitter.com/"
-                            aria-describedby="basic-addon3"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-lg-4 col-md-6 form-group">
-                        <label for="facebook-input">Facebook</label>
-                        <div class="input-group input-group-merge">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon4">
-                              <i
-                                class="font-medium-2"
-                                data-feather="facebook"
-                              ></i>
-                            </span>
-                          </div>
-                          <input
-                            id="facebook-input"
-                            type="text"
-                            class="form-control"
-                            value="https://www.facebook.com/adoptionism664"
-                            placeholder="https://www.facebook.com/"
-                            aria-describedby="basic-addon4"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-lg-4 col-md-6 form-group">
-                        <label for="instagram-input">Instagram</label>
-                        <div class="input-group input-group-merge">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon5">
-                              <i
-                                class="font-medium-2"
-                                data-feather="instagram"
-                              ></i>
-                            </span>
-                          </div>
-                          <input
-                            id="instagram-input"
-                            type="text"
-                            class="form-control"
-                            value="https://www.instagram.com/adopt-ionism744"
-                            placeholder="https://www.instagram.com/"
-                            aria-describedby="basic-addon5"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-lg-4 col-md-6 form-group">
-                        <label for="github-input">Github</label>
-                        <div class="input-group input-group-merge">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon9">
-                              <i
-                                class="font-medium-2"
-                                data-feather="github"
-                              ></i>
-                            </span>
-                          </div>
-                          <input
-                            id="github-input"
-                            type="text"
-                            class="form-control"
-                            value="https://www.github.com/madop818"
-                            placeholder="https://www.github.com/"
-                            aria-describedby="basic-addon9"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-lg-4 col-md-6 form-group">
-                        <label for="codepen-input">Codepen</label>
-                        <div class="input-group input-group-merge">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon12">
-                              <i
-                                class="font-medium-2"
-                                data-feather="codepen"
-                              ></i>
-                            </span>
-                          </div>
-                          <input
-                            id="codepen-input"
-                            type="text"
-                            class="form-control"
-                            value="https://www.codepen.com/adoptism243"
-                            placeholder="https://www.codepen.com/"
-                            aria-describedby="basic-addon12"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-lg-4 col-md-6 form-group">
-                        <label for="slack-input">Slack</label>
-                        <div class="input-group input-group-merge">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon11">
-                              <i class="font-medium-2" data-feather="slack"></i>
-                            </span>
-                          </div>
-                          <input
-                            id="slack-input"
-                            type="text"
-                            class="form-control"
-                            value="@adoptionism744"
-                            placeholder="https://www.slack.com/"
-                            aria-describedby="basic-addon11"
-                          />
-                        </div>
-                      </div>
-
-                      <div class="col-12 d-flex flex-sm-row flex-column mt-2">
-                        <button
-                          type="submit"
-                          class="btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1"
-                          rippleEffect
-                        >
-                          Save Changes
-                        </button>
-                        <button
-                          type="reset"
-                          class="btn btn-outline-secondary"
-                          rippleEffect
-                        >
-                          Reset
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-                  <!-- users edit socail form ends -->
-                </div>
-                <!-- Social Tab ends -->
               </ng-template>
             </li>
           </ul>

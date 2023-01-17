@@ -18,6 +18,13 @@ export class EcommerceDetailsComponent implements OnInit {
   public wishlist;
   public cartList;
   public relatedProducts;
+  productColors = [
+    { color: "orange", child: "bg-primary", parent: "b-primary" },
+    { color: "green", child: "bg-success", parent: "b-success" },
+    { color: "red", child: "bg-danger", parent: "b-danger" },
+    { color: "blue", child: "bg-info", parent: "b-info" },
+  ];
+  selectedColor = "green";
 
   isProductDisabled = false;
 
@@ -61,6 +68,10 @@ export class EcommerceDetailsComponent implements OnInit {
 
   toggleProductStatus() {
     this.isProductDisabled = !this.isProductDisabled;
+  }
+
+  changeColor(color) {
+    this.selectedColor = color;
   }
 
   // Lifecycle Hooks

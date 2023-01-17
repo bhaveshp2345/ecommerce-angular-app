@@ -9,9 +9,7 @@ import { Router } from "@angular/router";
 import { NgForm } from "@angular/forms";
 
 import { Subject } from "rxjs";
-import { takeUntil } from "rxjs/operators";
 import { FlatpickrOptions } from "ng2-flatpickr";
-import { cloneDeep } from "lodash";
 
 import { UserEditService } from "app/main/apps/user/user-edit/user-edit.service";
 
@@ -28,7 +26,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
   public rows;
   public currentRow;
   public tempRow;
-  public avatarImage: string;
+  public avatarImage = "";
 
   @ViewChild("accountForm") accountForm: NgForm;
 
@@ -91,6 +89,10 @@ export class UserEditComponent implements OnInit, OnDestroy {
     }
   }
 
+  removeAvatar() {
+    this.avatarImage = "";
+  }
+
   /**
    * Submit
    *
@@ -107,22 +109,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
   /**
    * On init
    */
-  ngOnInit(): void {
-    this._userEditService.onUserEditChanged
-      .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((response) => {
-        this.rows = response;
-        if (this.rows?.length > 0) {
-          this.rows.map((row) => {
-            if (row.id == this.urlLastValue) {
-              this.currentRow = row;
-              this.avatarImage = this.currentRow.avatar;
-              this.tempRow = cloneDeep(row);
-            }
-          });
-        }
-      });
-  }
+  ngOnInit(): void {}
 
   /**
    * On destroy
