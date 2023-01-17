@@ -14,7 +14,7 @@
                 <img
                   [src]="product?.image"
                   class="img-fluid product-img"
-                  alt="product image"
+                  alt=""
                 />
               </div>
             </div>
@@ -28,21 +28,6 @@
               >
               <div class="ecommerce-details-price d-flex flex-wrap mt-1">
                 <h4 class="item-price mr-1">${{ product?.price }}</h4>
-                <div class="rating rating-sm pl-1 border-left mb-1">
-                  <ngb-rating
-                    [rate]="product?.rating"
-                    [readonly]="true"
-                    [max]="5"
-                    class="outline-none"
-                  >
-                    <ng-template let-fill="fill" let-index="index"
-                      ><span
-                        class="fa fa-star-o mr-25"
-                        [class.fa-star]="fill === 100"
-                      ></span
-                    ></ng-template>
-                  </ngb-rating>
-                </div>
               </div>
               <p class="card-text">
                 Available - <span class="text-success">In stock</span>
@@ -93,70 +78,29 @@
               </div>
               <hr />
               <div class="d-flex flex-column flex-sm-row pt-1">
-                <a
-                  *ngIf="product?.isInCart !== true"
-                  href="javascript:void(0)"
+                <button
+                  *ngIf="isProductDisabled"
+                  (click)="toggleProductStatus()"
                   class="btn btn-primary btn-cart mr-0 mr-sm-1 mb-1 mb-sm-0"
-                  (click)="addToCart(product)"
                 >
-                  <i data-feather="shopping-cart" class="mr-25"></i>
-                  <span class="add-to-cart">Add to cart</span>
-                </a>
-                <a
-                  *ngIf="product?.isInCart === true"
-                  routerLink="/apps/e-commerce/checkout"
-                  class="btn btn-primary btn-cart mr-0 mr-sm-1 mb-1 mb-sm-0"
-                  rippleEffect
-                >
-                  <i data-feather="shopping-cart" class="mr-25"></i>
-                  <span class="add-to-cart">View in cart</span>
-                </a>
-                <a
-                  href="javascript:void(0)"
-                  (click)="toggleWishlist(product)"
+                  <i data-feather="minus-circle" class="mr-25"></i>
+                  <span class="add-to-cart">Disable</span>
+                </button>
+                <button
+                  *ngIf="!isProductDisabled"
+                  (click)="toggleProductStatus()"
                   class="btn btn-outline-secondary btn-wishlist mr-0 mr-sm-1 mb-1 mb-sm-0"
-                  rippleEffect
                 >
-                  <i
-                    class="fa mr-50"
-                    [ngClass]="
-                      product?.isInWishlist === true
-                        ? 'fa-heart text-danger'
-                        : 'fa-heart-o'
-                    "
-                  ></i>
-                  <span>Wishlist</span>
+                  <i data-feather="file-plus" class="mr-25"></i>
+                  <span class="add-to-cart">Enable</span>
+                </button>
+                <a
+                  [routerLink]="'/apps/e-commerce/edit/27'"
+                  class="btn btn-outline-secondary btn-wishlist mr-0 mr-sm-1 mb-1 mb-sm-0"
+                >
+                  <i data-feather="edit" class="mr-25"></i>
+                  <span class="add-to-cart">Edit</span>
                 </a>
-                <div
-                  class="btn-group dropdown-icon-wrapper btn-share"
-                  ngbDropdown
-                >
-                  <button
-                    ngbDropdownToggle
-                    type="button"
-                    class="btn btn-icon hide-arrow btn-outline-secondary"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                    rippleEffect
-                  >
-                    <i data-feather="share-2"></i>
-                  </button>
-                  <div class="dropdown-menu-right" ngbDropdownMenu>
-                    <a ngbDropdownItem href="javascript:void(0)">
-                      <i data-feather="facebook"></i>
-                    </a>
-                    <a ngbDropdownItem href="javascript:void(0)">
-                      <i data-feather="twitter"></i>
-                    </a>
-                    <a ngbDropdownItem href="javascript:void(0)">
-                      <i data-feather="youtube"></i>
-                    </a>
-                    <a ngbDropdownItem href="javascript:void(0)">
-                      <i data-feather="instagram"></i>
-                    </a>
-                  </div>
-                </div>
               </div>
             </div>
           </div>

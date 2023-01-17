@@ -10,23 +10,6 @@
 </div>
 <div class="card-body">
   <div class="item-wrapper">
-    <div class="item-rating">
-      <div class="rating rating-sm">
-        <ngb-rating
-          [rate]="product?.rating"
-          [readonly]="true"
-          [max]="5"
-          class="outline-none"
-        >
-          <ng-template let-fill="fill" let-index="index"
-            ><span
-              class="fa fa-star-o mr-25"
-              [class.fa-star]="fill === 100"
-            ></span
-          ></ng-template>
-        </ngb-rating>
-      </div>
-    </div>
     <div class="item-cost">
       <h6 class="item-price">${{ product?.price }}</h6>
     </div>
@@ -58,49 +41,23 @@
       </p>
     </div>
   </div>
-  <a
-    *ngIf="isWishlistOpen === true"
-    href="javascript:void(0)"
-    class="btn btn-light btn-wishlist"
-    (click)="toggleWishlist(product)"
+  <button
+    *ngIf="isProductDisabled"
+    class="btn btn-light btn-cart"
+    (click)="toggleProductDisable()"
     rippleEffect
   >
-    <i data-feather="x"></i>
-    <span>Remove</span>
-  </a>
-  <a
-    *ngIf="isWishlistOpen !== true"
-    href="javascript:void(0)"
-    class="btn btn-light btn-wishlist"
-    (click)="toggleWishlist(product)"
-    rippleEffect
-  >
-    <i
-      class="fa mr-25"
-      [ngClass]="
-        product?.isInWishlist === true ? 'fa-heart text-danger' : 'fa-heart-o'
-      "
-    ></i>
-    <span>Wishlist</span>
-  </a>
-  <a
-    *ngIf="product?.isInCart !== true"
-    href="javascript:void(0)"
+    <i data-feather="minus-circle" class="mr-25"></i>
+    <span class="add-to-cart">Disable</span>
+  </button>
+  <button
+    *ngIf="!isProductDisabled"
     class="btn btn-primary btn-cart"
-    (click)="addToCart(product)"
+    (click)="toggleProductDisable()"
     rippleEffect
   >
-    <i data-feather="shopping-cart" class="mr-25"></i>
-    <span class="add-to-cart">Add to cart</span>
-  </a>
-  <a
-    *ngIf="product?.isInCart === true"
-    routerLink="/apps/e-commerce/checkout"
-    class="btn btn-primary btn-cart"
-    rippleEffect
-  >
-    <i data-feather="shopping-cart" class="mr-25"></i>
-    <span class="add-to-cart">View in cart</span>
-  </a>
+    <i data-feather="file-plus" class="mr-25"></i>
+    <span class="add-to-cart">Enable</span>
+  </button>
 </div>
 <!--/ Ecommerce Item -->

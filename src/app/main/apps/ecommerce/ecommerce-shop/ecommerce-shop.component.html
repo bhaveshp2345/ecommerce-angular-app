@@ -91,7 +91,7 @@
 
       <section id="ecommerce-searchbar" class="ecommerce-searchbar">
         <div class="row mt-1">
-          <div class="col-sm-12">
+          <div class="col-sm-9">
             <div class="input-group input-group-merge">
               <input
                 type="text"
@@ -109,6 +109,19 @@
               </div>
             </div>
           </div>
+          <div class="col-sm-3 d-flex justify-content-end">
+            <button
+              class="btn btn-primary ml-1"
+              rippleEffect
+              (click)="toggleSidebar('upsert-product-sidebar')"
+            >
+              <i
+                data-feather="plus"
+                class="d-sm-none d-inline-block mr-0 mr-sm-1"
+              ></i
+              ><span class="d-none d-sm-inline-block">Add New Product</span>
+            </button>
+          </div>
         </div>
       </section>
       <!-- E-commerce Head Section Starts -->
@@ -118,12 +131,6 @@
         id="ecommerce-products"
         [ngClass]="gridViewRef === true ? 'grid-view' : 'list-view'"
       >
-        <!-- [product]="product"
-           *ngFor="
-            let product of products
-              | filter : searchText : 'name'
-              | slice : (page - 1) * pageSize : (page - 1) * pageSize + pageSize    
-          " -->
         <app-ecommerce-item class="card ecommerce-card"></app-ecommerce-item>
       </section>
       <!-- E-commerce Products Ends -->
@@ -180,4 +187,13 @@
       <!-- E-commerce Pagination Ends -->
     </div>
   </div>
+  <!-- New User Sidebar -->
+  <core-sidebar
+    class="modal modal-slide-in sidebar-todo-modal fade"
+    name="upsert-product-sidebar"
+    overlayClass="modal-backdrop"
+  >
+    <app-upsert-product-sidebar></app-upsert-product-sidebar>
+  </core-sidebar>
+  <!--/ New User Sidebar -->
 </div>

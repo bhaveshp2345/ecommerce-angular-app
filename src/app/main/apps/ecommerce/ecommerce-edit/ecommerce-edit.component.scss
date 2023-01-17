@@ -1,0 +1,72 @@
+@import "@core/scss/base/bootstrap-extended/include";
+@import "@core/scss/base/components/include";
+
+.product-color-options {
+  .color-option {
+    border: 1px solid transparent;
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    padding: 3px;
+
+    .filloption {
+      height: 18px;
+      width: 18px;
+      border-radius: 50%;
+    }
+  }
+
+  // selected
+  .selected {
+    // these use for border color only page specific
+    .b-primary {
+      border-color: $primary;
+      .filloption {
+        box-shadow: 0 2px 4px 0 rgba($primary, 0.4);
+      }
+    }
+
+    .b-success {
+      border-color: $success;
+      .filloption {
+        box-shadow: 0 2px 4px 0 rgba($success, 0.4);
+      }
+    }
+
+    .b-danger {
+      border-color: $danger;
+      .filloption {
+        box-shadow: 0 2px 4px 0 rgba($danger, 0.4);
+      }
+    }
+
+    .b-warning {
+      border-color: $warning;
+      .filloption {
+        box-shadow: 0 2px 4px 0 rgba($warning, 0.4);
+      }
+    }
+
+    .b-info {
+      border-color: $info;
+      .filloption {
+        box-shadow: 0 2px 4px 0 rgba($info, 0.4);
+      }
+    }
+  }
+  .b-primary .filloption {
+    box-shadow: 0 2px 4px 0 rgba($primary, 0.4);
+  }
+  .b-success .filloption {
+    box-shadow: 0 2px 4px 0 rgba($success, 0.4);
+  }
+  .b-danger .filloption {
+    box-shadow: 0 2px 4px 0 rgba($danger, 0.4);
+  }
+  .b-warning .filloption {
+    box-shadow: 0 2px 4px 0 rgba($warning, 0.4);
+  }
+  .b-info .filloption {
+    box-shadow: 0 2px 4px 0 rgba($info, 0.4);
+  }
+}

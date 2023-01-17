@@ -15,6 +15,7 @@ export const locale = {
           DETAIL: "Detalhes",
           WISHLIST: "Lista de Desejos",
           CHECKOUT: "Confira",
+          EDIT: "Editar",
         },
         USER: {
           COLLAPSIBLE: "Do utilizador",

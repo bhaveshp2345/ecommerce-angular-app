@@ -1,0 +1,190 @@
+<div class="slideout-content">
+  <!-- Modal to add new user starts-->
+  <div
+    class="modalsd modal-slide-in sdfade new-user-modal"
+    id="modals-slide-in"
+  >
+    <div class="modal-dialog">
+      <form
+        class="add-new-user modal-content pt-0"
+        (ngSubmit)="(newProductForm.form.valid)"
+        #newProductForm="ngForm"
+      >
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="toggleSidebar('upsert-product-sidebar')"
+        >
+          ×
+        </button>
+        <div class="modal-header mb-1">
+          <h5 class="modal-title" id="exampleModalLabel">New User</h5>
+        </div>
+        <ngb-alert [type]="'danger'" [dismissible]="false" *ngIf="error">
+          <div class="alert-body">
+            <p>{{ error }}</p>
+          </div>
+        </ngb-alert>
+        <div class="modal-body flex-grow-1">
+          <!-- Title Start -->
+          <div class="form-group">
+            <label class="form-label" for="product-title">Title</label>
+            <input
+              type="text"
+              class="form-control dt-full-name"
+              id="product-title"
+              placeholder="Apple Watch"
+              [(ngModel)]="title"
+              name="product-title"
+              [class.error]="
+                newProductForm.submitted && ProductTitleRef.invalid
+              "
+              #ProductTitleRef="ngModel"
+              required
+              aria-label="Apple Watch"
+              aria-describedby="product-title2"
+            />
+            <span
+              *ngIf="newProductForm.submitted && ProductTitleRef.invalid"
+              class="invalid-form"
+            >
+              <small
+                class="form-text text-danger"
+                *ngIf="ProductTitleRef.errors.required"
+                >This field is required!</small
+              >
+            </span>
+          </div>
+          <!-- Title End -->
+
+          <!-- Brand Start -->
+          <div class="form-group">
+            <label class="form-label" for="product-brand">Brand</label>
+            <input
+              type="text"
+              class="form-control dt-full-name"
+              id="product-brand"
+              placeholder="Apple"
+              [(ngModel)]="brand"
+              name="product-brand"
+              [class.error]="
+                newProductForm.submitted && ProductBrandRef.invalid
+              "
+              #ProductBrandRef="ngModel"
+              required
+              aria-label="Apple"
+              aria-describedby="product-brand2"
+            />
+            <span
+              *ngIf="newProductForm.submitted && ProductBrandRef.invalid"
+              class="invalid-form"
+            >
+              <small
+                class="form-text text-danger"
+                *ngIf="ProductBrandRef.errors.required"
+                >This field is required!</small
+              >
+            </span>
+          </div>
+          <!-- Brand End -->
+
+          <!-- Price Start -->
+          <div class="form-group">
+            <label class="form-label" for="product-price">Price</label>
+            <input
+              type="text"
+              id="product-price"
+              class="form-control dt-email"
+              placeholder="350"
+              aria-label="350"
+              aria-describedby="product-price2"
+              name="product-price"
+              [(ngModel)]="price"
+              [class.error]="
+                newProductForm.submitted && ProductPriceRef.invalid
+              "
+              #ProductPriceRef="ngModel"
+              required
+              pattern="^\d*\.?\d*$"
+            />
+            <span
+              *ngIf="newProductForm.submitted && ProductPriceRef.invalid"
+              class="invalid-form"
+            >
+              <small
+                class="form-text text-danger"
+                *ngIf="ProductPriceRef.errors.required"
+                >This field is required!</small
+              >
+              <small
+                class="form-text text-danger"
+                *ngIf="ProductPriceRef.errors.pattern"
+                >Please enter valid price!</small
+              >
+            </span>
+          </div>
+          <!-- Price End -->
+
+          <!-- Description Start -->
+          <div class="form-group">
+            <label class="form-label" for="product-description"
+              >Description</label
+            >
+            <textarea
+              type="text"
+              rows="2"
+              class="form-control dt-full-name"
+              id="product-description"
+              placeholder="Write product description"
+              [(ngModel)]="description"
+              name="product-description"
+              [class.error]="
+                newProductForm.submitted && ProductDescriptionRef.invalid
+              "
+              #ProductDescriptionRef="ngModel"
+              required
+              aria-label="Write product description"
+              aria-describedby="product-description2"
+            ></textarea>
+            <span
+              *ngIf="newProductForm.submitted && ProductBrandRef.invalid"
+              class="invalid-form"
+            >
+              <small
+                class="form-text text-danger"
+                *ngIf="ProductBrandRef.errors.required"
+                >This field is required!</small
+              >
+            </span>
+          </div>
+          <!-- Description End -->
+
+          <button
+            [disabled]="loading"
+            type="submit"
+            class="btn btn-primary mr-1"
+            (click)="submit(newProductForm)"
+            rippleEffect
+          >
+            <span
+              *ngIf="loading"
+              class="spinner-border spinner-border-sm mr-1"
+            ></span
+            >Submit
+          </button>
+          <button
+            type="reset"
+            class="btn btn-outline-secondary"
+            (click)="toggleSidebar('upsert-product-sidebar')"
+            rippleEffect
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- Modal to add new user Ends-->
+</div>

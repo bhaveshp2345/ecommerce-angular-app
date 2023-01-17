@@ -19,6 +19,8 @@ export class EcommerceDetailsComponent implements OnInit {
   public cartList;
   public relatedProducts;
 
+  isProductDisabled = false;
+
   // Swiper
   public swiperResponsive: SwiperConfigInterface = {
     slidesPerView: 3,
@@ -57,32 +59,8 @@ export class EcommerceDetailsComponent implements OnInit {
   // Public Methods
   // -----------------------------------------------------------------------------------------------------
 
-  /**
-   * Toggle Wishlist
-   *
-   * @param product
-   */
-  toggleWishlist(product) {
-    if (product.isInWishlist === true) {
-      this._ecommerceService.removeFromWishlist(product.id).then((res) => {
-        product.isInWishlist = false;
-      });
-    } else {
-      this._ecommerceService.addToWishlist(product.id).then((res) => {
-        product.isInWishlist = true;
-      });
-    }
-  }
-
-  /**
-   * Add To Cart
-   *
-   * @param product
-   */
-  addToCart(product) {
-    this._ecommerceService.addToCart(product.id).then((res) => {
-      product.isInCart = true;
-    });
+  toggleProductStatus() {
+    this.isProductDisabled = !this.isProductDisabled;
   }
 
   // Lifecycle Hooks
@@ -92,33 +70,6 @@ export class EcommerceDetailsComponent implements OnInit {
    * On init
    */
   ngOnInit(): void {
-    // Subscribe to Selected Product change
-    this._ecommerceService.onSelectedProductChange.subscribe((res) => {
-      this.product = res[0];
-    });
-
-    // Subscribe to Wishlist change
-    this._ecommerceService.onWishlistChange.subscribe(
-      (res) => (this.wishlist = res)
-    );
-
-    // Subscribe to Cartlist change
-    this._ecommerceService.onCartListChange.subscribe(
-      (res) => (this.cartList = res)
-    );
-
-    // Get Related Products
-    // this._ecommerceService.getRelatedProducts().then((response) => {
-    //   this.relatedProducts = response;
-    // });
-
-    if (this.product?.length > 0) {
-      this.product.isInWishlist =
-        this.wishlist.findIndex((p) => p.productId === this.product.id) > -1;
-      this.product.isInCart =
-        this.cartList.findIndex((p) => p.productId === this.product.id) > -1;
-    }
-
     // content header
     this.contentHeader = {
       headerTitle: "Product Details",

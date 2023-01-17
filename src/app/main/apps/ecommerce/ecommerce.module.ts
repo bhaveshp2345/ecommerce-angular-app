@@ -17,14 +17,12 @@ import { CoreTouchspinModule } from "@core/components/core-touchspin/core-touchs
 
 import { ContentHeaderModule } from "app/layout/components/content-header/content-header.module";
 
-import { EcommerceService } from "app/main/apps/ecommerce/ecommerce.service";
 import { EcommerceDetailsComponent } from "app/main/apps/ecommerce/ecommerce-details/ecommerce-details.component";
 import { EcommerceItemComponent } from "app/main/apps/ecommerce/ecommerce-item/ecommerce-item.component";
 import { EcommerceShopComponent } from "app/main/apps/ecommerce/ecommerce-shop/ecommerce-shop.component";
 import { EcommerceSidebarComponent } from "app/main/apps/ecommerce/ecommerce-shop/sidebar/sidebar.component";
-import { EcommerceWishlistComponent } from "app/main/apps/ecommerce/ecommerce-wishlist/ecommerce-wishlist.component";
-import { EcommerceCheckoutComponent } from "app/main/apps/ecommerce/ecommerce-checkout/ecommerce-checkout.component";
-import { EcommerceCheckoutItemComponent } from "app/main/apps/ecommerce/ecommerce-checkout/ecommerce-checkout-item/ecommerce-checkout-item.component";
+import { UpsertProductSidebarComponent } from "./upsert-product-sidebar/upsert-product-sidebar.component";
+import { EcommerceEditComponent } from "./ecommerce-edit/ecommerce-edit.component";
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: "horizontal",
@@ -36,37 +34,25 @@ const routes: Routes = [
   {
     path: "shop",
     component: EcommerceShopComponent,
-    // resolve: {
-    //   ecommerce: EcommerceService,
-    // },
     data: { animation: "EcommerceShopComponent" },
   },
   {
     path: "details/:id",
     component: EcommerceDetailsComponent,
-    // resolve: {
-    //   ecommerce: EcommerceService,
-    // },
     data: { animation: "EcommerceDetailsComponent" },
   },
   {
-    path: "wishlist",
-    component: EcommerceWishlistComponent,
-    // resolve: {
-    //   ecommerce: EcommerceService,
-    // },
-    data: { animation: "EcommerceWishlistComponent" },
-  },
-  {
-    path: "checkout",
-    component: EcommerceCheckoutComponent,
-    // resolve: {
-    //   ecommerce: EcommerceService,
-    // },
-    data: { animation: "EcommerceCheckoutComponent" },
-  },
-  {
     path: "details",
+    redirectTo: "/apps/e-commerce/details/27", //Redirection
+    data: { animation: "EcommerceDetailsComponent" },
+  },
+  {
+    path: "edit/:id",
+    component: EcommerceEditComponent,
+    data: { animation: "EcommerceEditComponent" },
+  },
+  {
+    path: "edit",
     redirectTo: "/apps/e-commerce/details/27", //Redirection
     data: { animation: "EcommerceDetailsComponent" },
   },
@@ -77,10 +63,9 @@ const routes: Routes = [
     EcommerceShopComponent,
     EcommerceSidebarComponent,
     EcommerceDetailsComponent,
-    EcommerceWishlistComponent,
-    EcommerceCheckoutComponent,
     EcommerceItemComponent,
-    EcommerceCheckoutItemComponent,
+    EcommerceEditComponent,
+    UpsertProductSidebarComponent,
   ],
   imports: [
     CommonModule,
