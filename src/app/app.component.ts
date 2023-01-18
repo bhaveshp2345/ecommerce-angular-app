@@ -265,7 +265,6 @@ export class AppComponent implements OnInit, OnDestroy {
         ) {
           this.document.body.classList.remove(
             "default-layout",
-            "bordered-layout",
             "dark-layout",
             "semi-dark-layout"
           );

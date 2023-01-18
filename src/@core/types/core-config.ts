@@ -8,16 +8,16 @@ export interface CoreConfig {
     appLanguage :'en' | 'fr' | 'de' | 'pt';
   };
   layout: {
-    skin : 'default' | 'bordered' | 'dark' | 'semi-dark';
-    type : 'vertical' | 'horizontal';
-    animation: 'fadeInLeft'| 'zoomIn' | 'fadeIn'| 'none';
+    skin : 'default' | 'dark' | 'semi-dark';
+    type : 'vertical' ;
+    animation:  'fadeIn'| 'none';
     menu : {
       hidden               : boolean;
       collapsed            : boolean;
     };
     navbar: {
       hidden               : boolean;
-      type                 : 'navbar-static-top' | 'fixed-top' | 'floating-nav' | 'd-none';
+      type                 :  'floating-nav' | 'd-none';
       background           : 'navbar-dark' | 'navbar-light';
       customBackgroundColor: boolean;
       backgroundColor      : string;

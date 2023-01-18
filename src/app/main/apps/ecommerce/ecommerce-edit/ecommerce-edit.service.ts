@@ -1,14 +1,17 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
+import {
+  ActivatedRouteSnapshot,
+  Resolve,
+  RouterStateSnapshot,
+} from "@angular/router";
 
 import { BehaviorSubject, Observable } from "rxjs";
 
 @Injectable()
-export class DashboardService {
-  // Public
+export class EcommerceEditService implements Resolve<any> {
   public apiData: any;
-  public onApiDataChanged: BehaviorSubject<any>;
+  public onEcommerceEditChanged: BehaviorSubject<any>;
 
   /**
    * Constructor
@@ -17,7 +20,7 @@ export class DashboardService {
    */
   constructor(private _httpClient: HttpClient) {
     // Set the defaults
-    this.onApiDataChanged = new BehaviorSubject({});
+    this.onEcommerceEditChanged = new BehaviorSubject({});
   }
 
   /**
@@ -32,22 +35,24 @@ export class DashboardService {
     state: RouterStateSnapshot
   ): Observable<any> | Promise<any> | any {
     return new Promise<void>((resolve, reject) => {
-      Promise.all([this.getApiData()]).then(() => {
+      Promise.all([this.getProductbyId(route.params.id)]).then(() => {
         resolve();
       }, reject);
     });
   }
 
   /**
-   * Get Api Data
+   * Get API Data
    */
-  getApiData(): Promise<any[]> {
+  getProductbyId(productId: number): Promise<any[]> {
     return new Promise((resolve, reject) => {
-      this._httpClient.get("api/dashboard-data").subscribe((response: any) => {
-        this.apiData = response;
-        this.onApiDataChanged.next(this.apiData);
-        resolve(this.apiData);
-      }, reject);
+      this._httpClient
+        .get("api/ecommerce-products" + "/" + productId)
+        .subscribe((response: any) => {
+          this.apiData = response;
+          this.onEcommerceEditChanged.next(this.apiData);
+          resolve(this.apiData);
+        }, reject);
     });
   }
 }

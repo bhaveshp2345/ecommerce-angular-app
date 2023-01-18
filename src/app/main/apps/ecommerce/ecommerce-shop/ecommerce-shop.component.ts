@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 
 import { CoreSidebarService } from "@core/components/core-sidebar/core-sidebar.service";
-
 import { EcommerceService } from "app/main/apps/ecommerce/ecommerce.service";
+
 @Component({
   selector: "app-ecommerce-shop",
   templateUrl: "./ecommerce-shop.component.html",
@@ -59,6 +59,13 @@ export class EcommerceShopComponent implements OnInit {
     this.gridViewRef = true;
   }
 
+  /**
+   * Sort Product
+   */
+  sortProduct(sortParam) {
+    this._ecommerceService.sortProduct(sortParam);
+  }
+
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------
 
@@ -66,6 +73,11 @@ export class EcommerceShopComponent implements OnInit {
    * On init
    */
   ngOnInit(): void {
+    // Subscribe to ProductList change
+    this._ecommerceService.onProductListChange.subscribe((res) => {
+      this.products = res;
+    });
+
     // content header
     this.contentHeader = {
       headerTitle: "Shop",

@@ -49,23 +49,23 @@ export class UpsertProductSidebarComponent implements OnInit {
         price: formVal["price"],
         description: formVal["description"],
       };
-      this.registerNewProduct(productBody).subscribe();
+      // this.registerNewProduct(productBody).subscribe();
     }
   }
 
-  registerNewProduct(productBody: any) {
-    return this._ecommerceService.registerNewProduct(productBody).pipe(
-      catchError((err) => {
-        this.error = err?.error?.message || "Something went wrong!";
-        this.loading = false;
-        return of();
-      }),
-      tap((data: any) => {
-        if (data.status == 1) {
-          this.toggleSidebar("upsert-product-sidebar");
-        }
-        this.loading = false;
-      })
-    );
-  }
+  // registerNewProduct(productBody: any) {
+  //   return this._ecommerceService.registerNewProduct(productBody).pipe(
+  //     catchError((err) => {
+  //       this.error = err?.error?.message || "Something went wrong!";
+  //       this.loading = false;
+  //       return of();
+  //     }),
+  //     tap((data: any) => {
+  //       if (data.status == 1) {
+  //         this.toggleSidebar("upsert-product-sidebar");
+  //       }
+  //       this.loading = false;
+  //     })
+  //   );
+  // }
 }

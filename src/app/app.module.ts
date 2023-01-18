@@ -4,6 +4,9 @@ import { RouterModule, Routes } from "@angular/router";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
+import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
+import { FakeDbService } from "@fake-db/fake-db.service";
+
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { ToastrModule } from "ngx-toastr";
 import { TranslateModule } from "@ngx-translate/core";
@@ -57,10 +60,10 @@ const appRoutes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    // HttpClientInMemoryWebApiModule.forRoot(FakeDbService, {
-    //   delay: 0,
-    //   passThruUnknownUrl: true,
-    // }),
+    HttpClientInMemoryWebApiModule.forRoot(FakeDbService, {
+      delay: 0,
+      passThruUnknownUrl: true,
+    }),
     RouterModule.forRoot(appRoutes, {
       scrollPositionRestoration: "enabled",
       relativeLinkResolution: "legacy",

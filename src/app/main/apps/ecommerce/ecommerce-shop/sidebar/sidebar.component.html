@@ -9,35 +9,78 @@
     <!-- Price Filter starts -->
     <div class="multi-range-price">
       <h6 class="filter-title mt-0">Multi Range</h6>
-      <ul class="list-unstyled price-range" id="price-range">
+      <ul
+        class="list-unstyled price-range"
+        id="price-range"
+        (change)="changeMultiRange($event)"
+      >
         <li>
           <div class="custom-control custom-radio">
-            <input type="radio" id="priceAll" name="price-range" class="custom-control-input" checked />
+            <input
+              type="radio"
+              id="priceAll"
+              name="price-range"
+              class="custom-control-input"
+              value="all"
+              checked
+            />
             <label class="custom-control-label" for="priceAll">All</label>
           </div>
         </li>
         <li>
           <div class="custom-control custom-radio">
-            <input type="radio" id="priceRange1" name="price-range" class="custom-control-input" />
-            <label class="custom-control-label" for="priceRange1">&lt;=$10</label>
+            <input
+              type="radio"
+              id="priceRange1"
+              name="price-range"
+              value="Less than equal to 10"
+              class="custom-control-input"
+            />
+            <label class="custom-control-label" for="priceRange1"
+              >&lt;=$10</label
+            >
           </div>
         </li>
         <li>
           <div class="custom-control custom-radio">
-            <input type="radio" id="priceRange2" name="price-range" class="custom-control-input" />
-            <label class="custom-control-label" for="priceRange2">$10 - $100</label>
+            <input
+              type="radio"
+              id="priceRange2"
+              name="price-range"
+              value="from 10 to 100"
+              class="custom-control-input"
+            />
+            <label class="custom-control-label" for="priceRange2"
+              >$10 - $100</label
+            >
           </div>
         </li>
         <li>
           <div class="custom-control custom-radio">
-            <input type="radio" id="priceARange3" name="price-range" class="custom-control-input" />
-            <label class="custom-control-label" for="priceARange3">$100 - $500</label>
+            <input
+              type="radio"
+              id="priceARange3"
+              name="price-range"
+              value="from 100 to 500"
+              class="custom-control-input"
+            />
+            <label class="custom-control-label" for="priceARange3"
+              >$100 - $500</label
+            >
           </div>
         </li>
         <li>
           <div class="custom-control custom-radio">
-            <input type="radio" id="priceRange4" name="price-range" class="custom-control-input" />
-            <label class="custom-control-label" for="priceRange4">&gt;= $500</label>
+            <input
+              type="radio"
+              id="priceRange4"
+              name="price-range"
+              value="Greater than equal to 500"
+              class="custom-control-input"
+            />
+            <label class="custom-control-label" for="priceRange4"
+              >&gt;= $500</label
+            >
           </div>
         </li>
       </ul>
@@ -58,6 +101,7 @@
           [limit]="100"
           [step]="2"
           [(ngModel)]="sliderPriceValue"
+          (ngModelChange)="changePriceRange($event)"
         ></nouislider>
       </div>
     </div>
@@ -69,62 +113,131 @@
       <ul class="list-unstyled categories-list">
         <li>
           <div class="custom-control custom-radio">
-            <input type="radio" id="category1" name="category-filter" class="custom-control-input" checked />
-            <label class="custom-control-label" for="category1">Appliances</label>
+            <input
+              type="radio"
+              id="category1"
+              name="category-filter"
+              class="custom-control-input"
+              checked
+            />
+            <label class="custom-control-label" for="category1"
+              >Appliances</label
+            >
           </div>
         </li>
         <li>
           <div class="custom-control custom-radio">
-            <input type="radio" id="category2" name="category-filter" class="custom-control-input" />
+            <input
+              type="radio"
+              id="category2"
+              name="category-filter"
+              class="custom-control-input"
+            />
             <label class="custom-control-label" for="category2">Audio</label>
           </div>
         </li>
         <li>
           <div class="custom-control custom-radio">
-            <input type="radio" id="category3" name="category-filter" class="custom-control-input" />
-            <label class="custom-control-label" for="category3">Cameras & Camcorders</label>
+            <input
+              type="radio"
+              id="category3"
+              name="category-filter"
+              class="custom-control-input"
+            />
+            <label class="custom-control-label" for="category3"
+              >Cameras & Camcorders</label
+            >
           </div>
         </li>
         <li>
           <div class="custom-control custom-radio">
-            <input type="radio" id="category4" name="category-filter" class="custom-control-input" />
-            <label class="custom-control-label" for="category4">Car Electronics & GPS</label>
+            <input
+              type="radio"
+              id="category4"
+              name="category-filter"
+              class="custom-control-input"
+            />
+            <label class="custom-control-label" for="category4"
+              >Car Electronics & GPS</label
+            >
           </div>
         </li>
         <li>
           <div class="custom-control custom-radio">
-            <input type="radio" id="category5" name="category-filter" class="custom-control-input" />
-            <label class="custom-control-label" for="category5">Cell Phones</label>
+            <input
+              type="radio"
+              id="category5"
+              name="category-filter"
+              class="custom-control-input"
+            />
+            <label class="custom-control-label" for="category5"
+              >Cell Phones</label
+            >
           </div>
         </li>
         <li>
           <div class="custom-control custom-radio">
-            <input type="radio" id="category6" name="category-filter" class="custom-control-input" />
-            <label class="custom-control-label" for="category6">Computers & Tablets</label>
+            <input
+              type="radio"
+              id="category6"
+              name="category-filter"
+              class="custom-control-input"
+            />
+            <label class="custom-control-label" for="category6"
+              >Computers & Tablets</label
+            >
           </div>
         </li>
         <li>
           <div class="custom-control custom-radio">
-            <input type="radio" id="category7" name="category-filter" class="custom-control-input" />
-            <label class="custom-control-label" for="category7">Health, Fitness & Beauty</label>
+            <input
+              type="radio"
+              id="category7"
+              name="category-filter"
+              class="custom-control-input"
+            />
+            <label class="custom-control-label" for="category7"
+              >Health, Fitness & Beauty</label
+            >
           </div>
         </li>
         <li>
           <div class="custom-control custom-radio">
-            <input type="radio" id="category8" name="category-filter" class="custom-control-input" />
-            <label class="custom-control-label" for="category8">Office & School Supplies</label>
+            <input
+              type="radio"
+              id="category8"
+              name="category-filter"
+              class="custom-control-input"
+            />
+            <label class="custom-control-label" for="category8"
+              >Office & School Supplies</label
+            >
           </div>
         </li>
         <li>
           <div class="custom-control custom-radio">
-            <input type="radio" id="category9" name="category-filter" class="custom-control-input" />
-            <label class="custom-control-label" for="category9">TV & Home Theater</label>
+            <input
+              type="radio"
+              id="category9"
+              name="category-filter"
+              class="custom-control-input"
+            />
+            <label class="custom-control-label" for="category9"
+              >TV & Home Theater</label
+            >
           </div>
         </li>
         <li>
           <div class="custom-control custom-radio">
-            <input type="radio" id="category10" name="category-filter" class="custom-control-input" />
-            <label class="custom-control-label" for="category10">Video Games</label>
+            <input
+              type="radio"
+              id="category10"
+              name="category-filter"
+              class="custom-control-input"
+            />
+            <label class="custom-control-label" for="category10"
+              >Video Games</label
+            >
           </div>
         </li>
       </ul>
@@ -137,71 +250,127 @@
       <ul class="list-unstyled brand-list">
         <li>
           <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="productBrand1" />
-            <label class="custom-control-label" for="productBrand1">Insignia™</label>
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="productBrand1"
+            />
+            <label class="custom-control-label" for="productBrand1"
+              >Insignia™</label
+            >
           </div>
           <span>746</span>
         </li>
         <li>
           <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="productBrand2" checked />
-            <label class="custom-control-label" for="productBrand2">Samsung</label>
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="productBrand2"
+              checked
+            />
+            <label class="custom-control-label" for="productBrand2"
+              >Samsung</label
+            >
           </div>
           <span>633</span>
         </li>
         <li>
           <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="productBrand3" />
-            <label class="custom-control-label" for="productBrand3">Metra</label>
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="productBrand3"
+            />
+            <label class="custom-control-label" for="productBrand3"
+              >Metra</label
+            >
           </div>
           <span>591</span>
         </li>
         <li>
           <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="productBrand4" />
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="productBrand4"
+            />
             <label class="custom-control-label" for="productBrand4">HP</label>
           </div>
           <span>530</span>
         </li>
         <li>
           <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="productBrand5" checked />
-            <label class="custom-control-label" for="productBrand5">Apple</label>
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="productBrand5"
+              checked
+            />
+            <label class="custom-control-label" for="productBrand5"
+              >Apple</label
+            >
           </div>
           <span>442</span>
         </li>
         <li>
           <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="productBrand6" />
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="productBrand6"
+            />
             <label class="custom-control-label" for="productBrand6">GE</label>
           </div>
           <span>394</span>
         </li>
         <li>
           <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="productBrand7" />
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="productBrand7"
+            />
             <label class="custom-control-label" for="productBrand7">Sony</label>
           </div>
           <span>350</span>
         </li>
         <li>
           <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="productBrand8" />
-            <label class="custom-control-label" for="productBrand8">Incipio</label>
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="productBrand8"
+            />
+            <label class="custom-control-label" for="productBrand8"
+              >Incipio</label
+            >
           </div>
           <span>320</span>
         </li>
         <li>
           <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="productBrand9" />
-            <label class="custom-control-label" for="productBrand9">KitchenAid</label>
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="productBrand9"
+            />
+            <label class="custom-control-label" for="productBrand9"
+              >KitchenAid</label
+            >
           </div>
           <span>318</span>
         </li>
         <li>
           <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="productBrand10" />
-            <label class="custom-control-label" for="productBrand10">Whirlpool</label>
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="productBrand10"
+            />
+            <label class="custom-control-label" for="productBrand10"
+              >Whirlpool</label
+            >
           </div>
           <span>298</span>
         </li>
@@ -215,9 +384,17 @@
       <div class="ratings-list">
         <a href="javascript:void(0)">
           <span class="rating rating-sm">
-            <ngb-rating [rate]="4" [readonly]="true" [max]="5" class="outline-none">
+            <ngb-rating
+              [rate]="4"
+              [readonly]="true"
+              [max]="5"
+              class="outline-none"
+            >
               <ng-template let-fill="fill" let-index="index"
-                ><span class="fa fa-star-o mr-25" [class.fa-star]="fill === 100"></span
+                ><span
+                  class="fa fa-star-o mr-25"
+                  [class.fa-star]="fill === 100"
+                ></span
               ></ng-template>
             </ngb-rating>
           </span>
@@ -228,9 +405,17 @@
       <div class="ratings-list">
         <a href="javascript:void(0)">
           <span class="rating rating-sm">
-            <ngb-rating [rate]="3" [readonly]="true" [max]="5" class="outline-none">
+            <ngb-rating
+              [rate]="3"
+              [readonly]="true"
+              [max]="5"
+              class="outline-none"
+            >
               <ng-template let-fill="fill" let-index="index"
-                ><span class="fa fa-star-o mr-25" [class.fa-star]="fill === 100"></span
+                ><span
+                  class="fa fa-star-o mr-25"
+                  [class.fa-star]="fill === 100"
+                ></span
               ></ng-template>
             </ngb-rating>
           </span>
@@ -241,9 +426,17 @@
       <div class="ratings-list">
         <a href="javascript:void(0)">
           <span class="rating rating-sm">
-            <ngb-rating [rate]="2" [readonly]="true" [max]="5" class="outline-none">
+            <ngb-rating
+              [rate]="2"
+              [readonly]="true"
+              [max]="5"
+              class="outline-none"
+            >
               <ng-template let-fill="fill" let-index="index"
-                ><span class="fa fa-star-o mr-25" [class.fa-star]="fill === 100"></span
+                ><span
+                  class="fa fa-star-o mr-25"
+                  [class.fa-star]="fill === 100"
+                ></span
               ></ng-template>
             </ngb-rating>
           </span>
@@ -254,9 +447,17 @@
       <div class="ratings-list">
         <a href="javascript:void(0)">
           <span class="rating rating-sm">
-            <ngb-rating [rate]="1" [readonly]="true" [max]="5" class="outline-none">
+            <ngb-rating
+              [rate]="1"
+              [readonly]="true"
+              [max]="5"
+              class="outline-none"
+            >
               <ng-template let-fill="fill" let-index="index"
-                ><span class="fa fa-star-o mr-25" [class.fa-star]="fill === 100"></span
+                ><span
+                  class="fa fa-star-o mr-25"
+                  [class.fa-star]="fill === 100"
+                ></span
               ></ng-template>
             </ngb-rating>
           </span>
@@ -269,7 +470,9 @@
 
     <!-- Clear Filters Starts -->
     <div id="clear-filters">
-      <button type="button" class="btn btn-block btn-primary" rippleEffect>Clear All Filters</button>
+      <button type="button" class="btn btn-block btn-primary" rippleEffect>
+        Clear All Filters
+      </button>
     </div>
     <!-- Clear Filters Ends -->
   </div>

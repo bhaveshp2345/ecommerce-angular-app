@@ -3,6 +3,7 @@ import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { SwiperConfigInterface } from "ngx-swiper-wrapper";
 
 import { EcommerceService } from "app/main/apps/ecommerce/ecommerce.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-ecommerce-details",
@@ -18,6 +19,8 @@ export class EcommerceDetailsComponent implements OnInit {
   public wishlist;
   public cartList;
   public relatedProducts;
+  public url = this.router.url;
+  public lastValue;
   productColors = [
     { color: "orange", child: "bg-primary", parent: "b-primary" },
     { color: "green", child: "bg-success", parent: "b-success" },
@@ -61,7 +64,12 @@ export class EcommerceDetailsComponent implements OnInit {
    *
    * @param {EcommerceService} _ecommerceService
    */
-  constructor(private _ecommerceService: EcommerceService) {}
+  constructor(
+    private router: Router,
+    private _ecommerceService: EcommerceService
+  ) {
+    this.lastValue = this.url.substr(this.url.lastIndexOf("/") + 1);
+  }
 
   // Public Methods
   // -----------------------------------------------------------------------------------------------------
@@ -81,6 +89,16 @@ export class EcommerceDetailsComponent implements OnInit {
    * On init
    */
   ngOnInit(): void {
+    // Subscribe to Selected Product change
+    this._ecommerceService.onSelectedProductChange.subscribe((res) => {
+      this.product = res[0];
+    });
+
+    // Get Related Products
+    this._ecommerceService.getRelatedProducts().then((response) => {
+      this.relatedProducts = response;
+    });
+
     // content header
     this.contentHeader = {
       headerTitle: "Product Details",

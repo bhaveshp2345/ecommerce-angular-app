@@ -126,9 +126,7 @@ export class CoreSidebarComponent implements OnInit, OnDestroy {
     this.hideOnEsc = false;
 
     // Layout root element
-    this.rootElement =
-      this.document.querySelectorAll(".vertical-layout")[0] ||
-      this.document.querySelectorAll(".horizontal-layout")[0];
+    this.rootElement = this.document.querySelectorAll(".vertical-layout")[0];
 
     this.collapsedChangedEvent = new EventEmitter();
     this.openedChangedEvent = new EventEmitter();

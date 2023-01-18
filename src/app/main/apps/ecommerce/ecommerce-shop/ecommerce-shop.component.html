@@ -1,6 +1,22 @@
 <div class="content-wrapper container-xxl overflow-hidden p-0">
   <app-content-header [contentHeader]="contentHeader"></app-content-header>
-  <div class="content-detached">
+  <!-- Sidebar filters  -->
+  <div class="sidebar-detached sidebar-left">
+    <div class="sidebar">
+      <core-sidebar
+        class="sidebar-shop"
+        id="ecommerce-sidebar-toggler"
+        name="ecommerce-sidebar"
+        collapsibleSidebar="bs-gt-lg"
+        overlayClass="body-content-overlay"
+      >
+        <ecommerce-sidebar></ecommerce-sidebar>
+      </core-sidebar>
+    </div>
+  </div>
+  <!--/ Sidebar filters -->
+
+  <div class="content-detached content-right">
     <div class="content-body">
       <!-- E-commerce Head Section Starts -->
       <section id="ecommerce-header">
@@ -37,9 +53,24 @@
                     <span class="active-sorting">Featured</span>
                   </button>
                   <div ngbDropdownMenu>
-                    <a ngbDropdownItem href="javascript:void(0);">Featured</a>
-                    <a ngbDropdownItem href="javascript:void(0);">Lowest</a>
-                    <a ngbDropdownItem href="javascript:void(0);">Highest</a>
+                    <a
+                      ngbDropdownItem
+                      href="javascript:void(0);"
+                      (click)="sortProduct('featured')"
+                      >Featured</a
+                    >
+                    <a
+                      ngbDropdownItem
+                      href="javascript:void(0);"
+                      (click)="sortProduct('price-asc')"
+                      >Lowest</a
+                    >
+                    <a
+                      ngbDropdownItem
+                      href="javascript:void(0);"
+                      (click)="sortProduct('price-desc')"
+                      >Highest</a
+                    >
                   </div>
                 </div>
                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -116,7 +147,15 @@
         id="ecommerce-products"
         [ngClass]="gridViewRef === true ? 'grid-view' : 'list-view'"
       >
-        <app-ecommerce-item class="card ecommerce-card"></app-ecommerce-item>
+        <app-ecommerce-item
+          class="card ecommerce-card"
+          [product]="product"
+          *ngFor="
+            let product of products
+              | filter : searchText : 'name'
+              | slice : (page - 1) * pageSize : (page - 1) * pageSize + pageSize
+          "
+        ></app-ecommerce-item>
       </section>
       <!-- E-commerce Products Ends -->
 

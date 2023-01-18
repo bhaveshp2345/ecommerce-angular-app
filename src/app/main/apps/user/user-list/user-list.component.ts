@@ -135,14 +135,7 @@ export class UserListComponent implements OnInit {
     this._coreConfigService.config
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((config) => {
-        //! If we have zoomIn route Transition then load datatable after 450ms(Transition will finish in 400ms)
-        if (config.layout.animation === "zoomIn") {
-          setTimeout(() => {
-            this.setPage({ offset: 0 });
-          }, 450);
-        } else {
-          this.setPage({ offset: 0 });
-        }
+        this.setPage({ offset: 0 });
       });
 
     this.searchControl.valueChanges

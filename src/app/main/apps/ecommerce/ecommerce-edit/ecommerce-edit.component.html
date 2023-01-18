@@ -19,7 +19,7 @@
                   role="tabpanel"
                 >
                   <div class="media mb-2 d-flex align-items-stretch">
-                    <div>
+                    <div *ngIf="currentRow.image.length > 0">
                       <img
                         class="user-avatar users-avatar-shadow rounded mr-2 my-25 cursor-pointer"
                         [src]="avatarImage"
@@ -95,7 +95,7 @@
                             class="form-control"
                             placeholder="iPhone"
                             name="title"
-                            [(ngModel)]="productTitle"
+                            [(ngModel)]="currentRow.name"
                             [class.error]="
                               productInfoEditForm.submitted && titleRef.invalid
                             "
@@ -125,7 +125,7 @@
                             class="form-control"
                             placeholder="Apple"
                             name="brand"
-                            [(ngModel)]="productBrand"
+                            [(ngModel)]="currentRow.brand"
                             [class.error]="
                               productInfoEditForm.submitted && brandRef.invalid
                             "
@@ -148,12 +148,12 @@
                       </div>
                       <div class="col-lg-4 col-md-6">
                         <div class="form-group">
-                          <label for="availability">Availability</label>
+                          <label for="availability">Shipping</label>
                           <select
                             id="availability"
                             class="form-control"
                             name="availability"
-                            [(ngModel)]="productInStock"
+                            [(ngModel)]="currentRow.hasFreeShipping"
                             [class.error]="
                               productInfoEditForm.submitted &&
                               inStockRef.invalid
@@ -161,8 +161,8 @@
                             #inStockRef="ngModel"
                             required
                           >
-                            <option value="1">In stock</option>
-                            <option value="2">Out of stock</option>
+                            <option value="true">Free</option>
+                            <option value="false">Paid</option>
                           </select>
                           <span
                             *ngIf="
@@ -188,7 +188,7 @@
                             class="form-control"
                             placeholder="350"
                             name="price"
-                            [(ngModel)]="productPrice"
+                            [(ngModel)]="currentRow.price"
                             [class.error]="
                               productInfoEditForm.submitted && priceRef.invalid
                             "
@@ -312,12 +312,12 @@
                           <h6>Rating</h6>
                           <div class="rating rating-sm mb-1">
                             <ngb-rating
-                              [(rate)]="productRating"
+                              [(rate)]="currentRow.rating"
                               [readonly]="false"
                               [max]="5"
                               class="outline-none"
                               name="rating"
-                              [(ngModel)]="productRating"
+                              [(ngModel)]="currentRow.rating"
                             >
                               <ng-template let-fill="fill" let-index="index"
                                 ><span
@@ -339,7 +339,7 @@
                             class="form-control"
                             placeholder="Product description"
                             name="description"
-                            [(ngModel)]="productDescription"
+                            [(ngModel)]="currentRow.description"
                             [class.error]="
                               productInfoEditForm.submitted &&
                               descriptionRef.invalid

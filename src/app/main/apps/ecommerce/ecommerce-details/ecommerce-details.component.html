@@ -12,25 +12,25 @@
             >
               <div class="d-flex align-items-center justify-content-center">
                 <img
-                  [src]="product?.image"
+                  [src]="product.image"
                   class="img-fluid product-img"
-                  alt=""
+                  alt="product image"
                 />
               </div>
             </div>
             <div class="col-12 col-md-7">
-              <h4>{{ product?.name }}</h4>
+              <h4>{{ product.name }}</h4>
               <span class="card-text item-company"
                 >By
                 <a href="javascript:void(0)" class="company-name">{{
-                  product?.brand
+                  product.brand
                 }}</a></span
               >
               <div class="ecommerce-details-price d-flex flex-wrap mt-1">
-                <h4 class="item-price mr-1">${{ product?.price }}</h4>
+                <h4 class="item-price mr-1">${{ product.price }}</h4>
                 <div class="rating rating-sm pl-1 border-left mb-1">
                   <ngb-rating
-                    [rate]="4"
+                    [rate]="product.rating"
                     [readonly]="true"
                     [max]="5"
                     class="outline-none"
@@ -48,10 +48,10 @@
                 Available - <span class="text-success">In stock</span>
               </p>
               <p class="card-text">
-                {{ product?.description }}
+                {{ product.description }}
               </p>
               <ul class="product-features list-unstyled">
-                <li *ngIf="product?.hasFreeShipping">
+                <li *ngIf="product.hasFreeShipping">
                   <i data-feather="shopping-cart"></i>
                   <span>Free Shipping</span>
                 </li>
@@ -100,7 +100,7 @@
                   <span class="add-to-cart">Enable</span>
                 </button>
                 <a
-                  [routerLink]="'/apps/e-commerce/edit/27'"
+                  routerLink="/apps/e-commerce/edit/{{ product.id }}"
                   class="btn btn-outline-secondary btn-wishlist mr-0 mr-sm-1 mb-1 mb-sm-0"
                 >
                   <i data-feather="edit" class="mr-25"></i>

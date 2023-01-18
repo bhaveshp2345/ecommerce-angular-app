@@ -23,6 +23,8 @@ import { EcommerceShopComponent } from "app/main/apps/ecommerce/ecommerce-shop/e
 import { EcommerceSidebarComponent } from "app/main/apps/ecommerce/ecommerce-shop/sidebar/sidebar.component";
 import { UpsertProductSidebarComponent } from "./upsert-product-sidebar/upsert-product-sidebar.component";
 import { EcommerceEditComponent } from "./ecommerce-edit/ecommerce-edit.component";
+import { EcommerceService } from "./ecommerce.service";
+import { EcommerceEditService } from "./ecommerce-edit/ecommerce-edit.service";
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: "horizontal",
@@ -34,11 +36,17 @@ const routes: Routes = [
   {
     path: "shop",
     component: EcommerceShopComponent,
+    resolve: {
+      ecommerce: EcommerceService,
+    },
     data: { animation: "EcommerceShopComponent" },
   },
   {
     path: "details/:id",
     component: EcommerceDetailsComponent,
+    resolve: {
+      ecommerce: EcommerceService,
+    },
     data: { animation: "EcommerceDetailsComponent" },
   },
   {
@@ -49,6 +57,9 @@ const routes: Routes = [
   {
     path: "edit/:id",
     component: EcommerceEditComponent,
+    resolve: {
+      ecommerce: EcommerceEditService,
+    },
     data: { animation: "EcommerceEditComponent" },
   },
   {
@@ -84,6 +95,7 @@ const routes: Routes = [
       provide: SWIPER_CONFIG,
       useValue: DEFAULT_SWIPER_CONFIG,
     },
+    EcommerceEditService,
   ],
 })
 export class EcommerceModule {}

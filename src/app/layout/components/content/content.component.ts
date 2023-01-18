@@ -1,14 +1,14 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { CoreConfigService } from '@core/services/config.service';
-import { fadeInLeft, zoomIn, fadeIn } from '@core/animations/core.animation';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Component, ViewEncapsulation } from "@angular/core";
+import { CoreConfigService } from "@core/services/config.service";
+import { fadeIn } from "@core/animations/core.animation";
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 
 @Component({
-  selector: 'content',
-  templateUrl: './content.component.html',
+  selector: "content",
+  templateUrl: "./content.component.html",
   encapsulation: ViewEncapsulation.None,
-  animations: [fadeInLeft, zoomIn, fadeIn]
+  animations: [fadeIn],
 })
 export class ContentComponent {
   public coreConfig: any;
@@ -29,36 +29,12 @@ export class ContentComponent {
   }
 
   /**
-   * Fade In Left Animation
-   *
-   * @param outlet
-   */
-  fadeInLeft(outlet) {
-    if (this.animate === 'fadeInLeft') {
-      return outlet.activatedRouteData.animation;
-    }
-    return null;
-  }
-
-  /**
-   * Zoom In Animation
-   *
-   * @param outlet
-   */
-  zoomIn(outlet) {
-    if (this.animate === 'zoomIn') {
-      return outlet.activatedRouteData.animation;
-    }
-    return null;
-  }
-
-  /**
    * Fade In Animation
    *
    * @param outlet
    */
   fadeIn(outlet) {
-    if (this.animate === 'fadeIn') {
+    if (this.animate === "fadeIn") {
       return outlet.activatedRouteData.animation;
     }
     return null;
@@ -72,9 +48,11 @@ export class ContentComponent {
    */
   ngOnInit(): void {
     // Subscribe config change
-    this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
-      this.coreConfig = config;
-      this.animate = this.coreConfig.layout.animation;
-    });
+    this._coreConfigService.config
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((config) => {
+        this.coreConfig = config;
+        this.animate = this.coreConfig.layout.animation;
+      });
   }
 }

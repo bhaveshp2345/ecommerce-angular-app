@@ -22,9 +22,9 @@ export const coreConfig: CoreConfig = {
     appLanguage : 'en',                                           // App Default Language (en, fr, de, pt etc..)
   },
   layout: {
-    skin  : 'default',                        // default, dark, bordered, semi-dark
+    skin  : 'default',                        // default, dark, semi-dark
     type  : 'vertical',                       // vertical, horizontal
-    animation : 'fadeIn',                     // fadeInLeft, zoomIn , fadeIn, none
+    animation : 'fadeIn',                     // fadeIn, none
     menu : {
       hidden               : false,           // Boolean: true, false
       collapsed            : false,           // Boolean: true, false

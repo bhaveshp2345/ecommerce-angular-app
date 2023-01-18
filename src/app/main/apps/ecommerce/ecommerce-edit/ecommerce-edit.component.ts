@@ -2,6 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 
 import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
+import { cloneDeep } from "lodash";
+import { EcommerceEditService } from "./ecommerce-edit.service";
 
 @Component({
   selector: "app-ecommerce-edit",
@@ -10,14 +13,11 @@ import { Subject } from "rxjs";
 })
 export class EcommerceEditComponent implements OnInit {
   // Public
-  public avatarImage = "";
-  productTitle;
-  productBrand;
-  productInStock;
-  productPrice;
-  productDeliveryCharge;
-  productStatus;
-  productDescription;
+  public currentRow;
+  public tempRow;
+  public avatarImage: string;
+  productDeliveryCharge = 10;
+  productStatus = 1;
   productColors = [
     { color: "orange", child: "bg-primary", parent: "b-primary" },
     { color: "green", child: "bg-success", parent: "b-success" },
@@ -34,11 +34,9 @@ export class EcommerceEditComponent implements OnInit {
 
   /**
    * Constructor
-   *
-   * @param {Router} router
-   * @param {UserEditService} _userEditService
+   * @param {EcommerceEditService} _ecommerceEditService
    */
-  constructor(private router: Router) {
+  constructor(private _ecommerceEditService: EcommerceEditService) {
     this._unsubscribeAll = new Subject();
   }
 
@@ -76,32 +74,31 @@ export class EcommerceEditComponent implements OnInit {
    * @param form
    */
   submitProductEdit(form) {
-    if (form.valid) {
-      if (
-        this.avatarImage &&
-        this.productRating != null &&
-        this.selectedColor
-      ) {
-        this.loading = true;
-        const formVal = form.value;
-        const productBody = {
-          rating: this.productRating,
-          avatarImage: this.avatarImage,
-          title: formVal["title"],
-          brand: formVal["brand"],
-          inStock: formVal["availability"],
-          price: formVal["price"],
-          delivery_charge: formVal["delivery_charge"],
-          status: formVal["status"],
-          description: formVal["description"],
-          color: this.selectedColor,
-        };
-
-        this.error = "No API found";
-      } else {
-        this.error = "All fields are required";
-      }
-    }
+    // if (form.valid) {
+    //   if (
+    //     this.avatarImage &&
+    //     this.productRating != null &&
+    //     this.selectedColor
+    //   ) {
+    //     this.loading = true;
+    //     const formVal = form.value;
+    //     const productBody = {
+    //       rating: this.productRating,
+    //       avatarImage: this.avatarImage,
+    //       title: formVal["title"],
+    //       brand: formVal["brand"],
+    //       inStock: formVal["availability"],
+    //       price: formVal["price"],
+    //       delivery_charge: formVal["delivery_charge"],
+    //       status: formVal["status"],
+    //       description: formVal["description"],
+    //       color: this.selectedColor,
+    //     };
+    //     this.error = "No API found";
+    //   } else {
+    //     this.error = "All fields are required";
+    //   }
+    // }
   }
 
   // Lifecycle Hooks
@@ -109,7 +106,15 @@ export class EcommerceEditComponent implements OnInit {
   /**
    * On init
    */
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._ecommerceEditService.onEcommerceEditChanged
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((response) => {
+        this.currentRow = response;
+        this.avatarImage = this.currentRow.image;
+        this.tempRow = cloneDeep(this.currentRow);
+      });
+  }
 
   /**
    * On destroy
