@@ -6,6 +6,7 @@ import {
   RouterStateSnapshot,
 } from "@angular/router";
 import {
+  Brands,
   Categories,
   FilterList,
   MultiRange,
@@ -31,15 +32,82 @@ export class EcommerceService implements Resolve<any> {
   public onSelectedProductChange: BehaviorSubject<any>;
   public onInitialFilterChange: BehaviorSubject<any>;
   public productFilter$: Observable<any>;
-
-  // Private
-  private initialFilter = {
+  public initialFilter = {
     categories: Categories.APPLIANCES,
     multiRange: MultiRange.ALL,
     priceRangeFilter: { min: 1, max: 100 },
     ratings: 0,
     brands: [],
   };
+
+  public initialMultiRange = [
+    { label: "All", value: MultiRange.ALL, checked: false },
+    { label: "<=$10", value: MultiRange.LESS_EQ_10, checked: false },
+    { label: "$10 - $100", value: MultiRange.FROM_10_TO_100, checked: false },
+    { label: "$100 - $500", value: MultiRange.FROM_100_TO_500, checked: false },
+    { label: ">= $500", value: MultiRange.GREAT_EQ_500, checked: false },
+  ];
+
+  public initialPriceRange = [1, 100];
+  public initialCategories = [
+    { label: "Appliances", value: Categories.APPLIANCES, checked: false },
+    { label: "Audio", value: Categories.AUDIO, checked: false },
+    {
+      label: "Cameras & Camcorders",
+      value: Categories.CAMERAS_CAMCORDERS,
+      checked: false,
+    },
+    {
+      label: "Car Electronics & GPS",
+      value: Categories.CAR_ELECTRONICS_GPS,
+      checked: false,
+    },
+    { label: "Cell Phones", value: Categories.CELL_PHONES, checked: false },
+    {
+      label: "Computers & Tablets",
+      value: Categories.COMPUTERS_TABLETS,
+      checked: false,
+    },
+    {
+      label: "Health, Fitness & Beauty",
+      value: Categories.HEALTH_FITNESS_BEAUTY,
+      checked: false,
+    },
+    {
+      label: "Office & School Supplies",
+      value: Categories.OFFICE_SCHOOL_SUPPLIES,
+      checked: false,
+    },
+    {
+      label: "TV & Home Theater",
+      value: Categories.TV_HOME_THEATER,
+      checked: false,
+    },
+    { label: "Video Games", value: Categories.VIDEO_GAMES, checked: false },
+  ];
+
+  public initialBrands = [
+    { key: Brands.APPLE, checked: false, counts: 746 },
+    { key: Brands.ONEODIO, checked: false, counts: 677 },
+    { key: Brands.SHARP, checked: false, counts: 625 },
+    { key: Brands.GOOGLE, checked: false, counts: 567 },
+    { key: Brands.PHILIPS, checked: false, counts: 514 },
+    { key: Brands.LOGITECH, checked: false, counts: 497 },
+    { key: Brands.NIKE, checked: false, counts: 456 },
+    { key: Brands.BUGANI, checked: false, counts: 411 },
+    { key: Brands.SONY, checked: false, counts: 402 },
+    { key: Brands.TAS, checked: false, counts: 378 },
+    { key: Brands.ADIDAS, checked: false, counts: 321 },
+  ];
+
+  public initialRating = [
+    { rating: 4, counts: 160 },
+    { rating: 3, counts: 176 },
+    { rating: 2, counts: 291 },
+    { rating: 1, counts: 190 },
+  ];
+
+  // Private
 
   private idHandel;
   private sortRef = (key) => (a, b) => {
@@ -156,6 +224,9 @@ export class EcommerceService implements Resolve<any> {
       filterList.priceRangeFilter,
       tempProducts
     );
+    tempProducts = this.categoriesFilter(filterList.categories, tempProducts);
+    tempProducts = this.brandsFilter(filterList.brands, tempProducts);
+    tempProducts = this.ratingFilter(filterList.ratings, tempProducts);
     this.onProductListChange.next(tempProducts);
   }
 
@@ -188,6 +259,33 @@ export class EcommerceService implements Resolve<any> {
     );
   }
   //#endregion
+
+  //#region Categories Filter
+  private categoriesFilter(category: Categories, tempProducts) {
+    if (category === Categories.APPLIANCES) return tempProducts;
+    return tempProducts.filter(
+      (item) => item.categoery.toLowerCase() == category
+    );
+  }
+  //#endregion
+
+  // #region Categories Filter
+  private brandsFilter(brands: Brands[], tempProducts) {
+    if (brands.length === 0) return tempProducts;
+    return tempProducts.filter((item) =>
+      brands.includes(item.brand.toLowerCase())
+    );
+  }
+  // #endregion
+
+  // #region rating filter
+  private ratingFilter(ratings: number, tempProducts) {
+    if (ratings === 0) return tempProducts;
+    return tempProducts.filter((item) =>
+      ratings == 4 ? item.rating >= ratings : item.rating === ratings
+    );
+  }
+  // #endregion
 
   //#endregion
 }

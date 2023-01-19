@@ -42,16 +42,17 @@ export enum Categories {
 }
 
 export enum Brands {
-  INSIGNIA = "Insignia™",
-  SAMSUNG = "Samsung",
-  METRA = "Metra",
-  HP = "HP",
   APPLE = "Apple",
-  GE = "GE",
+  ONEODIO = "OneOdio",
+  SHARP = "Sharp",
+  GOOGLE = "Google",
+  PHILIPS = "Philips",
+  LOGITECH = "Logitech",
+  NIKE = "Nike",
+  BUGANI = "Bugani",
   SONY = "Sony",
-  INCIPIO = "Incipio",
-  KITCHENAID = "KitchenAid",
-  WHIRLPOOL = "Whirlpool",
+  TAS = "TAS",
+  ADIDAS = "Adidas",
 }
 
 export interface FilterList {
