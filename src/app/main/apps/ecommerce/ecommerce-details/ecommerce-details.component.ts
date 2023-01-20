@@ -29,8 +29,6 @@ export class EcommerceDetailsComponent implements OnInit {
   ];
   selectedColor = "green";
 
-  isProductDisabled = false;
-
   // Swiper
   public swiperResponsive: SwiperConfigInterface = {
     slidesPerView: 3,
@@ -75,7 +73,11 @@ export class EcommerceDetailsComponent implements OnInit {
   // -----------------------------------------------------------------------------------------------------
 
   toggleProductStatus() {
-    this.isProductDisabled = !this.isProductDisabled;
+    const tempProduct = {
+      ...this.product,
+      isDisabled: !this.product.isDisabled,
+    };
+    this._ecommerceService.onProductAvailibityChange.next(tempProduct);
   }
 
   changeColor(color) {
@@ -92,6 +94,7 @@ export class EcommerceDetailsComponent implements OnInit {
     // Subscribe to Selected Product change
     this._ecommerceService.onSelectedProductChange.subscribe((res) => {
       this.product = res[0];
+      this.selectedColor = this.product?.color;
     });
 
     // Get Related Products

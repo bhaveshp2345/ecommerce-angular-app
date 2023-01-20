@@ -154,20 +154,24 @@ export class EcommerceService implements Resolve<any> {
     );
 
     this.onProductAvailibityChange = new BehaviorSubject(null);
-    this.productAvailibity$ = this.onProductAvailibityChange
+    this.onProductAvailibityChange
       .asObservable()
       .pipe(
         debounceTime(200),
         filter((item) => item != null),
         switchMap((product) => this.updateProductEdit(product))
-      );
+      )
+      .subscribe();
 
     this.onNewProductChange = new BehaviorSubject(null);
-    this.newproduct$ = this.onNewProductChange.asObservable().pipe(
-      debounceTime(200),
-      filter((item) => item != null),
-      switchMap((product) => this.registerProductProcess(product))
-    );
+    this.onNewProductChange
+      .asObservable()
+      .pipe(
+        debounceTime(200),
+        filter((item) => item != null),
+        switchMap((product) => this.registerProductProcess(product))
+      )
+      .subscribe();
   }
 
   /**
@@ -276,6 +280,8 @@ export class EcommerceService implements Resolve<any> {
     if (prodIdx != -1) {
       this.productList[prodIdx] = editedResult;
       this.onProductListChange.next(this.productList);
+      this.selectedProduct = [editedResult];
+      this.onSelectedProductChange.next(this.selectedProduct);
     }
   }
   //#endregion

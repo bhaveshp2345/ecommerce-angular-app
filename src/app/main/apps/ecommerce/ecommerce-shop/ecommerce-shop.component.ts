@@ -89,13 +89,6 @@ export class EcommerceShopComponent implements OnInit {
         this.products = res;
       });
 
-    this._ecommerceService.productAvailibity$
-      .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe();
-    this._ecommerceService.newproduct$
-      .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe();
-
     // content header
     this.contentHeader = {
       headerTitle: "Shop",
@@ -126,7 +119,5 @@ export class EcommerceShopComponent implements OnInit {
     // Unsubscribe from all subscriptions
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
-    this._ecommerceService.onProductAvailibityChange.next(null);
-    this._ecommerceService.onNewProductChange.next(null);
   }
 }

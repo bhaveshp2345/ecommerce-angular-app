@@ -84,17 +84,17 @@
               <hr />
               <div class="d-flex flex-column flex-sm-row pt-1">
                 <button
-                  *ngIf="isProductDisabled"
+                  *ngIf="product?.isDisabled"
                   (click)="toggleProductStatus()"
-                  class="btn btn-primary btn-cart mr-0 mr-sm-1 mb-1 mb-sm-0"
+                  class="btn btn-outline-secondary btn-cart mr-0 mr-sm-1 mb-1 mb-sm-0"
                 >
                   <i data-feather="minus-circle" class="mr-25"></i>
                   <span class="add-to-cart">Disable</span>
                 </button>
                 <button
-                  *ngIf="!isProductDisabled"
+                  *ngIf="!product?.isDisabled"
                   (click)="toggleProductStatus()"
-                  class="btn btn-outline-secondary btn-wishlist mr-0 mr-sm-1 mb-1 mb-sm-0"
+                  class="btn btn-primary btn-wishlist mr-0 mr-sm-1 mb-1 mb-sm-0"
                 >
                   <i data-feather="file-plus" class="mr-25"></i>
                   <span class="add-to-cart">Enable</span>
