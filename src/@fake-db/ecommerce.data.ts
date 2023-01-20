@@ -14,6 +14,9 @@ export class EcommerceFakeData {
       hasFreeShipping: true,
       rating: 3,
       categoery: Categories.OFFICE_SCHOOL_SUPPLIES,
+      isDisabled: false,
+      color: "blue",
+      isStockAvailable: true,
     },
     {
       id: 2,
@@ -27,6 +30,9 @@ export class EcommerceFakeData {
       hasFreeShipping: false,
       rating: 4,
       categoery: Categories.HEALTH_FITNESS_BEAUTY,
+      isDisabled: true,
+      color: "blue",
+      isStockAvailable: true,
     },
     {
       id: 3,
@@ -40,6 +46,9 @@ export class EcommerceFakeData {
       hasFreeShipping: true,
       rating: 5,
       categoery: Categories.OFFICE_SCHOOL_SUPPLIES,
+      isDisabled: true,
+      color: "blue",
+      isStockAvailable: true,
     },
     {
       id: 4,
@@ -53,6 +62,9 @@ export class EcommerceFakeData {
       hasFreeShipping: true,
       rating: 2,
       categoery: Categories.OFFICE_SCHOOL_SUPPLIES,
+      isDisabled: false,
+      color: "blue",
+      isStockAvailable: true,
     },
     {
       id: 5,
@@ -66,6 +78,9 @@ export class EcommerceFakeData {
       hasFreeShipping: true,
       rating: 2,
       categoery: Categories.HEALTH_FITNESS_BEAUTY,
+      isDisabled: false,
+      color: "blue",
+      isStockAvailable: true,
     },
     {
       id: 6,
@@ -79,6 +94,9 @@ export class EcommerceFakeData {
       hasFreeShipping: false,
       rating: 4,
       categoery: Categories.CAR_ELECTRONICS_GPS,
+      isDisabled: false,
+      color: "blue",
+      isStockAvailable: true,
     },
     {
       id: 7,
@@ -92,6 +110,9 @@ export class EcommerceFakeData {
       hasFreeShipping: false,
       rating: 3,
       categoery: Categories.AUDIO,
+      isDisabled: false,
+      color: "blue",
+      isStockAvailable: true,
     },
     {
       id: 8,
@@ -105,6 +126,9 @@ export class EcommerceFakeData {
       hasFreeShipping: false,
       rating: 4,
       categoery: Categories.VIDEO_GAMES,
+      isDisabled: false,
+      color: "blue",
+      isStockAvailable: true,
     },
     {
       id: 9,
@@ -118,6 +142,9 @@ export class EcommerceFakeData {
       hasFreeShipping: true,
       rating: 4,
       categoery: Categories.HEALTH_FITNESS_BEAUTY,
+      isDisabled: false,
+      color: "blue",
+      isStockAvailable: true,
     },
     {
       id: 10,
@@ -131,6 +158,9 @@ export class EcommerceFakeData {
       hasFreeShipping: false,
       rating: 1,
       categoery: Categories.VIDEO_GAMES,
+      isDisabled: false,
+      color: "blue",
+      isStockAvailable: true,
     },
     {
       id: 11,
@@ -144,6 +174,9 @@ export class EcommerceFakeData {
       hasFreeShipping: true,
       rating: 3,
       categoery: Categories.HEALTH_FITNESS_BEAUTY,
+      isDisabled: false,
+      color: "blue",
+      isStockAvailable: true,
     },
     {
       id: 12,
@@ -157,6 +190,9 @@ export class EcommerceFakeData {
       hasFreeShipping: false,
       rating: 5,
       categoery: Categories.HEALTH_FITNESS_BEAUTY,
+      isDisabled: false,
+      color: "blue",
+      isStockAvailable: true,
     },
     {
       id: 13,
@@ -170,6 +206,9 @@ export class EcommerceFakeData {
       hasFreeShipping: true,
       rating: 5,
       categoery: Categories.OFFICE_SCHOOL_SUPPLIES,
+      isDisabled: false,
+      color: "blue",
+      isStockAvailable: true,
     },
     {
       id: 14,
@@ -183,6 +222,9 @@ export class EcommerceFakeData {
       hasFreeShipping: true,
       rating: 3,
       categoery: Categories.OFFICE_SCHOOL_SUPPLIES,
+      isDisabled: false,
+      color: "blue",
+      isStockAvailable: true,
     },
     {
       id: 15,
@@ -196,6 +238,9 @@ export class EcommerceFakeData {
       hasFreeShipping: true,
       rating: 2,
       categoery: Categories.TV_HOME_THEATER,
+      isDisabled: false,
+      color: "blue",
+      isStockAvailable: true,
     },
     {
       id: 16,
@@ -209,6 +254,9 @@ export class EcommerceFakeData {
       hasFreeShipping: false,
       rating: 3,
       categoery: Categories.CELL_PHONES,
+      isDisabled: false,
+      color: "blue",
+      isStockAvailable: true,
     },
     {
       id: 17,
@@ -222,6 +270,9 @@ export class EcommerceFakeData {
       hasFreeShipping: true,
       rating: 5,
       categoery: Categories.HEALTH_FITNESS_BEAUTY,
+      isDisabled: false,
+      color: "blue",
+      isStockAvailable: true,
     },
     {
       id: 18,
@@ -235,6 +286,9 @@ export class EcommerceFakeData {
       hasFreeShipping: false,
       rating: 4,
       categoery: Categories.OFFICE_SCHOOL_SUPPLIES,
+      isDisabled: false,
+      color: "blue",
+      isStockAvailable: true,
     },
     {
       id: 19,
@@ -251,6 +305,9 @@ export class EcommerceFakeData {
     resolution, 90Hz refresh rate and support for HDR 10+ content. The display produces vivid colours, deep blacks
     and has good viewing angles.`,
       categoery: Categories.CELL_PHONES,
+      isDisabled: false,
+      color: "blue",
+      isStockAvailable: true,
     },
     {
       id: 20,
@@ -265,6 +322,9 @@ export class EcommerceFakeData {
     and an immersive experience. This TV has Yes HDMI ports & Yes USB ports. Connectivity options included are HDMI.
     You can connect various gadgets such as your laptop using the HDMI port. The TV comes with a 1 Year warranty.`,
       categoery: Categories.TV_HOME_THEATER,
+      isDisabled: false,
+      color: "blue",
+      isStockAvailable: true,
     },
     {
       id: 21,
@@ -279,6 +339,9 @@ export class EcommerceFakeData {
     voice commands to enjoy music, get answers from Google and manage everyday tasks. Google Home is compatible with
     Android and iOS operating systems, and can control compatible smart devices such as Chromecast or Nest.`,
       categoery: Categories.AUDIO,
+      isDisabled: false,
+      color: "blue",
+      isStockAvailable: true,
     },
     {
       id: 22,
@@ -294,6 +357,9 @@ export class EcommerceFakeData {
     impressive motion sensors and vibration systems. On top of all of that, it uses Bluetooth, so you don't need an
     adapter to use it with your PC.`,
       categoery: Categories.VIDEO_GAMES,
+      isDisabled: false,
+      color: "blue",
+      isStockAvailable: true,
     },
     {
       id: 23,
@@ -309,6 +375,9 @@ export class EcommerceFakeData {
     light, and durable enough to take everywhere you go-and powerful enough to do everything once you get there,
     better.`,
       categoery: Categories.COMPUTERS_TABLETS,
+      isDisabled: true,
+      color: "blue",
+      isStockAvailable: true,
     },
     {
       id: 24,
@@ -324,6 +393,9 @@ export class EcommerceFakeData {
     activation, or schedule a ride with Uber and order a pizza. OneOdio A71 Wired Headphones voice-controlled device
     turns any home into a smart device on a smartphone or tablet.`,
       categoery: Categories.AUDIO,
+      isDisabled: false,
+      color: "blue",
+      isStockAvailable: true,
     },
     {
       id: 25,
@@ -340,6 +412,9 @@ export class EcommerceFakeData {
     capabilities, and an even more stunning Retina 5K display. It’s the desktop that does it all — better and faster
     than ever.`,
       categoery: Categories.COMPUTERS_TABLETS,
+      isDisabled: true,
+      color: "blue",
+      isStockAvailable: true,
     },
     {
       id: 26,
@@ -355,6 +430,9 @@ export class EcommerceFakeData {
     excellent images as well as capable of recording crisp videos. However, expandable storage and a fingerprint
     scanner would have made it a perfect option to go for around this price range.`,
       categoery: Categories.CELL_PHONES,
+      isDisabled: true,
+      color: "blue",
+      isStockAvailable: true,
     },
     {
       id: 27,
@@ -371,6 +449,9 @@ export class EcommerceFakeData {
     directly from Apple Watch in over 150 countries, even without iPhone nearby. Apple Watch Series 5 is available
     in a wider range of materials, including aluminium, stainless steel, ceramic and an all-new titanium.`,
       categoery: Categories.CAR_ELECTRONICS_GPS,
+      isDisabled: false,
+      color: "blue",
+      isStockAvailable: true,
     },
   ];
 

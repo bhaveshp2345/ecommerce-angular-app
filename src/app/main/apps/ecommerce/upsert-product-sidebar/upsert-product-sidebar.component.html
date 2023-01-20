@@ -149,17 +149,124 @@
               aria-describedby="product-description2"
             ></textarea>
             <span
-              *ngIf="newProductForm.submitted && ProductBrandRef.invalid"
+              *ngIf="newProductForm.submitted && ProductDescriptionRef.invalid"
               class="invalid-form"
             >
               <small
                 class="form-text text-danger"
-                *ngIf="ProductBrandRef.errors.required"
+                *ngIf="ProductDescriptionRef.errors.required"
                 >This field is required!</small
               >
             </span>
           </div>
           <!-- Description End -->
+
+          <!-- Shipping type start -->
+          <div class="form-group">
+            <label for="shipping_type">Shipping type</label>
+
+            <select
+              id="shipping_type"
+              class="form-control"
+              name="shipping_type"
+              [(ngModel)]="productShippingType"
+              [class.error]="
+                newProductForm.submitted && shippingTypeRef.invalid
+              "
+              #shippingTypeRef="ngModel"
+              required
+            >
+              <option value="free">Free shipping</option>
+              <option value="paid">Paid shipping</option>
+            </select>
+            <span
+              *ngIf="newProductForm.submitted && shippingTypeRef.invalid"
+              class="invalid-form"
+            >
+              <small
+                class="form-text text-danger"
+                *ngIf="shippingTypeRef.errors.required"
+                >This field is required!</small
+              >
+            </span>
+          </div>
+          <!-- Shipping type end -->
+
+          <!-- Category start -->
+          <div class="form-group">
+            <label for="category">Category</label>
+            <select
+              id="category"
+              class="form-control"
+              name="category"
+              [(ngModel)]="productCategory"
+              [class.error]="newProductForm.submitted && categoryRef.invalid"
+              #categoryRef="ngModel"
+              required
+            >
+              <option [value]="item?.value" *ngFor="let item of categoryList">
+                {{ item?.label }}
+              </option>
+            </select>
+            <span
+              *ngIf="newProductForm.submitted && categoryRef.invalid"
+              class="invalid-form"
+            >
+              <small
+                class="form-text text-danger"
+                *ngIf="categoryRef.errors.required"
+                >This field is required!</small
+              >
+            </span>
+          </div>
+          <!-- Category end -->
+
+          <!-- Colors start -->
+          <div class="product-color-options mb-1">
+            <h6>Colors</h6>
+            <ul class="list-unstyled mb-1">
+              <li
+                class="d-inline-block"
+                *ngFor="let item of productColors"
+                [ngClass]="{
+                  selected: item.color == selectedColor
+                }"
+              >
+                <button
+                  class="btn color-option {{ item.parent }}"
+                  (click)="changeColor(item.color)"
+                  rippleEffect
+                >
+                  <div class="filloption {{ item.child }}"></div>
+                </button>
+              </li>
+            </ul>
+          </div>
+          <!-- COlors end -->
+
+          <!-- Rating Start -->
+          <div class="product-color-options mb-1">
+            <h6>Rating</h6>
+            <div class="rating rating-sm mb-2">
+              <ngb-rating
+                [(rate)]="rating"
+                [readonly]="false"
+                [max]="5"
+                class="outline-none"
+                name="rating"
+                [(ngModel)]="rating"
+              >
+                <ng-template let-fill="fill" let-index="index"
+                  ><span
+                    class="fa fa-star-o mr-25"
+                    [class.fa-star]="fill === 100"
+                  ></span
+                ></ng-template>
+              </ngb-rating>
+            </div>
+          </div>
+
+          <!-- Rating Ends -->
 
           <button
             [disabled]="loading"

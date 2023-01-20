@@ -2,6 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 
 import { CoreSidebarService } from "@core/components/core-sidebar/core-sidebar.service";
 import { EcommerceService } from "app/main/apps/ecommerce/ecommerce.service";
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 
 @Component({
   selector: "app-ecommerce-shop",
@@ -22,6 +24,10 @@ export class EcommerceShopComponent implements OnInit {
   public page = 1;
   public pageSize = 9;
   public searchText = "";
+  public selectedSortOrder = "Featured";
+
+  // Private
+  private _unsubscribeAll: Subject<any>;
 
   /**
    *
@@ -31,7 +37,9 @@ export class EcommerceShopComponent implements OnInit {
   constructor(
     private _coreSidebarService: CoreSidebarService,
     private _ecommerceService: EcommerceService
-  ) {}
+  ) {
+    this._unsubscribeAll = new Subject();
+  }
 
   // Public Methods
   // -----------------------------------------------------------------------------------------------------
@@ -63,6 +71,7 @@ export class EcommerceShopComponent implements OnInit {
    * Sort Product
    */
   sortProduct(sortParam) {
+    this.selectedSortOrder = this._ecommerceService.getSortLabel(sortParam);
     this._ecommerceService.sortProduct(sortParam);
   }
 
@@ -74,9 +83,18 @@ export class EcommerceShopComponent implements OnInit {
    */
   ngOnInit(): void {
     // Subscribe to ProductList change
-    this._ecommerceService.onProductListChange.subscribe((res) => {
-      this.products = res;
-    });
+    this._ecommerceService.onProductListChange
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((res) => {
+        this.products = res;
+      });
+
+    this._ecommerceService.productAvailibity$
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe();
+    this._ecommerceService.newproduct$
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe();
 
     // content header
     this.contentHeader = {
@@ -102,5 +120,13 @@ export class EcommerceShopComponent implements OnInit {
         ],
       },
     };
+  }
+
+  ngOnDestroy(): void {
+    // Unsubscribe from all subscriptions
+    this._unsubscribeAll.next();
+    this._unsubscribeAll.complete();
+    this._ecommerceService.onProductAvailibityChange.next(null);
+    this._ecommerceService.onNewProductChange.next(null);
   }
 }

@@ -13,8 +13,14 @@ import {
   PriceRange,
 } from "app/main/main-constants";
 
-import { BehaviorSubject, Observable, of, from } from "rxjs";
-import { tap, debounceTime, switchMap } from "rxjs/operators";
+import { BehaviorSubject, Observable, of } from "rxjs";
+import {
+  catchError,
+  tap,
+  debounceTime,
+  switchMap,
+  filter,
+} from "rxjs/operators";
 
 @Injectable({
   providedIn: "root",
@@ -30,8 +36,16 @@ export class EcommerceService implements Resolve<any> {
   public onProductListChange: BehaviorSubject<any>;
   public onRelatedProductsChange: BehaviorSubject<any>;
   public onSelectedProductChange: BehaviorSubject<any>;
+
+  public onProductAvailibityChange: BehaviorSubject<any>;
+  public productAvailibity$: Observable<any>;
+
   public onInitialFilterChange: BehaviorSubject<any>;
   public productFilter$: Observable<any>;
+
+  public onNewProductChange: BehaviorSubject<any>;
+  public newproduct$: Observable<any>;
+
   public initialFilter = {
     categories: Categories.APPLIANCES,
     multiRange: MultiRange.ALL,
@@ -132,10 +146,27 @@ export class EcommerceService implements Resolve<any> {
     this.onProductListChange = new BehaviorSubject({});
     this.onRelatedProductsChange = new BehaviorSubject({});
     this.onSelectedProductChange = new BehaviorSubject({});
+
     this.onInitialFilterChange = new BehaviorSubject(this.initialFilter);
     this.productFilter$ = this.onInitialFilterChange.asObservable().pipe(
       debounceTime(100),
       tap((item) => this.triggerFilterProducts(item))
+    );
+
+    this.onProductAvailibityChange = new BehaviorSubject(null);
+    this.productAvailibity$ = this.onProductAvailibityChange
+      .asObservable()
+      .pipe(
+        debounceTime(200),
+        filter((item) => item != null),
+        switchMap((product) => this.updateProductEdit(product))
+      );
+
+    this.onNewProductChange = new BehaviorSubject(null);
+    this.newproduct$ = this.onNewProductChange.asObservable().pipe(
+      debounceTime(200),
+      filter((item) => item != null),
+      switchMap((product) => this.registerProductProcess(product))
     );
   }
 
@@ -195,6 +226,60 @@ export class EcommerceService implements Resolve<any> {
     });
   }
 
+  private editProduct(product: any) {
+    return this._httpClient.put(
+      "api/ecommerce-products/" + product.id,
+      product
+    );
+  }
+
+  private registerNewProduct(product: any) {
+    return this._httpClient.post("api/ecommerce-products/", product);
+  }
+
+  //#region register products functions
+  registerProductProcess(newProduct) {
+    return this.registerNewProduct(newProduct).pipe(
+      catchError((err) => {
+        return of();
+      }),
+
+      tap((response: any) => {
+        this.updateNewProduct(response);
+      })
+    );
+  }
+
+  private updateNewProduct(newItem) {
+    this.productList = [newItem, ...this.productList];
+    this.onProductListChange.next(this.productList);
+  }
+  //#endregion
+
+  //#region Toggle product availibity
+  private updateProductEdit(editedProduct) {
+    return this.editProduct(editedProduct).pipe(
+      catchError((err) => {
+        return of();
+      }),
+
+      tap((response: any) => {
+        this.updateProductValue(response);
+      })
+    );
+  }
+
+  private updateProductValue(editedResult) {
+    const prodIdx = this.productList.findIndex(
+      (item) => item.id == editedResult.id
+    );
+    if (prodIdx != -1) {
+      this.productList[prodIdx] = editedResult;
+      this.onProductListChange.next(this.productList);
+    }
+  }
+  //#endregion
+
   sortProduct(sortBy) {
     let sortDesc = false;
 
@@ -214,6 +299,23 @@ export class EcommerceService implements Resolve<any> {
     if (sortDesc) sortedData.reverse();
     this.productList = sortedData;
     this.onProductListChange.next(this.productList);
+  }
+
+  getSortLabel(sortBy) {
+    switch (sortBy) {
+      case "featured": {
+        return "Featured";
+      }
+      case "price-asc": {
+        return "Lowest";
+      }
+      case "price-desc": {
+        return "Highest";
+      }
+      default: {
+        return "Featured";
+      }
+    }
   }
 
   //#region Sidebar Filter

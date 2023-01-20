@@ -13,9 +13,6 @@ export class EcommerceItemComponent implements OnInit {
   // Input Decorotor
   @Input() product;
 
-  // Public
-  public isProductDisabled = false;
-
   /**
    *
    * @param {EcommerceService} _ecommerceService
@@ -25,8 +22,12 @@ export class EcommerceItemComponent implements OnInit {
   // Public Methods
   // -----------------------------------------------------------------------------------------------------
 
-  toggleProductDisable() {
-    this.isProductDisabled = !this.isProductDisabled;
+  toggleProductAvailibility() {
+    const tempProduct = {
+      ...this.product,
+      isDisabled: !this.product.isDisabled,
+    };
+    this._ecommerceService.onProductAvailibityChange.next(tempProduct);
   }
 
   // Lifecycle Hooks

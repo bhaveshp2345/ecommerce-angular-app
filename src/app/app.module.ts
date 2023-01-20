@@ -63,6 +63,7 @@ const appRoutes: Routes = [
     HttpClientInMemoryWebApiModule.forRoot(FakeDbService, {
       delay: 0,
       passThruUnknownUrl: true,
+      put204: false,
     }),
     RouterModule.forRoot(appRoutes, {
       scrollPositionRestoration: "enabled",

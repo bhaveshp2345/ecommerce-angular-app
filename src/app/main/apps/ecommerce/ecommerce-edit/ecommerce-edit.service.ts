@@ -47,7 +47,7 @@ export class EcommerceEditService implements Resolve<any> {
   getProductbyId(productId: number): Promise<any[]> {
     return new Promise((resolve, reject) => {
       this._httpClient
-        .get("api/ecommerce-products" + "/" + productId)
+        .get("api/ecommerce-products/" + productId)
         .subscribe((response: any) => {
           this.apiData = response;
           this.onEcommerceEditChanged.next(this.apiData);

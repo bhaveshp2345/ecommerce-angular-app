@@ -42,18 +42,18 @@
     </div>
   </div>
   <button
-    *ngIf="isProductDisabled"
+    *ngIf="product.isDisabled"
     class="btn btn-light btn-cart"
-    (click)="toggleProductDisable()"
+    (click)="toggleProductAvailibility()"
     rippleEffect
   >
     <i data-feather="minus-circle" class="mr-25"></i>
     <span class="add-to-cart">Disable</span>
   </button>
   <button
-    *ngIf="!isProductDisabled"
+    *ngIf="!product.isDisabled"
     class="btn btn-primary btn-cart"
-    (click)="toggleProductDisable()"
+    (click)="toggleProductAvailibility()"
     rippleEffect
   >
     <i data-feather="file-plus" class="mr-25"></i>
