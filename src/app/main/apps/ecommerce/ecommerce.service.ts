@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import {
   ActivatedRouteSnapshot,
   Resolve,
+  Router,
   RouterStateSnapshot,
 } from "@angular/router";
 import {
@@ -28,6 +29,7 @@ import {
 export class EcommerceService implements Resolve<any> {
   // Public
   public productList: Array<any>;
+  public filteredProductList: Array<any>;
   public wishlist: Array<any>;
   public cartList: Array<any>;
   public selectedProduct;
@@ -37,8 +39,7 @@ export class EcommerceService implements Resolve<any> {
   public onRelatedProductsChange: BehaviorSubject<any>;
   public onSelectedProductChange: BehaviorSubject<any>;
 
-  public onProductAvailibityChange: BehaviorSubject<any>;
-  public productAvailibity$: Observable<any>;
+  public onProductEditChange: BehaviorSubject<any>;
 
   public onInitialFilterChange: BehaviorSubject<any>;
   public productFilter$: Observable<any>;
@@ -142,7 +143,7 @@ export class EcommerceService implements Resolve<any> {
    *
    * @param {HttpClient} _httpClient
    */
-  constructor(private _httpClient: HttpClient) {
+  constructor(private _httpClient: HttpClient, private _router: Router) {
     this.onProductListChange = new BehaviorSubject({});
     this.onRelatedProductsChange = new BehaviorSubject({});
     this.onSelectedProductChange = new BehaviorSubject({});
@@ -153,8 +154,8 @@ export class EcommerceService implements Resolve<any> {
       tap((item) => this.triggerFilterProducts(item))
     );
 
-    this.onProductAvailibityChange = new BehaviorSubject(null);
-    this.onProductAvailibityChange
+    this.onProductEditChange = new BehaviorSubject(null);
+    this.onProductEditChange
       .asObservable()
       .pipe(
         debounceTime(200),
@@ -274,14 +275,29 @@ export class EcommerceService implements Resolve<any> {
   }
 
   private updateProductValue(editedResult) {
-    const prodIdx = this.productList.findIndex(
-      (item) => item.id == editedResult.id
-    );
-    if (prodIdx != -1) {
-      this.productList[prodIdx] = editedResult;
-      this.onProductListChange.next(this.productList);
-      this.selectedProduct = [editedResult];
-      this.onSelectedProductChange.next(this.selectedProduct);
+    if (this._router.url.includes("edit")) {
+      this._router.navigate(["/apps/e-commerce/details/" + editedResult?.id]);
+    } else {
+      let prodIdx;
+      prodIdx = this.productList.findIndex(
+        (item) => item.id == editedResult.id
+      );
+      if (prodIdx != -1) {
+        this.productList[prodIdx] = editedResult;
+        if (!this.filteredProductList)
+          this.onProductListChange.next(this.productList);
+        this.selectedProduct = [editedResult];
+        this.onSelectedProductChange.next(this.selectedProduct);
+      }
+      if (this.filteredProductList) {
+        prodIdx = this.filteredProductList.findIndex(
+          (item) => item.id == editedResult.id
+        );
+        if (prodIdx != -1) {
+          this.filteredProductList[prodIdx] = editedResult;
+          this.onProductListChange.next(this.filteredProductList);
+        }
+      }
     }
   }
   //#endregion
@@ -326,23 +342,22 @@ export class EcommerceService implements Resolve<any> {
 
   //#region Sidebar Filter
   private triggerFilterProducts(filterList: FilterList) {
-    let tempProducts = [...this.productList];
-    tempProducts = this.multiRangeFilter(filterList.multiRange, tempProducts);
-    tempProducts = this.priceRangeFilter(
-      filterList.priceRangeFilter,
-      tempProducts
+    this.filteredProductList = [...this.productList];
+    this.filteredProductList = this.multiRangeFilter(filterList.multiRange);
+    this.filteredProductList = this.priceRangeFilter(
+      filterList.priceRangeFilter
     );
-    tempProducts = this.categoriesFilter(filterList.categories, tempProducts);
-    tempProducts = this.brandsFilter(filterList.brands, tempProducts);
-    tempProducts = this.ratingFilter(filterList.ratings, tempProducts);
-    this.onProductListChange.next(tempProducts);
+    this.filteredProductList = this.categoriesFilter(filterList.categories);
+    this.filteredProductList = this.brandsFilter(filterList.brands);
+    this.filteredProductList = this.ratingFilter(filterList.ratings);
+    this.onProductListChange.next(this.filteredProductList);
   }
 
   //#region  Multirange filter
-  private multiRangeFilter(multiRange: MultiRange, tempProducts) {
+  private multiRangeFilter(multiRange: MultiRange) {
     const multiRangeOp = this.getOperationDetails(multiRange);
-    if (multiRangeOp == null) return tempProducts;
-    return tempProducts.filter(
+    if (multiRangeOp == null) return this.filteredProductList;
+    return this.filteredProductList.filter(
       (item) => item.price >= multiRangeOp.min && item.price <= multiRangeOp.max
     );
   }
@@ -360,36 +375,37 @@ export class EcommerceService implements Resolve<any> {
   //#endregion
 
   //#region Price Range Filter
-  private priceRangeFilter(priceRange: PriceRange, tempProducts) {
-    if (priceRange.min === 1 && priceRange.max === 100) return tempProducts;
-    return tempProducts.filter(
+  private priceRangeFilter(priceRange: PriceRange) {
+    if (priceRange.min === 1 && priceRange.max === 100)
+      return this.filteredProductList;
+    return this.filteredProductList.filter(
       (item) => item.price >= priceRange.min && item.price <= priceRange.max
     );
   }
   //#endregion
 
   //#region Categories Filter
-  private categoriesFilter(category: Categories, tempProducts) {
-    if (category === Categories.APPLIANCES) return tempProducts;
-    return tempProducts.filter(
+  private categoriesFilter(category: Categories) {
+    if (category === Categories.APPLIANCES) return this.filteredProductList;
+    return this.filteredProductList.filter(
       (item) => item.categoery.toLowerCase() == category
     );
   }
   //#endregion
 
   // #region Categories Filter
-  private brandsFilter(brands: Brands[], tempProducts) {
-    if (brands.length === 0) return tempProducts;
-    return tempProducts.filter((item) =>
+  private brandsFilter(brands: Brands[]) {
+    if (brands.length === 0) return this.filteredProductList;
+    return this.filteredProductList.filter((item) =>
       brands.includes(item.brand.toLowerCase())
     );
   }
   // #endregion
 
   // #region rating filter
-  private ratingFilter(ratings: number, tempProducts) {
-    if (ratings === 0) return tempProducts;
-    return tempProducts.filter((item) =>
+  private ratingFilter(ratings: number) {
+    if (ratings === 0) return this.filteredProductList;
+    return this.filteredProductList.filter((item) =>
       ratings == 4 ? item.rating >= ratings : item.rating === ratings
     );
   }

@@ -68,7 +68,7 @@
                     class="d-inline-block"
                     *ngFor="let item of productColors"
                     [ngClass]="{
-                      selected: item.color == selectedColor
+                      selected: item.color == product.color
                     }"
                   >
                     <button

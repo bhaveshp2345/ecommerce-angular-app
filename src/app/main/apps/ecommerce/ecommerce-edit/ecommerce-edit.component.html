@@ -24,7 +24,7 @@
                         class="user-avatar users-avatar-shadow rounded mr-2 my-25 cursor-pointer"
                         [src]="avatarImage"
                         height="140"
-                        width="140"
+                        width="180"
                         alt="User avatar"
                       />
                     </div>
@@ -86,36 +86,43 @@
                           <span class="align-middle">Product Information</span>
                         </h4>
                       </div>
+
+                      <!-- Product Name start -->
                       <div class="col-lg-4 col-md-6">
                         <div class="form-group">
-                          <label for="title">Title</label>
+                          <label for="productName">Name</label>
                           <input
-                            id="title"
+                            id="productName"
                             type="text"
                             class="form-control"
                             placeholder="iPhone"
-                            name="title"
+                            name="productName"
                             [(ngModel)]="currentRow.name"
                             [class.error]="
-                              productInfoEditForm.submitted && titleRef.invalid
+                              productInfoEditForm.submitted &&
+                              productNameRef.invalid
                             "
-                            #titleRef="ngModel"
+                            #productNameRef="ngModel"
                             required
                           />
                           <span
                             *ngIf="
-                              productInfoEditForm.submitted && titleRef.invalid
+                              productInfoEditForm.submitted &&
+                              productNameRef.invalid
                             "
                             class="invalid-form"
                           >
                             <small
                               class="form-text text-danger"
-                              *ngIf="titleRef.errors.required"
+                              *ngIf="productNameRef.errors.required"
                               >This field is required!</small
                             >
                           </span>
                         </div>
                       </div>
+                      <!-- Product Name end -->
+
+                      <!-- Product Brand start -->
                       <div class="col-lg-4 col-md-6">
                         <div class="form-group">
                           <label for="brand">Brand</label>
@@ -146,39 +153,9 @@
                           </span>
                         </div>
                       </div>
-                      <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                          <label for="availability">Shipping</label>
-                          <select
-                            id="availability"
-                            class="form-control"
-                            name="availability"
-                            [(ngModel)]="currentRow.hasFreeShipping"
-                            [class.error]="
-                              productInfoEditForm.submitted &&
-                              inStockRef.invalid
-                            "
-                            #inStockRef="ngModel"
-                            required
-                          >
-                            <option value="true">Free</option>
-                            <option value="false">Paid</option>
-                          </select>
-                          <span
-                            *ngIf="
-                              productInfoEditForm.submitted &&
-                              inStockRef.invalid
-                            "
-                            class="invalid-form"
-                          >
-                            <small
-                              class="form-text text-danger"
-                              *ngIf="inStockRef.errors.required"
-                              >This field is required!</small
-                            >
-                          </span>
-                        </div>
-                      </div>
+                      <!-- Product Brand End -->
+
+                      <!-- Product Price Start -->
                       <div class="col-lg-4 col-md-6">
                         <div class="form-group">
                           <label for="price">Price</label>
@@ -215,45 +192,85 @@
                           </span>
                         </div>
                       </div>
+                      <!-- Product Price End -->
+
+                      <!-- Shipping start -->
                       <div class="col-lg-4 col-md-6">
                         <div class="form-group">
-                          <label for="delivery_charge">Delivery Charge</label>
-                          <input
-                            id="delivery_charge"
-                            type="text"
+                          <label for="availability">Shipping</label>
+                          <select
+                            id="availability"
                             class="form-control"
-                            placeholder="10"
-                            name="delivery_charge"
-                            [(ngModel)]="productDeliveryCharge"
+                            name="availability"
+                            [(ngModel)]="currentRow.hasFreeShipping"
                             [class.error]="
                               productInfoEditForm.submitted &&
-                              deliveryChargeRef.invalid
+                              inStockRef.invalid
                             "
-                            #deliveryChargeRef="ngModel"
+                            #inStockRef="ngModel"
                             required
-                            pattern="^\d*\.?\d*$"
-                          />
+                          >
+                            <option value="true">Free</option>
+                            <option value="false">Paid</option>
+                          </select>
                           <span
                             *ngIf="
                               productInfoEditForm.submitted &&
-                              deliveryChargeRef.invalid
+                              inStockRef.invalid
                             "
                             class="invalid-form"
                           >
                             <small
                               class="form-text text-danger"
-                              *ngIf="deliveryChargeRef.errors.required"
+                              *ngIf="inStockRef.errors.required"
                               >This field is required!</small
-                            >
-                            <small
-                              class="form-text text-danger"
-                              *ngIf="deliveryChargeRef.errors.pattern"
-                              >Please enter valid delivery charge!</small
                             >
                           </span>
                         </div>
                       </div>
+                      <!-- Shipping end -->
 
+                      <!-- Category start -->
+                      <div class="col-lg-4 col-md-6">
+                        <div class="form-group">
+                          <label for="category">Category</label>
+                          <select
+                            id="category"
+                            class="form-control"
+                            name="productCategory"
+                            [(ngModel)]="currentRow.categoery"
+                            [class.error]="
+                              productInfoEditForm.submitted &&
+                              categoryRef.invalid
+                            "
+                            #categoryRef="ngModel"
+                            required
+                          >
+                            <option
+                              [value]="item?.value"
+                              *ngFor="let item of categoryList"
+                            >
+                              {{ item?.label }}
+                            </option>
+                          </select>
+                          <span
+                            *ngIf="
+                              productInfoEditForm.submitted &&
+                              categoryRef.invalid
+                            "
+                            class="invalid-form"
+                          >
+                            <small
+                              class="form-text text-danger"
+                              *ngIf="categoryRef.errors.required"
+                              >This field is required!</small
+                            >
+                          </span>
+                        </div>
+                      </div>
+                      <!-- Category end -->
+
+                      <!-- Product Status start  -->
                       <div class="col-lg-4 col-md-6">
                         <div class="form-group">
                           <label for="status">Status</label>
@@ -261,15 +278,15 @@
                             id="status"
                             class="form-control"
                             name="status"
-                            [(ngModel)]="productStatus"
+                            [(ngModel)]="currentRow.isDisabled"
                             [class.error]="
                               productInfoEditForm.submitted && statusRef.invalid
                             "
                             #statusRef="ngModel"
                             required
                           >
-                            <option value="1">Active</option>
-                            <option value="2">Inactive</option>
+                            <option value="true">Inactive</option>
+                            <option value="false">Active</option>
                           </select>
                           <span
                             *ngIf="
@@ -285,6 +302,45 @@
                           </span>
                         </div>
                       </div>
+                      <!-- Product Status ends  -->
+
+                      <!-- Stock Available start  -->
+                      <div class="col-lg-4 col-md-6">
+                        <div class="form-group">
+                          <label for="stock_available">Stock Available</label>
+                          <select
+                            id="stock_available"
+                            class="form-control"
+                            name="stock_available"
+                            [(ngModel)]="currentRow.isStockAvailable"
+                            [class.error]="
+                              productInfoEditForm.submitted &&
+                              isStockAvailableRef.invalid
+                            "
+                            #isStockAvailableRef="ngModel"
+                            required
+                          >
+                            <option value="true">Available</option>
+                            <option value="false">Not Available</option>
+                          </select>
+                          <span
+                            *ngIf="
+                              productInfoEditForm.submitted &&
+                              isStockAvailableRef.invalid
+                            "
+                            class="invalid-form"
+                          >
+                            <small
+                              class="form-text text-danger"
+                              *ngIf="isStockAvailableRef.errors.required"
+                              >This field is required!</small
+                            >
+                          </span>
+                        </div>
+                      </div>
+                      <!-- Stock Available start  -->
+
+                      <!-- Product Color start  -->
                       <div class="col-lg-4 col-md-6 mb-1">
                         <div class="product-color-options">
                           <h6>Colors</h6>
@@ -293,7 +349,7 @@
                               class="d-inline-block"
                               *ngFor="let item of productColors"
                               [ngClass]="{
-                                selected: item.color == selectedColor
+                                selected: item.color == currentRow.color
                               }"
                             >
                               <button
@@ -307,6 +363,8 @@
                           </ul>
                         </div>
                       </div>
+                      <!-- Product Color End  -->
+
                       <div class="col-lg-4 col-md-6 mb-1">
                         <div class="product-color-options">
                           <h6>Rating</h6>

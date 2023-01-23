@@ -1,10 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
 
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import { cloneDeep } from "lodash";
 import { EcommerceEditService } from "./ecommerce-edit.service";
+import { Categories } from "app/main/main-constants";
+import { EcommerceService } from "../ecommerce.service";
 
 @Component({
   selector: "app-ecommerce-edit",
@@ -16,15 +17,15 @@ export class EcommerceEditComponent implements OnInit {
   public currentRow;
   public tempRow;
   public avatarImage: string;
-  productDeliveryCharge = 10;
-  productStatus = 1;
+  isStockAvailable = 1;
   productColors = [
     { color: "orange", child: "bg-primary", parent: "b-primary" },
     { color: "green", child: "bg-success", parent: "b-success" },
     { color: "red", child: "bg-danger", parent: "b-danger" },
     { color: "blue", child: "bg-info", parent: "b-info" },
   ];
-  selectedColor = "green";
+  public productCategory = Categories.APPLIANCES;
+  public categoryList = this._ecommerceService.initialCategories;
   productRating = 4;
   loading = false;
   error = "";
@@ -36,7 +37,10 @@ export class EcommerceEditComponent implements OnInit {
    * Constructor
    * @param {EcommerceEditService} _ecommerceEditService
    */
-  constructor(private _ecommerceEditService: EcommerceEditService) {
+  constructor(
+    private _ecommerceEditService: EcommerceEditService,
+    private _ecommerceService: EcommerceService
+  ) {
     this._unsubscribeAll = new Subject();
   }
 
@@ -65,7 +69,7 @@ export class EcommerceEditComponent implements OnInit {
   }
 
   changeColor(color: string) {
-    this.selectedColor = color;
+    this.currentRow.color = color;
   }
 
   /**
@@ -74,31 +78,29 @@ export class EcommerceEditComponent implements OnInit {
    * @param form
    */
   submitProductEdit(form) {
-    // if (form.valid) {
-    //   if (
-    //     this.avatarImage &&
-    //     this.productRating != null &&
-    //     this.selectedColor
-    //   ) {
-    //     this.loading = true;
-    //     const formVal = form.value;
-    //     const productBody = {
-    //       rating: this.productRating,
-    //       avatarImage: this.avatarImage,
-    //       title: formVal["title"],
-    //       brand: formVal["brand"],
-    //       inStock: formVal["availability"],
-    //       price: formVal["price"],
-    //       delivery_charge: formVal["delivery_charge"],
-    //       status: formVal["status"],
-    //       description: formVal["description"],
-    //       color: this.selectedColor,
-    //     };
-    //     this.error = "No API found";
-    //   } else {
-    //     this.error = "All fields are required";
-    //   }
-    // }
+    if (form.valid) {
+      this.loading = true;
+      const formVal = form.value;
+
+      const tempProduct = {
+        ...this.currentRow,
+        image: this.avatarImage,
+        name: formVal["productName"],
+        brand: formVal["brand"],
+        price: +formVal["price"],
+        hasFreeShipping: formVal["availability"] == "true",
+        categoery: formVal["productCategory"],
+        isDisabled: formVal["status"] == "true",
+        isStockAvailable: formVal["stock_available"] == "true",
+        rating: formVal["rating"],
+        color: this.currentRow.color,
+        description: formVal["description"],
+      };
+
+      this._ecommerceService.onProductEditChange.next(tempProduct);
+    } else {
+      this.error = "Please select all required fields!";
+    }
   }
 
   // Lifecycle Hooks

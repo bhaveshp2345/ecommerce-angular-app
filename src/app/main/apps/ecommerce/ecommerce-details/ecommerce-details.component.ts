@@ -27,7 +27,6 @@ export class EcommerceDetailsComponent implements OnInit {
     { color: "red", child: "bg-danger", parent: "b-danger" },
     { color: "blue", child: "bg-info", parent: "b-info" },
   ];
-  selectedColor = "green";
 
   // Swiper
   public swiperResponsive: SwiperConfigInterface = {
@@ -77,11 +76,11 @@ export class EcommerceDetailsComponent implements OnInit {
       ...this.product,
       isDisabled: !this.product.isDisabled,
     };
-    this._ecommerceService.onProductAvailibityChange.next(tempProduct);
+    this._ecommerceService.onProductEditChange.next(tempProduct);
   }
 
   changeColor(color) {
-    this.selectedColor = color;
+    this.product.color = color;
   }
 
   // Lifecycle Hooks
@@ -94,7 +93,6 @@ export class EcommerceDetailsComponent implements OnInit {
     // Subscribe to Selected Product change
     this._ecommerceService.onSelectedProductChange.subscribe((res) => {
       this.product = res[0];
-      this.selectedColor = this.product?.color;
     });
 
     // Get Related Products

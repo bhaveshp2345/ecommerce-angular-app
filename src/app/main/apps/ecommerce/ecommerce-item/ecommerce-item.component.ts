@@ -27,7 +27,7 @@ export class EcommerceItemComponent implements OnInit {
       ...this.product,
       isDisabled: !this.product.isDisabled,
     };
-    this._ecommerceService.onProductAvailibityChange.next(tempProduct);
+    this._ecommerceService.onProductEditChange.next(tempProduct);
   }
 
   // Lifecycle Hooks
