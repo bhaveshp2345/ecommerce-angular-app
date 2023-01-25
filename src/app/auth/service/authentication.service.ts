@@ -65,7 +65,7 @@ export class AuthenticationService {
       .post<any>(`${environment.apiUrl}/users/login`, {
         email,
         password,
-        user_type: "2",
+        user_type: "1",
         platform_os: 1,
       })
       .pipe(
@@ -73,7 +73,7 @@ export class AuthenticationService {
           user = user.data;
           // login successful if there's a jwt token in the response
           if (user && user.auth_toekn) {
-            user.role = user.user_type == 1 ? Role.Client : Role.Admin;
+            user.role = Role.Admin;
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             localStorage.setItem("currentUser", JSON.stringify(user));
 
