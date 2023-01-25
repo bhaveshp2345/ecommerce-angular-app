@@ -1,14 +1,8 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from "@angular/core";
 import { ColumnMode, DatatableComponent } from "@swimlane/ngx-datatable";
 
-import { of, Subject } from "rxjs";
-import {
-  catchError,
-  debounceTime,
-  switchMap,
-  takeUntil,
-  tap,
-} from "rxjs/operators";
+import { Subject } from "rxjs";
+import { debounceTime, takeUntil, tap } from "rxjs/operators";
 
 import { CoreConfigService } from "@core/services/config.service";
 import { CoreSidebarService } from "@core/components/core-sidebar/core-sidebar.service";
@@ -30,10 +24,6 @@ export class UserListComponent implements OnInit {
   page = new Page();
   // public selectedOption = 10;
   public ColumnMode = ColumnMode;
-  public temp = [];
-  public previousRoleFilter = "";
-  public previousPlanFilter = "";
-  public previousStatusFilter = "";
   loading = false;
 
   public selectStatus: any = [
@@ -56,12 +46,12 @@ export class UserListComponent implements OnInit {
   searchControl = new FormControl("");
 
   allUserParams: any;
+  error = "";
 
   // Decorator
   @ViewChild(DatatableComponent) table: DatatableComponent;
 
   // Private
-  private tempData = [];
   private _unsubscribeAll: Subject<any>;
 
   /**
@@ -88,9 +78,9 @@ export class UserListComponent implements OnInit {
     this.loading = true;
     this.allUserParams = {
       ...this.allUserParams,
-      limit: this.page.limit,
+      length: this.page.limit,
     };
-    this.fetchTableData(this.allUserParams).subscribe();
+    this._userListService.onNewUserListChange.next(this.allUserParams);
   }
 
   toggleSidebar(name): void {
@@ -100,29 +90,19 @@ export class UserListComponent implements OnInit {
   changeStatusVal() {
     this.loading = true;
     if (!this.selectedStatus || !this.selectedStatus?.value) {
-      delete this.allUserParams?.status;
+      delete this.allUserParams?.filter;
     } else {
       this.allUserParams = {
         ...this.allUserParams,
-        status: +this.selectedStatus?.value,
+        filter: this.selectedStatus?.value == "1" ? "active" : "deactive",
       };
     }
-
-    return this.fetchTableData(this.allUserParams).subscribe();
+    this._userListService.onNewUserListChange.next(this.allUserParams);
   }
 
-  changeRoleVal() {
+  deleteUser(adminId: string) {
     this.loading = true;
-    if (!this.selectedRole || !this.selectedRole?.value) {
-      delete this.allUserParams?.user_type;
-    } else {
-      this.allUserParams = {
-        ...this.allUserParams,
-        user_type: +this.selectedRole?.value,
-      };
-    }
-
-    return this.fetchTableData(this.allUserParams).subscribe();
+    this._userListService.onAdminDeleteChange.next(adminId);
   }
 
   // Lifecycle Hooks
@@ -131,6 +111,18 @@ export class UserListComponent implements OnInit {
    * On init
    */
   ngOnInit(): void {
+    this._userListService.newUserList$
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((result) => {
+        this.handleTableDataResponse(result);
+      });
+
+    this._userListService.adminDelete$
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((result) => {
+        this.handleDeleteAdminResponse(result);
+      });
+
     // Subscribe config change
     this._coreConfigService.config
       .pipe(takeUntil(this._unsubscribeAll))
@@ -141,16 +133,34 @@ export class UserListComponent implements OnInit {
     this.searchControl.valueChanges
       .pipe(
         debounceTime(200),
-        switchMap((searchVal) => {
+        tap((searchVal) => {
           this.loading = true;
           this.allUserParams = {
             ...this.allUserParams,
             search: searchVal,
           };
-          return this.fetchTableData(this.allUserParams);
+          this._userListService.onNewUserListChange.next(this.allUserParams);
         })
       )
       .subscribe();
+  }
+
+  private handleTableDataResponse(result) {
+    this.loading = false;
+    if (result?.page) {
+      this.page = { ...this.page, ...result.page };
+      this.rows = result.rows;
+    }
+  }
+
+  private handleDeleteAdminResponse(result) {
+    if (result?.status == 1) {
+      this.loading = false;
+      this._userListService.onNewUserListChange.next(this.allUserParams);
+    } else {
+      this.error = result?.error?.message || "Something went wrong!";
+      this.loading = false;
+    }
   }
 
   setPage(pageInfo) {
@@ -161,7 +171,7 @@ export class UserListComponent implements OnInit {
       page: this.page.page,
       limit: this.page.limit,
     };
-    this.fetchTableData(this.allUserParams).subscribe();
+    this._userListService.onNewUserListChange.next(this.allUserParams);
   }
 
   onSort(event) {
@@ -170,32 +180,10 @@ export class UserListComponent implements OnInit {
     const sort = event.sorts[0];
     this.allUserParams = {
       ...this.allUserParams,
-      sortBy: sort.prop,
+      sort: sort.prop,
+      direction: sort.dir,
     };
-    this.fetchTableData(this.allUserParams).subscribe();
-  }
-
-  fetchTableData(userParams) {
-    return this._userListService.getDataTableRows(userParams).pipe(
-      catchError((err) => {
-        this.mapTableData(null);
-        this.loading = false;
-        return of();
-      }),
-      tap((pagedData: any) => {
-        if (pagedData.status == 1) this.mapTableData(pagedData);
-        this.loading = false;
-      })
-    );
-  }
-
-  mapTableData(pagedData) {
-    this.page.page = pagedData?.data?.page || 1;
-    this.page.totalPages = pagedData?.data?.total || 1;
-    this.page.totalElements = pagedData?.data?.total || 1;
-    this.page = { ...this.page };
-    this.rows = pagedData?.data?.data || [];
-    this.tempData = this.rows;
+    this._userListService.onNewUserListChange.next(this.allUserParams);
   }
 
   /**
@@ -205,5 +193,6 @@ export class UserListComponent implements OnInit {
     // Unsubscribe from all subscriptions
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
+    this._userListService.onAdminDeleteChange.next(null);
   }
 }

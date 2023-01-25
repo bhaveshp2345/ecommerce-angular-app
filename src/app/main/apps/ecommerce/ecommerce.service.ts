@@ -14,7 +14,7 @@ import {
   PriceRange,
 } from "app/main/main-constants";
 
-import { BehaviorSubject, Observable, of } from "rxjs";
+import { of, BehaviorSubject, Observable } from "rxjs";
 import {
   catchError,
   tap,
@@ -147,32 +147,35 @@ export class EcommerceService implements Resolve<any> {
     this.onProductListChange = new BehaviorSubject({});
     this.onRelatedProductsChange = new BehaviorSubject({});
     this.onSelectedProductChange = new BehaviorSubject({});
+    this.initializeFilter();
+    this.initializeProductEdit().subscribe();
+    this.initializeProductCreate().subscribe();
+  }
 
+  private initializeFilter() {
     this.onInitialFilterChange = new BehaviorSubject(this.initialFilter);
     this.productFilter$ = this.onInitialFilterChange.asObservable().pipe(
       debounceTime(100),
       tap((item) => this.triggerFilterProducts(item))
     );
+  }
 
+  private initializeProductEdit() {
     this.onProductEditChange = new BehaviorSubject(null);
-    this.onProductEditChange
-      .asObservable()
-      .pipe(
-        debounceTime(200),
-        filter((item) => item != null),
-        switchMap((product) => this.updateProductEdit(product))
-      )
-      .subscribe();
+    return this.onProductEditChange.asObservable().pipe(
+      debounceTime(200),
+      filter((item) => item != null),
+      switchMap((product) => this.updateProductEdit(product))
+    );
+  }
 
+  private initializeProductCreate() {
     this.onNewProductChange = new BehaviorSubject(null);
-    this.onNewProductChange
-      .asObservable()
-      .pipe(
-        debounceTime(200),
-        filter((item) => item != null),
-        switchMap((product) => this.registerProductProcess(product))
-      )
-      .subscribe();
+    return this.onNewProductChange.asObservable().pipe(
+      debounceTime(200),
+      filter((item) => item != null),
+      switchMap((product) => this.registerProductProcess(product))
+    );
   }
 
   /**
@@ -246,7 +249,7 @@ export class EcommerceService implements Resolve<any> {
   registerProductProcess(newProduct) {
     return this.registerNewProduct(newProduct).pipe(
       catchError((err) => {
-        return of();
+        return of(err);
       }),
 
       tap((response: any) => {
@@ -265,7 +268,7 @@ export class EcommerceService implements Resolve<any> {
   private updateProductEdit(editedProduct) {
     return this.editProduct(editedProduct).pipe(
       catchError((err) => {
-        return of();
+        return of(err);
       }),
 
       tap((response: any) => {

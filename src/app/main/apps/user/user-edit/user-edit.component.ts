@@ -9,7 +9,10 @@ import { Router } from "@angular/router";
 import { NgForm } from "@angular/forms";
 
 import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
+
 import { FlatpickrOptions } from "ng2-flatpickr";
+import { cloneDeep } from "lodash";
 
 import { UserEditService } from "app/main/apps/user/user-edit/user-edit.service";
 
@@ -23,10 +26,12 @@ export class UserEditComponent implements OnInit, OnDestroy {
   // Public
   public url = this.router.url;
   public urlLastValue;
-  public rows;
   public currentRow;
-  public tempRow;
   public avatarImage = "";
+  public tempRow;
+  // public rows;
+  loading = false;
+  error = "";
 
   @ViewChild("accountForm") accountForm: NgForm;
 
@@ -69,7 +74,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
    * Reset Form With Default Values
    */
   resetFormWithDefaultValues() {
-    this.accountForm.resetForm(this.tempRow);
+    this.accountForm.resetForm(this.currentRow);
   }
 
   /**
@@ -100,7 +105,18 @@ export class UserEditComponent implements OnInit, OnDestroy {
    */
   submit(form) {
     if (form.valid) {
-      console.log("Submitted...!");
+      this.loading = true;
+      const formVal = form.value;
+      const adminBody = {
+        adminId: this.currentRow._id,
+        email: formVal["email"],
+        company: formVal["company"],
+        first_name: formVal["first_name"],
+        last_name: formVal["last_name"],
+        address: formVal["address"],
+        status: formVal["status"],
+      };
+      this._userEditService.onAdminEditChange.next(adminBody);
     }
   }
 
@@ -109,7 +125,37 @@ export class UserEditComponent implements OnInit, OnDestroy {
   /**
    * On init
    */
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._userEditService.onUserEditChanged
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((response) => {
+        if (response?.status == 1) {
+          this.currentRow = response?.data;
+          this.avatarImage = this.currentRow?.avatar;
+          this.tempRow = cloneDeep(this.currentRow);
+        }
+      });
+
+    this._userEditService.adminEdit$
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((result) => {
+        this.handleEditResponse(result);
+      });
+  }
+
+  private handleEditResponse(result) {
+    if (result?.status == 1) {
+      this.loading = false;
+      this.router.navigate(["/apps/user/user-view/" + this.currentRow._id]);
+    } else {
+      this.handleEditErr(result);
+    }
+  }
+
+  private handleEditErr(err) {
+    this.error = err?.error?.message || "Something went wrong!";
+    this.loading = false;
+  }
 
   /**
    * On destroy
@@ -118,5 +164,6 @@ export class UserEditComponent implements OnInit, OnDestroy {
     // Unsubscribe from all subscriptions
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
+    this._userEditService.onAdminEditChange.next(null);
   }
 }

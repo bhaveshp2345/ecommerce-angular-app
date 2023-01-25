@@ -1,5 +1,10 @@
 <div class="content-wrapper container-xxl p-0">
   <div class="content-body">
+    <ngb-alert [type]="'danger'" [dismissible]="false" *ngIf="error">
+      <div class="alert-body">
+        <p>{{ error }}</p>
+      </div>
+    </ngb-alert>
     <!-- page users view start -->
     <section class="app-user-view">
       <!-- User Card & Plan Starts -->
@@ -14,54 +19,49 @@
                 >
                   <div class="user-avatar-section">
                     <div class="d-flex justify-content-start">
-                      <div *ngIf="data?.avatar?.length > 0; else customAvatar">
-                        <img
-                          class="img-fluid rounded"
-                          [src]="data?.avatar"
-                          height="104"
-                          width="104"
-                          alt="User avatar"
-                        />
-                      </div>
-                      <ng-template #customAvatar>
+                      <div>
                         <div class="mr-1 ml-0">
                           <div
                             [ngClass]="{
-                              'bg-light-success': data?.status == 'active',
-                              'bg-light-secondary': data?.status == 'inactive',
-                              'bg-light-warning': data?.status == 'pending'
+                              'bg-light-success': data?.status == 1,
+                              'bg-light-secondary': data?.status == 2
                             }"
                             class="rounded p-3"
                           >
                             <h2
                               [ngClass]="{
-                                'text-success': data?.status == 'active',
-                                'text-secondary': data?.status == 'inactive',
-                                'text-warning': data?.status == 'pending'
+                                'text-success': data?.status == 1,
+                                'text-secondary': data?.status == 2
                               }"
                               class="m-0"
                             >
-                              {{ data?.fullName | initials }}
+                              {{ data?.first_name | initials }}
                             </h2>
                           </div>
                         </div>
-                      </ng-template>
+                      </div>
                       <div class="d-flex flex-column ml-1">
                         <div class="user-info mb-1">
-                          <h4 class="mb-0">{{ data?.fullName }}</h4>
+                          <h4 class="mb-0">{{ data?.first_name }}</h4>
                           <span class="card-text">{{ data?.email }}</span>
                         </div>
                         <div class="d-flex flex-wrap">
                           <a
-                            routerLink="/apps/user/user-edit/{{ data?.id }}"
+                            routerLink="/apps/user/user-edit/{{ data?._id }}"
                             class="btn btn-primary"
                             rippleEffect
                             >Edit</a
                           >
                           <button
+                            [disabled]="loading"
+                            (click)="deleteUser()"
                             class="btn btn-outline-danger ml-1"
                             rippleEffect
                           >
+                            <span
+                              *ngIf="loading"
+                              class="spinner-border spinner-border-sm mr-1"
+                            ></span>
                             Delete
                           </button>
                         </div>
@@ -76,10 +76,10 @@
                         <i data-feather="user" class="mr-1"></i>
                         <span
                           class="card-text user-info-title font-weight-bold mb-0"
-                          >Username</span
+                          >Company</span
                         >
                       </div>
-                      <p class="card-text mb-0">{{ data?.username }}</p>
+                      <p class="card-text mb-0">{{ data?.company }}</p>
                     </div>
                     <div class="d-flex flex-wrap my-50">
                       <div class="user-info-title">
@@ -89,7 +89,9 @@
                           >Status</span
                         >
                       </div>
-                      <p class="card-text mb-0">{{ data?.status }}</p>
+                      <p class="card-text mb-0">
+                        {{ data?.status == 1 ? "Active" : "Inactive" }}
+                      </p>
                     </div>
                     <div class="d-flex flex-wrap my-50">
                       <div class="user-info-title">
@@ -99,27 +101,29 @@
                           >Role</span
                         >
                       </div>
-                      <p class="card-text mb-0">{{ data?.role }}</p>
+                      <p class="card-text mb-0">
+                        {{ data?.user_type == 1 ? "Admin" : "Client" }}
+                      </p>
                     </div>
                     <div class="d-flex flex-wrap my-50">
                       <div class="user-info-title">
                         <i data-feather="flag" class="mr-1"></i>
                         <span
                           class="card-text user-info-title font-weight-bold mb-0"
-                          >Country</span
+                          >Addres</span
                         >
                       </div>
-                      <p class="card-text mb-0">England</p>
+                      <p class="card-text mb-0">{{ data?.address }}</p>
                     </div>
                     <div class="d-flex flex-wrap">
                       <div class="user-info-title">
                         <i data-feather="phone" class="mr-1"></i>
                         <span
                           class="card-text user-info-title font-weight-bold mb-0"
-                          >Contact</span
+                          >Email</span
                         >
                       </div>
-                      <p class="card-text mb-0">{{ data?.contact }}</p>
+                      <p class="card-text mb-0">{{ data?.email }}</p>
                     </div>
                   </div>
                 </div>
@@ -130,338 +134,6 @@
         <!-- /User Card Ends-->
       </div>
       <!-- User Card & Plan Ends -->
-
-      <!-- User Timeline & Permissions Starts -->
-      <div class="row">
-        <!-- User Permissions Starts -->
-        <div class="col-md-12">
-          <!-- User Permissions -->
-          <div class="card">
-            <div class="card-header">
-              <h4 class="card-title">Permissions</h4>
-            </div>
-            <p class="card-text ml-2">Permission according to roles</p>
-            <div class="table-responsive">
-              <table class="table table-striped table-borderless">
-                <thead class="thead-light">
-                  <tr>
-                    <th>Module</th>
-                    <th>Read</th>
-                    <th>Write</th>
-                    <th>Create</th>
-                    <th>Delete</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Admin</td>
-                    <td>
-                      <div class="custom-control custom-checkbox">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id="admin-read"
-                          checked
-                          disabled
-                        />
-                        <label
-                          class="custom-control-label"
-                          for="admin-read"
-                        ></label>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="custom-control custom-checkbox">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id="admin-write"
-                          disabled
-                        />
-                        <label
-                          class="custom-control-label"
-                          for="admin-write"
-                        ></label>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="custom-control custom-checkbox">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id="admin-create"
-                          disabled
-                        />
-                        <label
-                          class="custom-control-label"
-                          for="admin-create"
-                        ></label>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="custom-control custom-checkbox">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id="admin-delete"
-                          disabled
-                        />
-                        <label
-                          class="custom-control-label"
-                          for="admin-delete"
-                        ></label>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Staff</td>
-                    <td>
-                      <div class="custom-control custom-checkbox">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id="staff-read"
-                          disabled
-                        />
-                        <label
-                          class="custom-control-label"
-                          for="staff-read"
-                        ></label>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="custom-control custom-checkbox">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id="staff-write"
-                          checked
-                          disabled
-                        />
-                        <label
-                          class="custom-control-label"
-                          for="staff-write"
-                        ></label>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="custom-control custom-checkbox">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id="staff-create"
-                          disabled
-                        />
-                        <label
-                          class="custom-control-label"
-                          for="staff-create"
-                        ></label>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="custom-control custom-checkbox">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id="staff-delete"
-                          disabled
-                        />
-                        <label
-                          class="custom-control-label"
-                          for="staff-delete"
-                        ></label>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Author</td>
-                    <td>
-                      <div class="custom-control custom-checkbox">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id="author-read"
-                          checked
-                          disabled
-                        />
-                        <label
-                          class="custom-control-label"
-                          for="author-read"
-                        ></label>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="custom-control custom-checkbox">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id="author-write"
-                          disabled
-                        />
-                        <label
-                          class="custom-control-label"
-                          for="author-write"
-                        ></label>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="custom-control custom-checkbox">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id="author-create"
-                          checked
-                          disabled
-                        />
-                        <label
-                          class="custom-control-label"
-                          for="author-create"
-                        ></label>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="custom-control custom-checkbox">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id="author-delete"
-                          disabled
-                        />
-                        <label
-                          class="custom-control-label"
-                          for="author-delete"
-                        ></label>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Contributor</td>
-                    <td>
-                      <div class="custom-control custom-checkbox">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id="contributor-read"
-                          disabled
-                        />
-                        <label
-                          class="custom-control-label"
-                          for="contributor-read"
-                        ></label>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="custom-control custom-checkbox">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id="contributor-write"
-                          disabled
-                        />
-                        <label
-                          class="custom-control-label"
-                          for="contributor-write"
-                        ></label>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="custom-control custom-checkbox">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id="contributor-create"
-                          disabled
-                        />
-                        <label
-                          class="custom-control-label"
-                          for="contributor-create"
-                        ></label>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="custom-control custom-checkbox">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id="contributor-delete"
-                          disabled
-                        />
-                        <label
-                          class="custom-control-label"
-                          for="contributor-delete"
-                        ></label>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>User</td>
-                    <td>
-                      <div class="custom-control custom-checkbox">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id="user-read"
-                          disabled
-                        />
-                        <label
-                          class="custom-control-label"
-                          for="user-read"
-                        ></label>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="custom-control custom-checkbox">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id="user-create"
-                          disabled
-                        />
-                        <label
-                          class="custom-control-label"
-                          for="user-create"
-                        ></label>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="custom-control custom-checkbox">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id="user-write"
-                          disabled
-                        />
-                        <label
-                          class="custom-control-label"
-                          for="user-write"
-                        ></label>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="custom-control custom-checkbox">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id="user-delete"
-                          checked
-                          disabled
-                        />
-                        <label
-                          class="custom-control-label"
-                          for="user-delete"
-                        ></label>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <!-- /User Permissions -->
-        </div>
-        <!-- User Permissions Ends -->
-      </div>
-      <!-- User Timeline & Permissions Ends -->
     </section>
     <!-- page users view end -->
   </div>

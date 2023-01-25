@@ -36,26 +36,26 @@ const routes: Routes = [
   {
     path: "user-view/:id",
     component: UserViewComponent,
-    // resolve: {
-    //   data: UserViewService,
-    // },
+    resolve: {
+      data: UserViewService,
+    },
     data: { path: "view/:id", animation: "UserViewComponent" },
   },
   {
     path: "user-edit/:id",
     component: UserEditComponent,
-    // resolve: {
-    //   ues: UserEditService,
-    // },
+    resolve: {
+      ues: UserEditService,
+    },
     data: { animation: "UserEditComponent" },
   },
   {
     path: "user-view",
-    redirectTo: "/apps/user/user-view/2", // Redirection
+    redirectTo: "/apps/user/user-view/637e1c27d6f20f0567a995e1", // Redirection
   },
   {
     path: "user-edit",
-    redirectTo: "/apps/user/user-edit/2", // Redirection
+    redirectTo: "/apps/user/user-edit/637e1c27d6f20f0567a995e1", // Redirection
   },
 ];
 

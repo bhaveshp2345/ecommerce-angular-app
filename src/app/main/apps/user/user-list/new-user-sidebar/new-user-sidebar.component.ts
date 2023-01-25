@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
 import { CoreSidebarService } from "@core/components/core-sidebar/core-sidebar.service";
-import { of } from "rxjs";
-import { catchError, tap } from "rxjs/operators";
+
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 import { UserListService } from "../user-list.service";
 
 @Component({
@@ -18,6 +18,9 @@ export class NewUserSidebarComponent implements OnInit {
   loading = false;
   error = "";
 
+  // Private
+  private _unsubscribeAll: Subject<any>;
+
   /**
    * Constructor
    *
@@ -25,9 +28,10 @@ export class NewUserSidebarComponent implements OnInit {
    */
   constructor(
     private _coreSidebarService: CoreSidebarService,
-    private _userListService: UserListService,
-    private router: Router
-  ) {}
+    private _userListService: UserListService
+  ) {
+    this._unsubscribeAll = new Subject();
+  }
 
   /**
    * Toggle the sidebar
@@ -50,33 +54,46 @@ export class NewUserSidebarComponent implements OnInit {
       const userBody = {
         email: formVal["user-email"],
         password: formVal["user-password"],
-        company: "Tridhya Tech",
+        company: "Tridhya",
         first_name: formVal["user-firstname"],
         last_name: formVal["user-lastname"],
+        user_type: 1,
       };
-      this.registerNewUser(userBody).subscribe();
+      this._userListService.onAdminCreateChange.next(userBody);
     }
-  }
-
-  registerNewUser(userBody: any) {
-    return this._userListService.registerNewUser(userBody).pipe(
-      catchError((err) => {
-        this.error = err?.error?.message || "Something went wrong!";
-        this.loading = false;
-        return of();
-      }),
-      tap((pagedData: any) => {
-        if (pagedData.status == 1) {
-          this.toggleSidebar("new-user-sidebar");
-        }
-        this.loading = false;
-      })
-    );
   }
 
   togglePasswordTextType() {
     this.passwordTextType = !this.passwordTextType;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._userListService.adminCreate$
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((result) => {
+        this.handleCreateResponse(result);
+      });
+  }
+
+  private handleCreateResponse(result) {
+    if (result?.status == 1) {
+      this.toggleSidebar("new-user-sidebar");
+      this._userListService.onNewUserListChange.next({});
+      this.loading = false;
+    } else {
+      this.handleCreateErr(result);
+    }
+  }
+
+  private handleCreateErr(err) {
+    this.error = err?.error?.message || "Something went wrong!";
+    this.loading = false;
+  }
+
+  ngOnDestroy(): void {
+    // Unsubscribe from all subscriptions
+    this._unsubscribeAll.next();
+    this._unsubscribeAll.complete();
+    this._userListService.onAdminCreateChange.next(null);
+  }
 }
