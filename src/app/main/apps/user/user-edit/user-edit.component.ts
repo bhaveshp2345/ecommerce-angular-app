@@ -11,7 +11,6 @@ import { NgForm } from "@angular/forms";
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 
-import { FlatpickrOptions } from "ng2-flatpickr";
 import { cloneDeep } from "lodash";
 
 import { UserEditService } from "app/main/apps/user/user-edit/user-edit.service";
@@ -34,21 +33,6 @@ export class UserEditComponent implements OnInit, OnDestroy {
   error = "";
 
   @ViewChild("accountForm") accountForm: NgForm;
-
-  public birthDateOptions: FlatpickrOptions = {
-    altInput: true,
-  };
-
-  public selectMultiLanguages = [
-    "English",
-    "Spanish",
-    "French",
-    "Russian",
-    "German",
-    "Arabic",
-    "Sanskrit",
-  ];
-  public selectMultiLanguagesSelected = [];
 
   // Private
   private _unsubscribeAll: Subject<any>;
